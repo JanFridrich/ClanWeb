@@ -1,0 +1,7 @@
+vendor
+app/config/local.neon
+temp
+/www/data/images/
+/www/data/methodologies/
+/www/data/print_and_play/
+/www/data/others/

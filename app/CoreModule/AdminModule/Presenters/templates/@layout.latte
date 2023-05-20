@@ -1,0 +1,150 @@
+{var $version = 8}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+{block head}
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="robots" content="all">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+			  integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+			  crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ublaboo-datagrid@6.2.24/assets/datagrid.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+			  rel="stylesheet">
+		<link rel="stylesheet" href="{$basePath}/css/admin.css?v={$version}">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+		<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+		<script src="{$basePath}/bower_components/tinymce/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+		<script>
+			tinymce.init({
+				selector: '#form-admin-text-area'
+			});
+		</script>
+		<title>DesiGn</title>
+	</head>
+{/block}
+
+
+<body>
+
+{block header}
+	<header>
+		<div class="row">
+			<div class="col-2 d-flex align-items-center justify-content-center">
+				<img itemprop="logo" class="pt-3 pb-3 logo-header"
+					 src="{$basePath}/data/admin/Logo.png"
+					 alt="BloodOath" title="BloodOath">
+			</div>
+			<div class="col-10 background-project d-flex align-items-center">
+				<div class="row">
+					<div class="col-2"></div>
+					<div class="col-4">
+						<a itemprop="url" class="h-auto w-100" href="/{$locale}/" target="_blank">
+							<img itemprop="logo" class="w-100 pt-1" src="{$basePath}/data/admin/website-logo.png"
+								 alt="BloodOath" title="BloodOath">
+						</a>
+					</div>
+					<div class="col-3"></div>
+
+					<div class="col-3 d-flex align-items-center justify-content-center icons" id="icons">
+						<i class="bi bi-bell ps-4"></i>
+						<a n:href=":User:Admin:User:default id: $currentUser->getId()">
+							<i class="bi bi-person-fill ps-4"></i>
+						</a>
+						<a n:href="logout!"><i class="bi bi-escape ps-4 color-warning"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+{/block}
+
+
+<div class="row">
+		<div class="col-2 menu">
+			<ul class="menu-list pt-5 ps-md-5">
+				<li>
+					<a n:href=":Core:Admin:Homepage:default" n:class="$action === ':Core:Admin:Homepage:default'? active">
+						<i class="bi bi-clipboard2-data"></i>
+						Overview
+					</a>
+				</li>
+				<li>
+					<a n:href=":User:Admin:User:list"  n:class="$action === ':User:Admin:User:list' ? active">
+						<i class="bi bi-people-fill"></i>
+						Users
+					</a>
+				</li>
+				<li>
+					<a n:href=":Page:Admin:Page:list" n:class="$action === ':Page:Admin:Page:list'? active">
+
+						<i class="bi bi-files"></i>
+						Pages
+					</a>
+				</li>
+				<li>
+					<a n:href=":Core:Admin:Setting:default" n:class="$action === ':Core:Admin:Setting:default'? active">
+						<i class="bi bi-gear"></i>
+						Setting
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-10 p-5 border-menu" id="content">
+			{snippet flashes}
+				<div n:foreach="$flashes as $flash" n:class="alert, 'alert-' . $flash->type">{$flash->message}</div>
+			{/snippet}
+			{include content}
+		</div>
+	</div>
+	{block footer}
+	<footer>
+	</footer>
+{/block}
+
+	{block scripts}
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+			crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-ui-sortable@1.0.0/jquery-ui.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/nette.ajax.js@2.3.0/nette.ajax.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/naja@1.8.3/dist/Naja.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', naja.initialize.bind(naja));
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/ublaboo-datagrid@6.2.24/assets/datagrid.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/nette-forms@3.0.4/src/assets/netteForms.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/ublaboo-datagrid@6.2.24/assets/datagrid-instant-url-refresh.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/ublaboo-datagrid@6.2.24/assets/datagrid-spinners.js"></script>
+
+	<script src="{$basePath}/js/main.js"></script>
+	<script src="{$basePath}/bower_components/nette.ajax.js/nette.ajax.js"></script>
+	<script n:syntax="double">
+
+		const selectBox = document.getElementById('langSelect');
+		const submitBtn = document.getElementById('saveLang');
+		console.debug(selectBox);
+		console.debug(submitBtn);
+
+		selectBox.addEventListener('change', () => {
+			submitBtn.click();
+			submitBtn.style.display = 'none';
+		});
+
+		function ajaxNette() {
+			$.ajax({
+				beforeSend: function (request) {
+					request.setRequestHeader("isNetteAjax", true);
+				},
+			});
+		}
+	</script>
+{/block}
+</body>
+</html>

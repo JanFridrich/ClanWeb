@@ -1,0 +1,56 @@
+{block content}
+
+	{snippet flashes}
+		<div n:foreach="$flashes as $flash" n:class="alert, 'alert-' . $flash->type">{$flash->message}</div>
+	{/snippet}
+	<a itemprop="url" href="/{$locale}/"><img itemprop="logo" class="w-50 pt-5 ps-5"
+											  src="{$basePath}/data/admin/website-logo.png"
+											  alt="Gamifactory" title="Gamifactory"></a>
+	<div class="row pt-5 mt-3">
+		<div class="col-7">
+			<div class="row">
+				<div class="col-6"></div>
+				<div class="col-6">
+					<h1 n:block=title class="d-flex justify-content-center">{$logInPage->getTitle()}</h1>
+				</div>
+			</div>
+			<form n:name=signInForm>
+				<ul class="alert alert-danger" n:ifcontent>
+					<li n:foreach="$form->ownErrors as $error">{$error}</li>
+				</ul>
+				<div class="row pb-4">
+
+					<div class="col-6 d-flex align-items-center justify-content-end">
+						<div class="row">{label username class => 'd-flex justify-content-end'}</div>
+					</div>
+					<div class="col-6 align-content-end">
+						<div class="row">{input username}</div>
+					</div>
+				</div>
+				<div class="row pb-4">
+
+					<div class="col-6 d-flex align-items-center justify-content-end">
+						<div class="row">{label password class => 'd-flex justify-content-end'}</div>
+					</div>
+					<div class="col-6 align-content-end">
+						<div class="row">{input password}</div>
+					</div>
+				</div>
+				<div class="row pb-4">
+					<div class="col-6">
+					</div>
+					<div class="col-6 align-content-end">
+						<div class="row d-flex align-items-center justify-content-between">
+							<a href="/{$locale}/{$forgotPasswordPage->getAlias()}"
+							   class='col'>{_'messages.login.forget_password'}</a>
+							{input send class => 'button button-admin w-auto'}
+						</div>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+{/block}
+

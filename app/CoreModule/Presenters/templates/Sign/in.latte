@@ -1,0 +1,21 @@
+{block content}
+
+
+	<div class="row content">
+		<div class="size form">
+			<section class="sign-up">
+				<h1 n:block=title>{$logInPage->getTitle()}</h1>
+
+				<main>
+					<p>{_'messages.login.registration'|replace:'%link%', '/' . $locale . '/' . $singUpPage->getAlias()|noescape}</p>
+				</main>
+				{include "../../../../CoreModule/Presenters/templates/@form.latte", name: signInForm}
+
+				<p><a href="/{$locale}/{$forgotPasswordPage->getAlias()}">{_'messages.login.forget_password'}</a></p>
+
+			</section>
+		</div>
+
+	</div>
+
+{/block}

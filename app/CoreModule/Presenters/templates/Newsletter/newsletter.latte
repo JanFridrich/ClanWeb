@@ -1,0 +1,39 @@
+{block content}
+
+
+	<div class="row content">
+		<div class="size form">
+
+			<section class="sign-up">
+
+				<h1 n:block=title>{_'messages.newsletter.title'}</h1>
+
+				<main>
+					<p>{_'messages.registration.already_have_acount'|replace:'%link%', '/' . $locale . '/' . $logInPage->getAlias()|noescape}</p>
+				</main>
+
+				<form n:name="newsletterForm">
+					<ul class="alert alert-danger" n:ifcontent>
+						<li n:foreach="$form->ownErrors as $error">{$error}</li>
+					</ul>
+					<fieldset>
+						<p>
+							{label email}
+							{input email}
+						</p>
+
+						<p class="small">{_'messages.newsletter.privacy_and_policy'|replace:'%link%', 'data/documents/Súhlas-so-spracovaním-osobných-údajov.pdf'|noescape}
+
+						</p>
+						<p>
+							<input n:name=send class="button tertiary">
+						</p>
+					</fieldset>
+				</form>
+
+			</section>
+		</div>
+	</div>
+
+
+{/block}

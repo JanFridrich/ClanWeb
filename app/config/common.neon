@@ -1,0 +1,46 @@
+extensions:
+	translation: Kdyby\Translation\DI\TranslationExtension
+	dibi: Dibi\Bridges\Nette\DibiExtension22
+
+parameters:
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+dibi:
+	host: 'innodb.endora.cz:3306'
+	username: dlembor
+	password: 31052010pA
+	database: bloodoath
+	lazy: true
+
+session:
+	expiration: 14 days
+
+translation:
+	default: en
+	fallback: [en_EN, en]
+
+database:
+	dsn: 'mysql:host=innodb.endora.cz;dbname=bloodoath;port=3306'
+	user: dlembor
+	password: 31052010pA
+	options:
+		lazy: yes
+
+services:
+	routerFactory:
+		factory: \App\Router\RouterFactory
+
+	router: @routerFactory::createRouter
+
+includes:
+	- ../PageModule/page.neon
+	- ../CoreModule/core.neon
+	- ../UserModule/user.neon
+	- ../MailModule/mail.neon
+	- ../UnitModule/unit.neon

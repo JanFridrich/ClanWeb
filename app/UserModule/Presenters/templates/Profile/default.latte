@@ -1,0 +1,53 @@
+{block content}
+	<div class="row content">
+		<h1 n:block=title>{$profilePage->getTitle()}</h1>
+
+		<div class="col-lg-6 pe-lg-4">
+			<form n:name=profileForm>
+				<h2>{_'messages.profile.basic_info'}</h2>
+				<ul class="alert alert-danger" n:ifcontent>
+					<li n:foreach="$form->ownErrors as $error">{$error}</li>
+				</ul>
+				<fieldset>
+					<p>
+						<label>Email</label>
+						<input name="email" type="text" class="form-control"
+							   value={$user->getIdentity()->getData()[\App\CoreModule\Model\UserManager::COLUMN_EMAIL]} disabled>
+					</p>
+					<p>
+						{label login/}
+						{input login class => form-control}
+					</p>
+					<p>
+						<input n:name=send class="btn btn-primary save-button">
+					</p>
+				</fieldset>
+			</form>
+		</div>
+		<div class="col-lg-6">
+			<form n:name=changePasswordForm>
+				<h2>{_'messages.profile.change_password'}</h2>
+				<ul class="alert alert-danger" n:ifcontent>
+					<li n:foreach="$form->ownErrors as $error">{$error}</li>
+				</ul>
+				<fieldset>
+					<p>
+						{label oldPassword/}
+						{input oldPassword class => form-control}
+					</p>
+					<p>
+						{label password/}
+						{input password class => form-control}
+					</p>
+					<p>
+						{label repeatPassword/}
+						{input repeatPassword class => form-control}
+					</p>
+					<p>
+						<input n:name=send class="btn btn-primary save-button">
+					</p>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+{/block}

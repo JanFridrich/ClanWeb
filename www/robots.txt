@@ -1,0 +1,11 @@
+User-agent: *
+
+Allow: /*.webp$
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*/*webp*
+Allow: /*/*jpg*
+Allow: /*/*png*
+
+
+Sitemap: https://gamifactory.eu/sitemap.xml

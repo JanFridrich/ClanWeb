@@ -1,0 +1,12 @@
+services:
+	userService:
+		factory: \App\UserModule\Model\UserService
+
+	userFormFactory:
+		factory: \App\UserModule\Forms\UserFormFactory
+
+	userRenderer:
+		factory: \App\UserModule\Grid\Renderer
+
+	userDataGridFactory:
+		factory: \App\UserModule\Grid\UserDataGridFactory

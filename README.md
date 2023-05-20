@@ -1,1 +1,1 @@
-# ClanWeb
+# Eternals

@@ -1,0 +1,188 @@
+body {
+	padding-top: 60px;
+}
+
+.content {
+	padding: 2rem;
+}
+
+a[href^="#error:"] {
+	background: red;
+	color: white;
+}
+
+form .required label {
+	font-weight: bold;
+}
+
+.row {
+	--bs-gutter-x: 0rem;
+}
+
+
+a:hover {
+	color: #0199a3;
+}
+
+.align-text-center {
+	text-align: center;
+}
+
+.flag-lang {
+	max-width: 4rem;
+}
+
+.flag-lang svg {
+	min-width: 2rem;
+	padding-right: 5px;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+	background-color: transparent;
+}
+
+.flag-icon {
+	min-width: 1.5rem;
+}
+
+.dropdown-toggle svg {
+	min-width: 1.5rem;
+}
+
+.dropdown-menu {
+	min-width: 9rem;
+	border: 0 solid rgba(0, 0, 0, .15);
+}
+
+.dropdown-menu li {
+	min-width: fit-content;
+}
+
+.dropdown-item {
+	padding: 0.25rem 0;
+}
+
+.timeline {
+	border-left: 5px solid #A3019D;
+	padding: 50px;
+	list-style: none;
+}
+
+@media (max-width: 767px) {
+	.timeline {
+		padding: 25px;
+	}
+}
+
+.timeline .event {
+	padding-bottom: 25px;
+	margin-bottom: 25px;
+	position: relative;
+}
+
+@media (max-width: 767px) {
+	.timeline .event {
+		padding-top: 30px;
+	}
+}
+
+.timeline .event:last-of-type {
+	padding-bottom: 0;
+	margin-bottom: 0;
+	border: none;
+}
+
+.timeline .event:before,
+.timeline .event:after {
+	position: absolute;
+	display: block;
+	top: 0;
+}
+
+.timeline .event:before {
+	left: -207px;
+	content: attr(data-date);
+	text-align: right;
+	font-weight: 100;
+	font-size: 0.9em;
+	min-width: 120px;
+}
+
+@media (max-width: 767px) {
+	.timeline .event:before {
+		left: 0;
+		text-align: left;
+	}
+}
+
+.timeline .event:after {
+	-webkit-box-shadow: 0 0 0 8px #A3019D;
+	box-shadow: 0 0 0 8px #A3019D;
+	left: -55.8px;
+	background: #A3019D;
+	border-radius: 50%;
+	height: 9px;
+	width: 9px;
+	content: "";
+	top: 5px;
+}
+
+@media (max-width: 767px) {
+	.timeline .event:after {
+		left: -31.8px;
+	}
+}
+
+.d-block {
+	padding: 5% 15% 10% 15%;
+	margin: auto;
+}
+
+
+.blog-box img {
+	height: auto;
+	max-width: 80%;
+	margin: 0 10%;
+}
+
+.blog-box-text {
+	margin-top: -10%;
+	padding: 13% 5% 5%;
+	margin-bottom: 10%;
+}
+
+.index {
+	font-size: 0.7rem;
+	vertical-align: text-top;
+}
+
+.no-decoration {
+	text-decoration: none; !important;
+}
+
+.fw-600 {
+	font-weight: 600;
+}
+
+.game-link {
+	list-style: none;
+	margin: 1rem;
+}
+.border-box{
+	border: 1px solid #000;
+	border-radius: 10px;
+}
+.pd-0-15{
+	padding: 0 1.5rem;
+}
+
+.game-box-border-image{
+	border-radius: 10px 10px 0 0;
+}
+.button-more
+{
+	position: absolute;
+	bottom: 1rem;
+	left: 50%;
+	transform: translateX(-50%);
+}

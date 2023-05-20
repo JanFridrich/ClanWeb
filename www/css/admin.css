@@ -1,0 +1,201 @@
+:root {
+	--color-text: #000000;
+	--gradient-g-b: linear-gradient(103.58deg, #92FE9D 0%, #00C9FF 100%);
+	--gradient-bg: linear-gradient(130deg, #00C9FF 60%, white 50%);
+	--color-bg-input: #D9D9D9;
+	--color-bg: #00C9FF;
+	--color-orange-light: #FE7824;
+	--color-blue: royalblue;
+	--color-warning: purple;
+
+}
+
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}
+
+.background-project {
+	background-color: var(--color-bg);
+}
+
+.logo-d-g {
+	font-size: 45px;
+	line-height: 54px;
+	background: var(--gradient-g-b);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	text-fill-color: transparent;
+}
+
+.icons {
+	font-size: 2rem;
+}
+
+.button-admin {
+	background: white;
+	width: auto;
+	cursor: pointer;
+	color: var(--color-text);
+}
+
+body {
+	min-height: 100%;
+	font-weight: 400;
+	font-size: 1.2rem;
+	font-family: 'Raleway', sans-serif;
+	font-style: normal;
+	color: var(--color-text);
+}
+
+.login-layout {
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--color-bg); /* For browsers that do not support gradients */
+	background-image: var(--gradient-bg);
+	background-repeat: no-repeat;
+
+}
+
+.logo-header {
+	max-height: 7rem;
+	width: auto;
+}
+
+.login-logo {
+	width: 90vw;
+	height: 90vh;
+	background-image: url('/data/admin/Logo.png');
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+
+input {
+	border-style: solid;
+	border-color: var(--color-blue);
+	border-radius: 10px;
+}
+
+input:disabled {
+	opacity: 1;
+}
+
+a {
+	color: var(--color-blue);
+	text-decoration: none;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.border-top {
+	border-top: 1px solid var(--color-bg) !important;
+}
+
+.menu {
+	height: calc(100vh - 7rem);
+	border-right: 1px solid var(--color-bg);
+	border-top: 1px solid var(--color-bg);
+}
+.border-menu{
+	border-left: 1px solid var(--color-bg);
+	margin-left: -1px;
+}
+
+.menu-list {
+	font-size: 1.4rem;
+	letter-spacing: 0.03rem;
+}
+
+.menu-list li {
+	padding-bottom: 0.5rem;
+	padding-top: 0.5rem;
+}
+
+.menu-list li a {
+	color: black;
+	text-decoration: none;
+}
+
+.menu-list li a:hover {
+	color: var(--color-blue);
+}
+
+.menu-list li a.active {
+	color: var(--color-bg);
+}
+
+.menu-list li a.active:hover {
+	color: var(--color-blue);
+}
+
+.color-warning {
+	color: var(--color-warning);
+}
+
+table {
+	width: 100%;
+}
+
+.form-check-input:checked {
+	border-color: green;
+	background-color: green;
+}
+
+.form-check-input:disabled {
+	opacity: 1;
+	pointer-events: none;
+}
+
+
+.input-box {
+	background-color: var(--color-bg);
+	padding: 0.5rem 1.5rem 1.5rem;
+	border-radius: 10px;
+}
+
+.input-box-checkbox {
+	background-color: var(--color-bg);
+	padding: 1.5rem;
+	border-radius: 10px;
+}
+
+.save-button {
+	background: var(--color-bg);
+	border-color: var(--color-bg);
+	color: black;
+}
+
+.save-button:hover {
+	background: var(--color-blue);
+	border-color: var(--color-blue);
+}
+.yes {
+	color: green;
+	background-color: rgba(0, 128, 0, 0.1);
+	border: 1px solid green;
+	border-radius: 23px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	width: 90%;
+}
+
+.no {
+	color: red;
+	background-color: rgba(128, 0, 0, 0.1);
+	border: 1px solid red;
+	border-radius: 23px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	width: 90%;
+}
+
+.hidden{
+	display: none;
+	height: 0;
+	width: 0;
+}

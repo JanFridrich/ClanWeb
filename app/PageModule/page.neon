@@ -1,0 +1,9 @@
+services:
+	pageService:
+		factory: \App\PageModule\Model\PageService
+
+	pageFormFactory:
+		factory: \App\PageModule\Forms\PageFormFactory
+
+	pageDataGridFactory:
+		factory: \App\PageModule\Grid\PageDataGridFactory

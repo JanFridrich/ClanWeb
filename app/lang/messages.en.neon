@@ -1,0 +1,122 @@
+homepage:
+	games: Games
+	banner_title: "We bring education to games and play to schools."
+	banner_text: '<span class="fw-600">9 out of 10 students</span> go to school only because they have to. Join us and help us bring the joy of learning back to schools.'
+	banner_button: I want to join.
+	more_games_button: 'More games'
+	impact_games_text: '<p>The games on Gamifactory are selected by experienced teachers and education experts. They will help you present even the most demanding subjects in an interesting and engaging way.</p>'
+	games_text: 'Our latest, greatest, current. See which games are recommended by other teachers.'
+	connect_title: 'Have you developed an educational game?'
+	connect_text: "<p>Contact us and distribute games on Gamifactory. </p><p>You will get them to hundreds of schools in Slovakia and abroad.</p> <p>Contact us at <a href='mailto:gamifactory@impactgames.eu'>gamifactory@impactgames.eu</a></p>"
+
+story:
+	impactgames_text: '<span class="fw-bolder-project">Gamifactory</span> by <a href="https://www.impactgames.eu" class="link-purple">Impact Games</a> is a unique educational platform full of games and tutorials for learning through play.'
+	team_header: Team
+	head_teachers_we_work_with: teachers we work with
+	head_schools_we_work_with: schools we work with
+	head_students_playing_our_games: students playing our games
+	head_played_minutes: played minutes
+	testimonials: Testimonials
+
+buttons:
+	learn_more: Learn more
+	log_out: Log out
+
+game:
+	button_download: Download
+	button_methodology: Methodology
+	other_games: Other games
+
+games:
+	list_title: Games
+	list_text: ''
+
+forms:
+	sign_in: 'Log in'
+	password: 'Password'
+	username: 'Username'
+	credentials_incorrect: 'The username, email or password you entered is incorrect.'
+
+	request_password: 'Request password'
+	please_enter_email: 'Please enter email'
+	email: Email
+	not_existing_user_by_email: "User with this email doesn't exost"
+	token: Token
+	please_enter_token: Please enter token from email
+	new_password: New password
+	repeat_password: Repeaet password
+	please_enter_password: 'Please enter password/s'
+	reset_password: Reset password
+	password_must_be_same: "Passwords doesn't match"
+	email_doesnt_exist: "Email doesn't exist"
+	wrong_token: Wrong token
+	token_expired: Token expired
+	sign_up: 'Sign up'
+	username_already_registered: Username is already taken
+	email_already_registered: Email is already taken
+	old_password: Current password
+	update_password: Update password
+	current_password_wrong: Incorrect current password
+	username_or_email: Username or Email
+	change: Change
+	school: School
+	newsletter_sign_up: 'Subscribe to the newsletter'
+	email_already_registered_in_newsletter: "This email is already subscribing newsletter. You can finish your registration with <a href=%link%>password restoration</a>."
+	is_mailing: "Subscribes to newsletter"
+	created: Created
+	is_active: Active
+
+
+learning_hub:
+	title_text: '<p>Educational games and methodologies in one place.</p> <p>Explore our instructional videos and methodological guides and cover parts of the curriculum or current topics.</p> <p>Let your students play and then do our complementary activities with them. All within a standard 45-minute class.</p>  <p><b>Bring education to games and games to schools!</b></p>'
+	title: Learning hub
+	button_pdf: Download PDF
+	button_youtube: Watch video
+	button_link: Learn more
+	button_other: Learn more
+	not_logged: 'We have dozens of high-quality methodological materials on game-based learning and gamification for you. Register on Gamifactory and we will give you access to all of these materials completely for free.'
+	already_registred: 'Have you already registered on Gamifactory? Sign in here.'
+
+passwords:
+	token_send_check_email: "Token was send to your email copy it and paste it down here"
+
+registration:
+	title: Sign Up for Gamifactory
+	already_have_acount: 'Already have an account ? <a href="%link%">Log in</a>.'
+	is_mailing: "I want to receive updates from Gamifactory and Impact Games."
+	privacy_and_policy: 'By creating an account, you agree to our <a href="%link%"> privacy policy.</a>'
+
+login:
+	registration: "Don't have a Gamifactory account yet?  <a href='%link%'>Create it</a>"
+	forget_password: 'Forgot your password?'
+
+restore_password:
+	title_text: 'A token for password recovery has been sent to your email. Enter it below along with your new password.'
+
+profile:
+	basic_info: Basic information
+	mailing: I am interested in subscribing to the newsletter.
+	change_password: Change password
+
+footer:
+	language: 'Language:'
+	call_us: 'Call us'
+	email_us: 'Email us'
+	neswletter_sign_up: 'Subscribe to the newsletter'
+	rights: Gamifactory. All rights reserved.
+
+newsletter:
+	title: 'Newsletter sign-up'
+	privacy_and_policy: 'By clicking "subscribe", you agree to the <a href="%link%">processing of your personal data.</a>'
+
+
+mail:
+	restorePasswordText: '<h1 style="font-family:Arial; font-size:2em; line-height:1em; font-weight:bold; ">Forgot your password? Create a new one.</h1> <p style="font-family:Arial; font-size:1em; line-height:1.5em; font-weight:normal;">We have received a request to change the password for this account. If you do not want to change your password, you can ignore this email.</p>  <p style="font-family:Arial; font-size:1em; line-height:1.5em; font-weight:normal;">If you did not request a password change, we recommend that you check the security settings of your account </p>  <p style="font-family:Arial; font-size:1em; line-height:1.5em; font-weight:normal;">Either copy this token and proceed on the website, or click the button below "Restore password" to reset your password .</p>'
+	restorePasswordSubject: 'Password recovery Gamifactory.eu'
+	restorePasswordLinkTitle: 'Restore password'
+
+paginator:
+	previous: previous
+	from: from
+	next: next
+	page: Page

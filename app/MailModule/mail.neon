@@ -1,0 +1,16 @@
+services:
+	MailSender:
+		factory: \App\MailModule\Model\MailSender\MailSender
+		arguments:
+			domain: %domain%
+
+	SMTPMailerProvider:
+		factory: \App\MailModule\Model\MailerProvider\SMTPMailerProvider
+		arguments:
+			host: 'smtp.endora.cz'
+			username: 'info@bloodoath-cb.eu'
+			password: 'BloodOath2023'
+			secure: 'ssl'
+
+parameters:
+	domain: http://bloodoath-cb.eu/

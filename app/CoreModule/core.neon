@@ -1,0 +1,27 @@
+services:
+	XLSXFileResponseGetter:
+		factory: \App\CoreModule\Model\XLSXFileResponseGetter
+
+	userManager:
+		factory: \App\CoreModule\Model\UserManager
+
+	restorePasswordManager:
+		factory: \App\CoreModule\Model\RestorePasswordManager
+
+	changePasswordFormFactory:
+		factory: \App\CoreModule\Forms\ChangePasswordFormFactory
+
+	signInFormFactory:
+		factory: \App\CoreModule\Forms\SignInFormFactory
+
+	forgotPasswordFormFactory:
+		factory: \App\CoreModule\Forms\ForgotPasswordFormFactory
+
+	restorePasswordFormFactory:
+		factory: \App\CoreModule\Forms\RestorePasswordFormFactory
+
+	signUpFormFactory:
+		factory: \App\CoreModule\Forms\SignUpFormFactory
+
+	profileFormFactory:
+		factory: \App\UserModule\Forms\ProfileFormFactory
