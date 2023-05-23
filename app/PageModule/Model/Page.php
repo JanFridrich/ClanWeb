@@ -12,7 +12,7 @@ class Page extends \App\CoreModule\Model\Entity
 		'Core:Sign:forgotPassword' => 'Forgot password',
 		'Core:Sign:restorePassword' => 'Restore password',
 		'Unit:Unit:default' => 'Units list',
-
+		'Armor:Armor:default' => 'Armors list',
 	];
 
 	protected bool $includeHeader;

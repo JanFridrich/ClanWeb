@@ -16,6 +16,7 @@ class PageService
 	public const UID_FORGOT_PASSWORD = 'UID_FORGOT_PASSWORD';
 	public const UID_RESTORE_PASSWORD = 'UID_RESTORE_PASSWORD';
 	public const UID_UNITS = 'UID_UNITS';
+	public const UID_ARMOR = 'UID_ARMOR';
 
 	private \Dibi\Connection $database;
 

@@ -69,6 +69,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 		$this->template->logInPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_LOG_IN);
 		$this->template->profilePage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_PROFILE);
 		$this->template->unitsPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_UNITS);
+		$this->template->armorPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_ARMOR);
 
 		$this->template->user = $this->getUser();
 
