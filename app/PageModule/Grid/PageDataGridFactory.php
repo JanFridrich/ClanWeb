@@ -2,7 +2,7 @@
 
 namespace App\PageModule\Grid;
 
-class PageDataGridFactory
+class PageDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 {
 
 	private \App\PageModule\Model\PageService $pageService;

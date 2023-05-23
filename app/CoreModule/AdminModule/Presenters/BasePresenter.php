@@ -19,6 +19,9 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 	protected $userEntity;
 
 
+	protected \App\CoreModule\GridFactory\DataGridFactory $dataGridFactory;
+
+
 	public function __construct(
 		\App\UserModule\Model\UserService $userService
 	)
@@ -87,6 +90,11 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 		}
 
 		return FALSE;
+	}
+
+	public function createComponentGrid(): \Ublaboo\DataGrid\DataGrid
+	{
+		return $this->dataGridFactory->create($this->locale);
 	}
 
 }

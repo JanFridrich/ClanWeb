@@ -1,6 +1,6 @@
 extensions:
-	translation: Kdyby\Translation\DI\TranslationExtension
-	dibi: Dibi\Bridges\Nette\DibiExtension22
+	translation: \Kdyby\Translation\DI\TranslationExtension
+	dibi: \Dibi\Bridges\Nette\DibiExtension22
 
 parameters:
 
@@ -39,6 +39,7 @@ services:
 	router: @routerFactory::createRouter
 
 includes:
+	- ../ArmorModule/armor.neon
 	- ../PageModule/page.neon
 	- ../CoreModule/core.neon
 	- ../UserModule/user.neon

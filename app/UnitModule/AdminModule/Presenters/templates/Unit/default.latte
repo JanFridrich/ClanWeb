@@ -1,0 +1,11 @@
+{block content}
+	<h2 class="pb-2">Unit: {$unit->getName()}</h2>
+	<div class="row">
+		<div class="col-7">
+		{include "../../../../../CoreModule/AdminModule/Presenters/templates/@form.latte", name: editForm}
+		</div>
+		<div class="col-5">
+			<img class="unit-image" alt="{$unit->getName()}" title="{$unit->getName()}" src="/data/images/units/{$unit->getImage()}">
+		</div>
+	</div>
+{/block}

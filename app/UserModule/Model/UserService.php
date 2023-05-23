@@ -2,74 +2,43 @@
 
 namespace App\UserModule\Model;
 
-class UserService
+class UserService extends \App\CoreModule\Model\Service
 {
+
+	protected string $mappingClass = \App\UserModule\Model\UserMapping::class;
 
 	private \Dibi\Connection $database;
 
 	private \Nette\Security\Passwords $passwords;
 
+	private \App\UnitModule\Model\UnitService $unitService;
+
 
 	public function __construct(
 		\Dibi\Connection $database,
-		\Nette\Security\Passwords $passwords
+		\Nette\Security\Passwords $passwords,
+		\App\UnitModule\Model\UnitService $unitService
 	)
 	{
+		parent::__construct($database);
 		$this->database = $database;
 		$this->passwords = $passwords;
-	}
-
-
-	public function get(int $id): ?\App\UserModule\Model\User
-	{
-		$userData = $this->database->select('*')
-			->from(\App\UserModule\Model\UserMapping::TABLE_NAME)
-			->where(\App\UserModule\Model\UserMapping::COLUMN_ID . ' = %i', $id)
-			->fetch()
-		;
-
-		if ($userData === NULL) {
-			return NULL;
-		}
-
-		return $this->constructUser($userData);
-	}
-
-
-	/**
-	 * @return \App\UserModule\Model\User[]
-	 */
-	public function getAll(?int $limit = NULL, ?int $offset = NULL): array
-	{
-		$usersData = $this->database->select('*')
-			->from(\App\UserModule\Model\UserMapping::TABLE_NAME)
-			->fetchAll($offset, $limit)
-		;
-
-		$users = [];
-		foreach ($usersData as $userData) {
-			$user = $this->constructUser($userData);
-			if ($user) {
-				$users[$user->getId()] = $user;
-			}
-		}
-
-		return $users;
+		$this->unitService = $unitService;
 	}
 
 
 	/**
 	 * @throws \App\CoreModule\Model\DuplicateNameException
 	 * @throws \Dibi\Exception
+	 *
+	 * @param \App\UserModule\Model\User $user
 	 */
-	public function saveFormData(\App\UserModule\Model\User $user, array $values): void
+	public function saveFormData(array $values, \App\CoreModule\Model\Entity $user)
 	{
-		unset($values[UserMapping::COLUMN_CREATED], $values[UserMapping::COLUMN_EMAIL]);
+		unset($values[\App\UserModule\Model\UserMapping::COLUMN_CREATED], $values[\App\UserModule\Model\UserMapping::COLUMN_EMAIL], $values['units']);
+
 		try {
-			$this->database->update(\App\UserModule\Model\UserMapping::TABLE_NAME, $values)
-				->where(\App\UserModule\Model\UserMapping::COLUMN_ID . ' = %i', $user->getId())
-				->execute()
-			;
+			return parent::saveFormData($values, $user);
 		} catch (\Dibi\UniqueConstraintViolationException $e) {
 			throw new \App\CoreModule\Model\DuplicateNameException;
 		}
@@ -104,15 +73,47 @@ class UserService
 			$this->database->insert(\App\UserModule\Model\UserMapping::TABLE_NAME, $values)
 				->execute()
 			;
-		} catch (\Nette\Database\UniqueConstraintViolationException $e) {
+		} catch (\Dibi\UniqueConstraintViolationException $e) {
 			\Tracy\Debugger::barDump($e);
 			throw new \App\CoreModule\Model\DuplicateNameException;
 		}
 	}
 
 
-	private function constructUser(\Dibi\Row $userData): ?\App\UserModule\Model\User
+	public function prepareDataForGrid(): array
 	{
+		$users = $this->getAll();
+		$gridData = [];
+		$units = $this->unitService->getAll();
+
+		/** @var \App\UserModule\Model\User $user */
+		foreach ($users as $user) {
+			$userId = $user->getId();
+			$gridData[$userId]['user'] = $user->getLogin();
+			$gridData[$userId]['id'] = $userId;
+			$userUnits = $user->getUnits();
+			/** @var \App\UnitModule\Model\Unit $unit */
+			foreach ($units as $unitId => $unit) {
+				$level = 'X';
+				if (isset($userUnits[$unitId])) {
+					$level = $userUnits[$unitId]->getLevel();
+					if ($level === $unit->getMaxLevel()) {
+						$level = 'max';
+					}
+				}
+				$gridData[$userId]['unit' . $unitId] = $level;
+			}
+		}
+
+		return $gridData;
+	}
+
+
+	protected function constructEntity(?\Dibi\Row $userData): ?\App\UserModule\Model\User
+	{
+		if ( ! $userData) {
+			return NULL;
+		}
 		try {
 			$user = new \App\UserModule\Model\User(
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_ID],
@@ -121,6 +122,11 @@ class UserService
 				(bool) $userData[\App\UserModule\Model\UserMapping::COLUMN_IS_ACTIVE],
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_CREATED],
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_ROLE],
+				$userData[\App\UserModule\Model\UserMapping::COLUMN_SKILL_LEVEL],
+				$userData[\App\UserModule\Model\UserMapping::COLUMN_NOTE],
+				$userData[\App\UserModule\Model\UserMapping::COLUMN_LAST_UPDATED_UNITS],
+				$this->unitService->getUnitsForUser($userData[\App\UserModule\Model\UserMapping::COLUMN_ID]),
+
 			);
 		} catch (\Exception $exception) {
 			\Tracy\Debugger::barDump($exception);

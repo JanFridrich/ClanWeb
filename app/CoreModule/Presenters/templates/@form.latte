@@ -1,13 +1,14 @@
 <form n:name=$name class=form-horizontal>
-	<ul class=error n:ifcontent>
+	<ul class="alert alert-danger" n:ifcontent>
 		<li n:foreach="$form->ownErrors as $error">{$error}</li>
 	</ul>
 
 	<div n:foreach="$form->controls as $name => $input"
 	n:if="!$input->getOption(rendered) && $input->getOption(type) !== hidden"
 	n:class="form-group, $input->required ? required, $input->error ? has-error">
+
 		<div class="row pb-2">
-			<div class="col-sm-2 control-label d-flex align-items-center justify-content-end">{label $input /}
+			<div class="col-sm-2 control-label d-flex align-items-center justify-content-end pe-2">{label $input /}
 				{if $input->getOption(type) === checkbox}
 					{$input->getCaption()}
 				{/if}

@@ -1,0 +1,6 @@
+{block content}
+	<h2 class="pb-2">Armor: {$armor->getName()}</h2>
+	{include "../../../../../CoreModule/AdminModule/Presenters/templates/@form.latte", name: editForm}
+	<img class="unit-image" alt="{$armor->getName()}" title="{$armor->getName()}" src="/data/images/armors/{$armor->getImage()}">
+
+{/block}

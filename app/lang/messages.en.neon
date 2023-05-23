@@ -1,35 +1,8 @@
-homepage:
-	games: Games
-	banner_title: "We bring education to games and play to schools."
-	banner_text: '<span class="fw-600">9 out of 10 students</span> go to school only because they have to. Join us and help us bring the joy of learning back to schools.'
-	banner_button: I want to join.
-	more_games_button: 'More games'
-	impact_games_text: '<p>The games on Gamifactory are selected by experienced teachers and education experts. They will help you present even the most demanding subjects in an interesting and engaging way.</p>'
-	games_text: 'Our latest, greatest, current. See which games are recommended by other teachers.'
-	connect_title: 'Have you developed an educational game?'
-	connect_text: "<p>Contact us and distribute games on Gamifactory. </p><p>You will get them to hundreds of schools in Slovakia and abroad.</p> <p>Contact us at <a href='mailto:gamifactory@impactgames.eu'>gamifactory@impactgames.eu</a></p>"
-
-story:
-	impactgames_text: '<span class="fw-bolder-project">Gamifactory</span> by <a href="https://www.impactgames.eu" class="link-purple">Impact Games</a> is a unique educational platform full of games and tutorials for learning through play.'
-	team_header: Team
-	head_teachers_we_work_with: teachers we work with
-	head_schools_we_work_with: schools we work with
-	head_students_playing_our_games: students playing our games
-	head_played_minutes: played minutes
-	testimonials: Testimonials
 
 buttons:
 	learn_more: Learn more
 	log_out: Log out
 
-game:
-	button_download: Download
-	button_methodology: Methodology
-	other_games: Other games
-
-games:
-	list_title: Games
-	list_text: ''
 
 forms:
 	sign_in: 'Log in'
@@ -66,17 +39,6 @@ forms:
 	created: Created
 	is_active: Active
 
-
-learning_hub:
-	title_text: '<p>Educational games and methodologies in one place.</p> <p>Explore our instructional videos and methodological guides and cover parts of the curriculum or current topics.</p> <p>Let your students play and then do our complementary activities with them. All within a standard 45-minute class.</p>  <p><b>Bring education to games and games to schools!</b></p>'
-	title: Learning hub
-	button_pdf: Download PDF
-	button_youtube: Watch video
-	button_link: Learn more
-	button_other: Learn more
-	not_logged: 'We have dozens of high-quality methodological materials on game-based learning and gamification for you. Register on Gamifactory and we will give you access to all of these materials completely for free.'
-	already_registred: 'Have you already registered on Gamifactory? Sign in here.'
-
 passwords:
 	token_send_check_email: "Token was send to your email copy it and paste it down here"
 
@@ -104,10 +66,6 @@ footer:
 	email_us: 'Email us'
 	neswletter_sign_up: 'Subscribe to the newsletter'
 	rights: Gamifactory. All rights reserved.
-
-newsletter:
-	title: 'Newsletter sign-up'
-	privacy_and_policy: 'By clicking "subscribe", you agree to the <a href="%link%">processing of your personal data.</a>'
 
 
 mail:

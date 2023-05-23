@@ -9,18 +9,14 @@ class PagePresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 
 	private \App\PageModule\Forms\PageFormFactory $pageFormFactory;
 
-	private \App\PageModule\Grid\PageDataGridFactory $dataGridFactory;
-
 
 	public function __construct(
 		\App\UserModule\Model\UserService $userService,
-		\App\PageModule\Model\PageService $pageService,
 		\App\PageModule\Forms\PageFormFactory $pageFormFactory,
 		\App\PageModule\Grid\PageDataGridFactory $dataGridFactory
 	)
 	{
 		parent::__construct($userService);
-		$this->pageService = $pageService;
 		$this->pageFormFactory = $pageFormFactory;
 		$this->dataGridFactory = $dataGridFactory;
 	}
@@ -34,7 +30,6 @@ class PagePresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 			'warning',
 			':Core:Admin:Homepage:'
 		);
-		$this->template->pages = $this->pageService->getAllPages($this->locale);
 	}
 
 
@@ -76,12 +71,6 @@ class PagePresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 			(int) $this->getParameters()['id'],
 			$this->locale,
 		);
-	}
-
-
-	public function createComponentGrid(): \Ublaboo\DataGrid\DataGrid
-	{
-		return $this->dataGridFactory->create($this->locale);
 	}
 
 }

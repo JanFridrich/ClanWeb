@@ -33,6 +33,7 @@
 
 .icons {
 	font-size: 2rem;
+	max-width: 1.5rem;
 }
 
 .button-admin {
@@ -73,6 +74,13 @@ body {
 	background-position: bottom right;
 }
 
+.logo-login {
+	max-width: 50vh;
+	max-height: 50vh;
+	height: auto;
+	width: auto;
+}
+
 input {
 	border-style: solid;
 	border-color: var(--color-blue);
@@ -101,7 +109,8 @@ ul {
 	border-right: 1px solid var(--color-bg);
 	border-top: 1px solid var(--color-bg);
 }
-.border-menu{
+
+.border-menu {
 	border-left: 1px solid var(--color-bg);
 	margin-left: -1px;
 }
@@ -174,6 +183,7 @@ table {
 	background: var(--color-blue);
 	border-color: var(--color-blue);
 }
+
 .yes {
 	color: green;
 	background-color: rgba(0, 128, 0, 0.1);
@@ -194,8 +204,18 @@ table {
 	width: 90%;
 }
 
-.hidden{
+.hidden {
 	display: none;
 	height: 0;
 	width: 0;
+}
+
+.unit-image {
+	max-width: 100%;
+	height: auto;
+}
+
+.datagrid {
+	width: 100%;
+	overflow-x: auto;
 }

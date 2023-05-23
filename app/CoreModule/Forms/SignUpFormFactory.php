@@ -7,29 +7,21 @@ final class SignUpFormFactory
 
 	public const PASSWORD_MIN_LENGTH = 7;
 
-	private \App\CoreModule\Model\UserManager $userManager;
-
 	private \Nette\Security\User $user;
 
 	private \Kdyby\Translation\Translator $translator;
-
-	private \App\PageModule\Model\PageService $pageService;
 
 	private \App\UserModule\Model\UserService $userService;
 
 
 	public function __construct(
 		\Nette\Security\User $user,
-		\App\CoreModule\Model\UserManager $userManager,
 		\Kdyby\Translation\Translator $translator,
-		\App\PageModule\Model\PageService $pageService,
 		\App\UserModule\Model\UserService $userService
 	)
 	{
-		$this->userManager = $userManager;
 		$this->user = $user;
 		$this->translator = $translator;
-		$this->pageService = $pageService;
 		$this->userService = $userService;
 	}
 

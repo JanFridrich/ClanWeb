@@ -1,0 +1,33 @@
+{block content}
+	<form n:name=unitsForm class="form-horizontal">
+		{foreach $form->getComponents() as $unitId =>  $container}
+			{if $container instanceof \Nette\Forms\Container}
+				{foreach $container->getComponents() as $component}
+					{if $iterator->getCounter() % 2 === 1}
+						<div class="row">
+						<h3 class="d-flex align-items-center justify-content-center"><span class="h3">{$units[$unitId]->getName()} </span> <span class="h5"> - {$units[$unitId]->getPriority()}</span></h3>
+						<div class="col-6 pe-2">
+								<img class="unit-image" alt="{$units[$unitId]->getName()}" title="{$units[$unitId]->getName()}" src="/data/images/units/{$units[$unitId]->getImage()}">
+							</div>
+							<div class="col-6 m-auto">
+					{/if}
+								<div class="row pt-2">
+									{input $component class => form-select}
+								</div>
+					{if $iterator->getCounter() % 2 === 0}
+							<div class="row pt-2">
+								<h5 class="h6">Recommended line: {$units[$unitId]->getVeterancyLine()}</h5>
+							</div>
+							</div>
+						</div>
+					{/if}
+				{/foreach}
+			{/if}
+		{/foreach}
+		<div class="form-group row pt-4 control-label d-flex align-items-center justify-content-center">
+			<div class="col-sm-2">
+				{input save class => "btn btn-primary save-button"}
+			</div>
+		</div>
+	</form>
+{/block}

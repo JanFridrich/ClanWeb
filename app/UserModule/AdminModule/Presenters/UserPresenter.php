@@ -11,8 +11,6 @@ class UserPresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 
 	private \App\CoreModule\Model\XLSXFileResponseGetter $XLSXFileResponseGetter;
 
-	private \App\UserModule\Grid\UserDataGridFactory $dataGridFactory;
-
 
 	public function __construct(
 		\App\UserModule\Model\UserService $userService,
@@ -56,10 +54,5 @@ class UserPresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 		);
 	}
 
-
-	public function createComponentGrid(): \Ublaboo\DataGrid\DataGrid
-	{
-		return $this->dataGridFactory->create();
-	}
 
 }

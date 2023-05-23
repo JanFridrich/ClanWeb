@@ -40,15 +40,15 @@
 					 alt="BloodOath" title="BloodOath">
 			</div>
 			<div class="col-10 background-project d-flex align-items-center">
-				<div class="row">
+				<div class="row w-100">
 					<div class="col-2"></div>
-					<div class="col-4">
+					<div class="col-1">
 						<a itemprop="url" class="h-auto w-100" href="/{$locale}/" target="_blank">
-							<img itemprop="logo" class="w-100 pt-1" src="{$basePath}/data/admin/website-logo.png"
+							<img itemprop="logo" class="w-100 pt-1" src="{$basePath}/data/images/Logo.png"
 								 alt="BloodOath" title="BloodOath">
 						</a>
 					</div>
-					<div class="col-3"></div>
+					<div class="col-6"></div>
 
 					<div class="col-3 d-flex align-items-center justify-content-center icons" id="icons">
 						<i class="bi bi-bell ps-4"></i>
@@ -81,9 +81,34 @@
 				</li>
 				<li>
 					<a n:href=":Page:Admin:Page:list" n:class="$action === ':Page:Admin:Page:list'? active">
-
 						<i class="bi bi-files"></i>
 						Pages
+					</a>
+				</li>
+				<li>
+					<a n:href=":Armor:Admin:Armor:list" n:class="$action === ':Armor:Admin:Armor:list'? active">
+						<div class="d-flex align-items-center">
+							<img src="{$basePath}/data/admin/icons/chest.svg" class="icons pe-1"/> Armors
+						</div>
+					</a>
+				</li>
+				<li>
+					<a n:href=":Armor:Admin:ArmorType:list" n:class="$action === ':Armor:Admin:ArmorType:list'? active">
+						<div class="d-flex align-items-center">
+							<img src="{$basePath}/data/admin/icons/helmet.svg" class="icons pe-1"/> Armors types
+						</div>
+					</a>
+				</li>
+				<li>
+					<a n:href=":Unit:Admin:Unit:list" n:class="$action === ':Unit:Admin:Unit:list'? active">
+						<i class="bi bi-diagram-3-fill"></i>
+						Units
+					</a>
+				</li>
+				<li>
+					<a n:href=":Unit:Admin:UserUnit:list" n:class="$action === ':Unit:Admin:UserUnit:list'? active">
+						<i class="bi bi-table"></i>
+						Units of users
 					</a>
 				</li>
 				<li>
@@ -127,15 +152,7 @@
 	<script src="{$basePath}/bower_components/nette.ajax.js/nette.ajax.js"></script>
 	<script n:syntax="double">
 
-		const selectBox = document.getElementById('langSelect');
-		const submitBtn = document.getElementById('saveLang');
-		console.debug(selectBox);
-		console.debug(submitBtn);
 
-		selectBox.addEventListener('change', () => {
-			submitBtn.click();
-			submitBtn.style.display = 'none';
-		});
 
 		function ajaxNette() {
 			$.ajax({

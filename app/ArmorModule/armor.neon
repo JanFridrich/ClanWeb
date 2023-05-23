@@ -1,0 +1,21 @@
+services:
+	armorTypeService:
+		factory: \App\ArmorModule\Model\ArmorType\ArmorTypeService
+
+	armorService:
+		factory: \App\ArmorModule\Model\Armor\ArmorService
+
+	armorDataGridFactory:
+		factory: \App\ArmorModule\Grid\ArmorDataGridFactory
+
+	armorTypeDataGridFactory:
+		factory: \App\ArmorModule\Grid\ArmorTypeDataGridFactory
+
+	armorTypeFormFactory:
+		factory: App\ArmorModule\Forms\ArmorTypeFormFactory
+
+	armorFormFactory:
+		factory: App\ArmorModule\Forms\ArmorFormFactory
+
+	armorRenderer:
+		factory: \App\ArmorModule\Grid\ArmorRenderer

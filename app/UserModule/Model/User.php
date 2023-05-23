@@ -2,24 +2,30 @@
 
 namespace App\UserModule\Model;
 
-class User
+class User extends \App\CoreModule\Model\Entity
 {
 
 	public const ROLE_MEMBER = 'member';
 	public const ROLE_ADMIN = 'admin';
 	public const ROLE_WARLORD = 'warlord';
 
-	private int $id;
+	protected string $email;
 
-	private string $email;
+	protected string $login;
 
-	private string $login;
+	protected bool $isActive;
 
-	private bool $isActive;
+	protected \Dibi\DateTime $created;
 
-	private \Dibi\DateTime $created;
+	protected string $role;
 
-	private string $role;
+	protected ?string $skillLevel;
+
+	protected string $note;
+
+	protected array $units;
+
+	protected ?\Dibi\DateTime $lastUpdatedUnits;
 
 
 	public function __construct(
@@ -28,7 +34,11 @@ class User
 		string $login,
 		bool $isActive,
 		\Dibi\DateTime $created,
-		string $role
+		string $role,
+		?string $skillLevel,
+		string $note,
+		?\Dibi\DateTime $lastUpdatedUnits,
+		array $units
 	)
 	{
 		$this->id = $id;
@@ -37,18 +47,10 @@ class User
 		$this->isActive = $isActive;
 		$this->created = $created;
 		$this->role = $role;
-	}
-
-
-	public function getId(): int
-	{
-		return $this->id;
-	}
-
-
-	public function setId(int $id): void
-	{
-		$this->id = $id;
+		$this->skillLevel = $skillLevel;
+		$this->note = $note;
+		$this->units = $units;
+		$this->lastUpdatedUnits = $lastUpdatedUnits;
 	}
 
 
@@ -109,6 +111,60 @@ class User
 	public function setRole(string $role): void
 	{
 		$this->role = $role;
+	}
+
+
+	public function getNote(): string
+	{
+		return $this->note;
+	}
+
+
+	public function setNote(string $note): void
+	{
+		$this->note = $note;
+	}
+
+
+	public function getSkillLevel(): ?string
+	{
+		return $this->skillLevel;
+	}
+
+
+	public function setSkillLevel(?string $skillLevel): void
+	{
+		$this->skillLevel = $skillLevel;
+	}
+
+
+	/**
+	 * @return array<int, \App\UnitModule\Model\Unit>
+	 */
+	public function getUnits(): array
+	{
+		return $this->units;
+	}
+
+
+	/**
+	 * @param array<int, \App\UnitModule\Model\Unit> $units
+	 */
+	public function setUnits(array $units): void
+	{
+		$this->units = $units;
+	}
+
+
+	public function getLastUpdatedUnits(): ?\Dibi\DateTime
+	{
+		return $this->lastUpdatedUnits;
+	}
+
+
+	public function setLastUpdatedUnits(?\Dibi\DateTime $lastUpdatedUnits): void
+	{
+		$this->lastUpdatedUnits = $lastUpdatedUnits;
 	}
 
 }

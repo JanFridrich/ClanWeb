@@ -3,7 +3,7 @@
 	{snippet flashes}
 		<div n:foreach="$flashes as $flash" n:class="alert, 'alert-' . $flash->type">{$flash->message}</div>
 	{/snippet}
-	<a itemprop="url" href="/{$locale}/"><img itemprop="logo" class="w-50 pt-5 ps-5"
+	<a itemprop="url" href="/{$locale}/"><img itemprop="logo" class="logo-login pt-5 ps-5"
 											  src="{$basePath}/data/admin/website-logo.png"
 											  alt="Gamifactory" title="Gamifactory"></a>
 	<div class="row pt-5 mt-3">
@@ -21,7 +21,7 @@
 				<div class="row pb-4">
 
 					<div class="col-6 d-flex align-items-center justify-content-end">
-						<div class="row">{label username class => 'd-flex justify-content-end'}</div>
+						<div class="row">{label username class => 'd-flex justify-content-end'/}</div>
 					</div>
 					<div class="col-6 align-content-end">
 						<div class="row">{input username}</div>
@@ -30,7 +30,7 @@
 				<div class="row pb-4">
 
 					<div class="col-6 d-flex align-items-center justify-content-end">
-						<div class="row">{label password class => 'd-flex justify-content-end'}</div>
+						<div class="row">{label password class => 'd-flex justify-content-end'/}</div>
 					</div>
 					<div class="col-6 align-content-end">
 						<div class="row">{input password}</div>

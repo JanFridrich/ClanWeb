@@ -23,7 +23,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 
 	private \App\UserModule\Model\UserService $userService;
 
-	private ?\App\UserModule\Model\User $userEntity;
+	protected ?\App\UserModule\Model\User $userEntity;
 
 
 	public function __construct(
@@ -68,11 +68,11 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 		$this->template->singUpPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_SIGN_UP);
 		$this->template->logInPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_LOG_IN);
 		$this->template->profilePage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_PROFILE);
+		$this->template->unitsPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_UNITS);
+
 		$this->template->user = $this->getUser();
-		if ($this->getUser()->getIdentity()) {
-			$this->userEntity = $this->userService->get($this->getUser()->getIdentity()->getId());
-		}
-		$this->template->userEntity = $this->userEntity;
+
+		$this->template->userEntity = $this->getUserEntity();
 
 		parent::beforeRender();
 	}
@@ -108,6 +108,16 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 	{
 		$this->getUser()->logout(TRUE);
 		$this->redirect('this');
+	}
+
+
+	protected function getUserEntity(): ?\App\UserModule\Model\User
+	{
+		if ($this->userEntity === NULL && $this->getUser()->getIdentity()) {
+			$this->userEntity = $this->userService->get($this->getUser()->getIdentity()->getId());
+		}
+
+		return $this->userEntity;
 	}
 
 }

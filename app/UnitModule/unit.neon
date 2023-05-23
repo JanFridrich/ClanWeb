@@ -1,0 +1,18 @@
+services:
+	unitService:
+		factory: \App\UnitModule\Model\UnitService
+
+	unitDataGridFactory:
+		factory: \App\UnitModule\Grid\UnitDataGridFactory
+
+	userUnitDataGridFactory:
+		factory: \App\UnitModule\Grid\UserUnitDataGridFactory
+
+	unitFormFactory:
+		factory: \App\UnitModule\Forms\UnitFormFactory
+
+	userUnitService:
+		factory: \App\UnitModule\Model\UserUnitService
+
+	userUnitFormFactory:
+		factory: \App\UnitModule\Forms\UserUnitFormFactory

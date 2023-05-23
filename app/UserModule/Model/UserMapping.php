@@ -13,5 +13,8 @@ class UserMapping
 	public const COLUMN_IS_ACTIVE = 'isActive';
 	public const COLUMN_CREATED = 'created';
 	public const COLUMN_ROLE = 'role';
+	public const COLUMN_SKILL_LEVEL = 'skillLevel';
+	public const COLUMN_NOTE = 'note';
+	public const COLUMN_LAST_UPDATED_UNITS = 'lastUpdatedUnits';
 
 }

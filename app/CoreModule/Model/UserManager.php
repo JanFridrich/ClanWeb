@@ -35,6 +35,7 @@ final class UserManager implements \Nette\Security\Authenticator
 	 * Performs an authentication.
 	 *
 	 * @throws \Nette\Security\AuthenticationException
+	 * @throws \App\CoreModule\Model\UserNotActiveException
 	 */
 	public function authenticate(string $user, string $password): \Nette\Security\IIdentity
 	{

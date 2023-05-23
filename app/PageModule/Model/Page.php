@@ -2,7 +2,7 @@
 
 namespace App\PageModule\Model;
 
-class Page
+class Page extends \App\CoreModule\Model\Entity
 {
 
 	public const ACTIONS = [
@@ -11,32 +11,31 @@ class Page
 		'User:Profile:default' => 'Profile',
 		'Core:Sign:forgotPassword' => 'Forgot password',
 		'Core:Sign:restorePassword' => 'Restore password',
+		'Unit:Unit:default' => 'Units list',
+
 	];
 
+	protected bool $includeHeader;
 
-	private int $id;
+	protected bool $includeFooter;
 
-	private bool $includeHeader;
+	protected ?string $module;
 
-	private bool $includeFooter;
+	protected ?string $presenter;
 
-	private ?string $module;
+	protected ?string $action;
 
-	private ?string $presenter;
+	protected ?string $uid;
 
-	private ?string $action;
+	protected string $lang;
 
-	private ?string $uid;
+	protected string $title;
 
-	private string $lang;
+	protected ?\App\PageModule\Model\Page $parentPage;
 
-	private string $title;
+	protected ?int $sort;
 
-	private ?\App\PageModule\Model\Page $parentPage;
-
-	private ?int $sort;
-
-	private ?string $alias;
+	protected ?string $alias;
 
 
 	public function __construct(
@@ -66,18 +65,6 @@ class Page
 		$this->parentPage = $parentPage;
 		$this->sort = $sort;
 		$this->alias = $alias;
-	}
-
-
-	public function getId(): int
-	{
-		return $this->id;
-	}
-
-
-	public function setId(int $id): void
-	{
-		$this->id = $id;
 	}
 
 

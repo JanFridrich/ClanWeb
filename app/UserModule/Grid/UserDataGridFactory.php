@@ -2,7 +2,7 @@
 
 namespace App\UserModule\Grid;
 
-class UserDataGridFactory
+class UserDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 {
 
 	private \App\UserModule\Model\UserService $userService;
@@ -21,7 +21,7 @@ class UserDataGridFactory
 	}
 
 
-	public function create(): \Ublaboo\DataGrid\DataGrid
+	public function create(string $locale): \Ublaboo\DataGrid\DataGrid
 	{
 		$grid = new \Ublaboo\DataGrid\DataGrid();
 

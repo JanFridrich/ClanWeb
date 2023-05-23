@@ -42,7 +42,7 @@ final class SignInFormFactory
 				$this->user->setExpiration('14 days');
 				$this->user->login($values->username, $values->password);
 			} catch (\Nette\Security\AuthenticationException $e) {
-				$form->addError($this->translator->translate("messages.forms.credentials_incorrect"));
+				$form->addError($this->translator->translate($e->getMessage()));
 
 				return;
 			}

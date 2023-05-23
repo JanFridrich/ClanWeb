@@ -1,0 +1,28 @@
+{block content}
+	<h2 class="pb-2">Create new unit</h2>
+	{include "../../../../../CoreModule/AdminModule/Presenters/templates/@form.latte", name: addForm}
+
+	<script n:syntax="double">
+
+		const selectBox = document.getElementById('frm-addForm-tier');
+		const level = document.getElementById('frm-addForm-maxLevel');
+		console.debug(selectBox);
+		console.debug(level);
+
+
+		selectBox.addEventListener('change', () => {
+			if (selectBox.value === {{\App\UnitModule\Model\Unit::TIER_GREY}}) {
+				level.value = {{\App\UnitModule\Model\Unit::DEFAULT_MAX_LEVELS[\App\UnitModule\Model\Unit::TIER_GREY]}};
+			} else if (selectBox.value === {{\App\UnitModule\Model\Unit::TIER_GREEN}}) {
+				level.value = {{\App\UnitModule\Model\Unit::DEFAULT_MAX_LEVELS[\App\UnitModule\Model\Unit::TIER_GREEN]}};
+			} else if (selectBox.value === {{\App\UnitModule\Model\Unit::TIER_BLUE}}) {
+				level.value = {{\App\UnitModule\Model\Unit::DEFAULT_MAX_LEVELS[\App\UnitModule\Model\Unit::TIER_BLUE]}};
+			} else if (selectBox.value === {{\App\UnitModule\Model\Unit::TIER_PURPLE}}) {
+				level.value = {{\App\UnitModule\Model\Unit::DEFAULT_MAX_LEVELS[\App\UnitModule\Model\Unit::TIER_PURPLE]}};
+			} else if (selectBox.value === {{\App\UnitModule\Model\Unit::TIER_ORANGE}}) {
+				level.value = {{\App\UnitModule\Model\Unit::DEFAULT_MAX_LEVELS[\App\UnitModule\Model\Unit::TIER_ORANGE]}};
+			}
+		});
+
+	</script>
+{/block}

@@ -1,5 +1,12 @@
 body {
-	padding-top: 60px;
+	padding-top: 100px;
+}
+
+.logo{
+	max-height: 80px;
+	max-width: 80px;
+	height: auto;
+	width: auto;
 }
 
 .content {
@@ -185,4 +192,9 @@ a:hover {
 	bottom: 1rem;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+.unit-image{
+	max-width: 100%;
+	height: auto;
 }
