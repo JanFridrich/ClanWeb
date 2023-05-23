@@ -65,6 +65,29 @@ class ArmorService extends \App\CoreModule\Model\Service
 	}
 
 
+	public function getAllByUser(int $userId): array
+	{
+		$armors = [];
+		$entitiesData = $this->connection->select($this->mappingClass::TABLE_NAME . '.*, ' . \App\ArmorModule\Model\UserArmor\UserArmorMapping::COLUMN_PREFER . ', ' . \App\ArmorModule\Model\UserArmorType\UserArmorTypeMapping::COLUMN_LEADERSHIP)
+			->from($this->mappingClass::TABLE_NAME)
+			->leftJoin(\App\ArmorModule\Model\UserArmor\UserArmorMapping::TABLE_NAME)->on(\App\ArmorModule\Model\UserArmor\UserArmorMapping::TABLE_NAME . '.' . \App\ArmorModule\Model\UserArmor\UserArmorMapping::COLUMN_ARMOR . ' = ' . $this->mappingClass::TABLE_NAME . '.' . $this->mappingClass::COLUMN_ID . ' AND ' . \App\ArmorModule\Model\UserArmor\UserArmorMapping::TABLE_NAME . '.' . \App\ArmorModule\Model\UserArmor\UserArmorMapping::COLUMN_USER . ' = %i', $userId)
+			->leftJoin(\App\ArmorModule\Model\UserArmorType\UserArmorTypeMapping::TABLE_NAME)->on(\App\ArmorModule\Model\UserArmorType\UserArmorTypeMapping::TABLE_NAME . '.' . \App\ArmorModule\Model\UserArmorType\UserArmorTypeMapping::COLUMN_ARMOR_TYPE . ' = ' . $this->mappingClass::TABLE_NAME . '.' . $this->mappingClass::COLUMN_ARMOR_TYPE . ' AND ' . \App\ArmorModule\Model\UserArmorType\UserArmorTypeMapping::TABLE_NAME . '.' . \App\ArmorModule\Model\UserArmorType\UserArmorTypeMapping::COLUMN_USER . ' = %i', $userId)
+			->where(\App\ArmorModule\Model\UserArmor\UserArmorMapping::TABLE_NAME . '.' . \App\ArmorModule\Model\UserArmor\UserArmorMapping::COLUMN_USER . ' = %i', $userId)
+			->fetchAll()
+		;
+		\Tracy\Debugger::barDump($entitiesData);
+		foreach ($entitiesData as $entityData) {
+			$armor = $this->constructEntity($entityData);
+			if ( ! $armor) {
+				continue;
+			}
+			$armors[$armor->getId()] = $armor;
+		}
+
+		return $armors;
+	}
+
+
 	/**
 	 * @return \App\ArmorModule\Model\Armor\Armor|null
 	 */
@@ -84,7 +107,9 @@ class ArmorService extends \App\CoreModule\Model\Service
 				$armorType,
 				$entityData[\App\ArmorModule\Model\Armor\ArmorMapping::COLUMN_NAME],
 				$entityData[\App\ArmorModule\Model\Armor\ArmorMapping::COLUMN_IMAGE],
-				$entityData[\App\ArmorModule\Model\Armor\ArmorMapping::COLUMN_SORT]
+				$entityData[\App\ArmorModule\Model\Armor\ArmorMapping::COLUMN_SORT],
+				$entityData[\App\ArmorModule\Model\UserArmor\UserArmorMapping::COLUMN_PREFER] ?? NULL,
+				$entityData[\App\ArmorModule\Model\UserArmorType\UserArmorTypeMapping::COLUMN_LEADERSHIP] ?? NULL,
 
 			);
 		} catch (\Exception $exception) {

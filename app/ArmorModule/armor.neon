@@ -19,3 +19,6 @@ services:
 
 	armorRenderer:
 		factory: \App\ArmorModule\Grid\ArmorRenderer
+
+	userArmorService:
+		factory: \App\ArmorModule\Model\UserArmor\UserArmorService

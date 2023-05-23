@@ -27,6 +27,8 @@ class User extends \App\CoreModule\Model\Entity
 
 	protected ?\Dibi\DateTime $lastUpdatedUnits;
 
+	private array $armors;
+
 
 	public function __construct(
 		int $id,
@@ -38,7 +40,8 @@ class User extends \App\CoreModule\Model\Entity
 		?string $skillLevel,
 		string $note,
 		?\Dibi\DateTime $lastUpdatedUnits,
-		array $units
+		array $units,
+		array $armors
 	)
 	{
 		$this->id = $id;
@@ -51,6 +54,7 @@ class User extends \App\CoreModule\Model\Entity
 		$this->note = $note;
 		$this->units = $units;
 		$this->lastUpdatedUnits = $lastUpdatedUnits;
+		$this->armors = $armors;
 	}
 
 
@@ -165,6 +169,24 @@ class User extends \App\CoreModule\Model\Entity
 	public function setLastUpdatedUnits(?\Dibi\DateTime $lastUpdatedUnits): void
 	{
 		$this->lastUpdatedUnits = $lastUpdatedUnits;
+	}
+
+
+	/**
+	 * @return array<int, \App\ArmorModule\Model\Armor\Armor>
+	 */
+	public function getArmors(): array
+	{
+		return $this->armors;
+	}
+
+
+	/**
+	 * @param array<int, \App\ArmorModule\Model\Armor\Armor> $armors
+	 */
+	public function setArmors(array $armors): void
+	{
+		$this->armors = $armors;
 	}
 
 }

@@ -13,13 +13,19 @@ class Armor extends \App\CoreModule\Model\Entity
 
 	protected int $sort;
 
+	protected ?string $prefer;
+
+	protected ?int $leadership;
+
 
 	public function __construct(
 		int $id,
 		\App\ArmorModule\Model\ArmorType\ArmorType $armorType,
 		string $name,
 		string $image,
-		int $sort
+		int $sort,
+		?string $prefer,
+		?int $leadership
 	)
 	{
 		$this->id = $id;
@@ -27,6 +33,8 @@ class Armor extends \App\CoreModule\Model\Entity
 		$this->name = $name;
 		$this->image = $image;
 		$this->sort = $sort;
+		$this->prefer = $prefer;
+		$this->leadership = $leadership;
 	}
 
 
@@ -75,6 +83,30 @@ class Armor extends \App\CoreModule\Model\Entity
 	public function setImage(string $image): void
 	{
 		$this->image = $image;
+	}
+
+
+	public function getPrefer(): ?string
+	{
+		return $this->prefer;
+	}
+
+
+	public function setPrefer(?string $prefer): void
+	{
+		$this->prefer = $prefer;
+	}
+
+
+	public function getLeadership(): ?int
+	{
+		return $this->leadership;
+	}
+
+
+	public function setLeadership(?int $leadership): void
+	{
+		$this->leadership = $leadership;
 	}
 
 }

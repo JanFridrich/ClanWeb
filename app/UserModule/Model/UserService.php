@@ -13,17 +13,21 @@ class UserService extends \App\CoreModule\Model\Service
 
 	private \App\UnitModule\Model\UnitService $unitService;
 
+	private \App\ArmorModule\Model\Armor\ArmorService $armorService;
+
 
 	public function __construct(
 		\Dibi\Connection $database,
 		\Nette\Security\Passwords $passwords,
-		\App\UnitModule\Model\UnitService $unitService
+		\App\UnitModule\Model\UnitService $unitService,
+		\App\ArmorModule\Model\Armor\ArmorService $armorService
 	)
 	{
 		parent::__construct($database);
 		$this->database = $database;
 		$this->passwords = $passwords;
 		$this->unitService = $unitService;
+		$this->armorService = $armorService;
 	}
 
 
@@ -126,7 +130,7 @@ class UserService extends \App\CoreModule\Model\Service
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_NOTE],
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_LAST_UPDATED_UNITS],
 				$this->unitService->getUnitsForUser($userData[\App\UserModule\Model\UserMapping::COLUMN_ID]),
-
+				$this->armorService->getAllByUser($userData[\App\UserModule\Model\UserMapping::COLUMN_ID]),
 			);
 		} catch (\Exception $exception) {
 			\Tracy\Debugger::barDump($exception);
@@ -134,6 +138,7 @@ class UserService extends \App\CoreModule\Model\Service
 			return NULL;
 		}
 
+		\Tracy\Debugger::barDump($user);
 		return $user;
 	}
 
