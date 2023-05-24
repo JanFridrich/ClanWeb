@@ -26,6 +26,7 @@ class Entity implements \ArrayAccess, \IteratorAggregate, \Countable
 	}
 
 
+	#[\ReturnTypeWillChange]
 	final public function offsetGet($offset)
 	{
 		return $this->$offset;
