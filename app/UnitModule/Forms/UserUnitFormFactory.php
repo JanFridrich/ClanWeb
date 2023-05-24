@@ -39,6 +39,12 @@ class UserUnitFormFactory
 				->setDefaultValue(isset($userUnits[$unit->getId()]) ? $userUnits[$unit->getId()]->getUserVeterancyLine() : \App\UnitModule\Model\Unit::VETERANCY_HYBRID)
 				->setRequired()
 			;
+			if ($unit->getMaxMastery() > 0) {
+				$unitForm->addSelect(\App\UnitModule\Model\UserUnitMapping::COLUMN_MASTERY, \App\UnitModule\Model\UserUnitMapping::COLUMN_MASTERY, $unit->getMasteriesArray())
+					->setDefaultValue(isset($userUnits[$unit->getId()]) ? $userUnits[$unit->getId()]->getUserMastery() : 0)
+					->setRequired()
+				;
+			}
 
 			$form->addComponent($unitForm, (string) $unit->getId());
 		}

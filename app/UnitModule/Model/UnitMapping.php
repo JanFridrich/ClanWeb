@@ -16,5 +16,6 @@ class UnitMapping
 	public const COLUMN_MAX_LEVEL = 'maxLevel';
 	public const COLUMN_IMAGE = 'image';
 	public const COLUMN_SORT = 'sort';
+	public const COLUMN_MAX_MASTERY = 'maxMastery';
 
 }

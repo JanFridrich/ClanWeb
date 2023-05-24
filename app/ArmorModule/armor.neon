@@ -22,3 +22,12 @@ services:
 
 	userArmorService:
 		factory: \App\ArmorModule\Model\UserArmor\UserArmorService
+
+	userArmorTypeFormFactory:
+		factory: \App\ArmorModule\Forms\UserArmorTypeFormFactory
+
+	userArmorTypeService:
+		factory: \App\ArmorModule\Model\UserArmorType\UserArmorTypeService
+
+	userArmorFormFactory:
+		factory: \App\ArmorModule\Forms\UserArmorFormFactory

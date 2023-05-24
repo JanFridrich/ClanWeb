@@ -87,6 +87,10 @@ class Unit extends \App\CoreModule\Model\Entity
 
 	protected int $sort;
 
+	protected ?int $userMastery;
+
+	protected int $maxMastery;
+
 
 	public function __construct(
 		int $id,
@@ -100,7 +104,9 @@ class Unit extends \App\CoreModule\Model\Entity
 		string $image,
 		int $sort,
 		?int $level,
-		?string $userLine
+		?string $userLine,
+		?int $userMastery,
+		int $maxMastery
 	)
 	{
 		$this->id = $id;
@@ -115,6 +121,8 @@ class Unit extends \App\CoreModule\Model\Entity
 		$this->level = $level;
 		$this->userLine = $userLine;
 		$this->sort = $sort;
+		$this->userMastery = $userMastery;
+		$this->maxMastery = $maxMastery;
 	}
 
 
@@ -274,6 +282,42 @@ class Unit extends \App\CoreModule\Model\Entity
 	public function setSort(int $sort): void
 	{
 		$this->sort = $sort;
+	}
+
+
+	public function getUserMastery(): ?int
+	{
+		return $this->userMastery;
+	}
+
+
+	public function setUserMastery(?int $userMastery): void
+	{
+		$this->userMastery = $userMastery;
+	}
+
+
+	public function getMasteriesArray(): array
+	{
+		$masteries = [NULL];
+		for ($i = 1; $i < $this->maxMastery; $i++) {
+			$masteries[$i] = $i;
+		}
+		$masteries[$this->maxMastery] = 'max';
+
+		return $masteries;
+	}
+
+
+	public function getMaxMastery(): int
+	{
+		return $this->maxMastery;
+	}
+
+
+	public function setMaxMastery(int $maxMastery): void
+	{
+		$this->maxMastery = $maxMastery;
 	}
 
 }

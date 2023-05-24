@@ -35,6 +35,29 @@ class UserArmorService extends \App\CoreModule\Model\Service
 	}
 
 
+	/**
+	 * @param \App\UserModule\Model\User $entity
+	 */
+	public function saveFormData(array $values, \App\CoreModule\Model\Entity $entity)
+	{
+		$this->connection->delete($this->mappingClass::TABLE_NAME)
+			->where($this->mappingClass::COLUMN_USER . ' = %i', $entity->getId())
+			->execute()
+		;
+
+		foreach ($values as $armorId => $value) {
+			$value[$this->mappingClass::COLUMN_USER] = $entity->getId();
+			$value[$this->mappingClass::COLUMN_ARMOR] = $armorId;
+
+			$this->connection->insert($this->mappingClass::TABLE_NAME, $value)
+				->execute()
+			;
+		}
+
+		return NULL;
+	}
+
+
 	protected function constructEntity(?\Dibi\Row $entityData): ?\App\CoreModule\Model\Entity
 	{
 		$this->container->callInjects($this);

@@ -16,3 +16,6 @@ services:
 
 	userUnitFormFactory:
 		factory: \App\UnitModule\Forms\UserUnitFormFactory
+
+	dataSourceGetter:
+		factory: \App\UnitModule\Grid\UserUnitDataGridFactory\DataSourceGetter

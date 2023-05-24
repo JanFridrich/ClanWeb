@@ -114,7 +114,7 @@ abstract class Service
 	 *
 	 * @param array<string, mixed> $values
 	 */
-	public function saveFormData(array $values, Entity $entity)
+	public function saveFormData(array $values, \App\CoreModule\Model\Entity $entity)
 	{
 		return $this->connection->update($this->mappingClass::TABLE_NAME, $values)
 			->where($this->mappingClass::COLUMN_ID . ' = %i', $entity->getId())

@@ -62,6 +62,7 @@ class UserUnitService extends \App\CoreModule\Model\Service
 				$entityData[\App\UnitModule\Model\UserUnitMapping::COLUMN_UNIT],
 				$entityData[\App\UnitModule\Model\UserUnitMapping::COLUMN_LINE],
 				$entityData[\App\UnitModule\Model\UserUnitMapping::COLUMN_LEVEL],
+				$entityData[\App\UnitModule\Model\UserUnitMapping::COLUMN_MASTERY],
 			);
 		} catch (\Exception $exception) {
 			\Tracy\Debugger::barDump($exception);

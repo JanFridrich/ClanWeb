@@ -75,7 +75,6 @@ class ArmorService extends \App\CoreModule\Model\Service
 			->where(\App\ArmorModule\Model\UserArmor\UserArmorMapping::TABLE_NAME . '.' . \App\ArmorModule\Model\UserArmor\UserArmorMapping::COLUMN_USER . ' = %i', $userId)
 			->fetchAll()
 		;
-		\Tracy\Debugger::barDump($entitiesData);
 		foreach ($entitiesData as $entityData) {
 			$armor = $this->constructEntity($entityData);
 			if ( ! $armor) {

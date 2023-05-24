@@ -5,6 +5,17 @@ namespace App\ArmorModule\Model\Armor;
 class Armor extends \App\CoreModule\Model\Entity
 {
 
+	public const DEFAULT_LEADERSHIP = 700;
+
+	public const SKILL_LEVELS = [
+		0 => "Don't have weapon or needed skills",
+		1 => "Have weapon with all needed skills, but never played",
+		2 => "Playing sometimes, but prefer not to get it",
+		3 => "Playing weapon I don't mind using it",
+		4 => "I want to use this weapon",
+		5 => "I really want to use this weapon",
+	];
+
 	protected \App\ArmorModule\Model\ArmorType\ArmorType $armorType;
 
 	protected string $name;

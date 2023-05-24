@@ -11,5 +11,6 @@ class UserUnitMapping
 	public const COLUMN_UNIT = 'unit';
 	public const COLUMN_LINE = 'line';
 	public const COLUMN_LEVEL = 'level';
+	public const COLUMN_MASTERY = 'mastery';
 
 }

@@ -1,2 +1,48 @@
 {block content}
+	<form n:name=armorTypeForm class="form-horizontal">
+		<div class="row d-flex align-items-center justify-content-center">
+			<h3 class="d-flex justify-content-center h3">Leadership for armors</h3>
+		{foreach $form->getComponents() as $armorTypeId =>  $container}
+			{if $container instanceof \Nette\Forms\Container}
+				{foreach $container->getComponents() as $component}
+					<div class="col-lg-auto ps-lg-4 pt-2 ">
+						{label $component/}
+						{input $component class => form-control}
+					</div>
+				{/foreach}
+			{/if}
+		{/foreach}
+			<div class="form-group row pt-4 control-label d-flex align-items-center justify-content-center">
+				<div class="col-sm-1">
+					{input save class => "btn btn-primary save-button"}
+				</div>
+			</div>
+		</div>
+	</form>
+
+
+	<form n:name=armorForm class="form-horizontal pt-5">
+		{foreach $form->getComponents() as $armorId =>  $container}
+			{if $container instanceof \Nette\Forms\Container}
+				<div class="row pt-5">
+					<h3 class="d-flex align-items-center justify-content-center"><span class="h3">{$armors[$armorId]->getName()} </span></h3>
+					<div class="col-6 pe-2">
+						<img class="unit-image" alt="{$armors[$armorId]->getName()}" title="{$armors[$armorId]->getName()}" src="/data/images/armors/{$armors[$armorId]->getImage()}">
+					</div>
+					<div class="col-6 m-auto">
+						{foreach $container->getComponents() as $component}
+							<div class="row pt-2">
+								{input $component class => form-select}
+							</div>
+						{/foreach}
+					</div>
+				</div>
+			{/if}
+		{/foreach}
+		<div class="form-group row pt-4 control-label d-flex align-items-center justify-content-center">
+			<div class="col-sm-2">
+				{input save class => "btn btn-primary save-button"}
+			</div>
+		</div>
+	</form>
 {/block}

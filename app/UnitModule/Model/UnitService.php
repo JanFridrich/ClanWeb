@@ -71,7 +71,7 @@ class UnitService extends \App\CoreModule\Model\Service
 	{
 		$unitsIds = $this->userUnitService->getAllUnitIdsForUser($userId);
 		$units = [];
-		$entitiesData = $this->connection->select($this->mappingClass::TABLE_NAME . '.*, ' . \App\UnitModule\Model\UserUnitMapping::COLUMN_LEVEL . ', ' . \App\UnitModule\Model\UserUnitMapping::COLUMN_LINE)
+		$entitiesData = $this->connection->select($this->mappingClass::TABLE_NAME . '.*, ' . \App\UnitModule\Model\UserUnitMapping::COLUMN_LEVEL . ', ' . \App\UnitModule\Model\UserUnitMapping::COLUMN_LINE . ', ' . \App\UnitModule\Model\UserUnitMapping::COLUMN_MASTERY)
 			->from($this->mappingClass::TABLE_NAME)
 			->leftJoin(\App\UnitModule\Model\UserUnitMapping::TABLE_NAME)->on(\App\UnitModule\Model\UserUnitMapping::TABLE_NAME . '.' . \App\UnitModule\Model\UserUnitMapping::COLUMN_UNIT . ' = ' . $this->mappingClass::TABLE_NAME . '.' . $this->mappingClass::COLUMN_ID . ' AND ' . \App\UnitModule\Model\UserUnitMapping::TABLE_NAME . '.' . \App\UnitModule\Model\UserUnitMapping::COLUMN_USER . ' = %i', $userId)
 			->where($this->mappingClass::TABLE_NAME . '.' . $this->mappingClass::COLUMN_ID . ' IN %in', $unitsIds)
@@ -130,6 +130,8 @@ class UnitService extends \App\CoreModule\Model\Service
 				$unitData[\App\UnitModule\Model\UnitMapping::COLUMN_SORT],
 				$unitData[\App\UnitModule\Model\UserUnitMapping::COLUMN_LEVEL] ?? NULL,
 				$unitData[\App\UnitModule\Model\UserUnitMapping::COLUMN_LINE] ?? NULL,
+				$unitData[\App\UnitModule\Model\UserUnitMapping::COLUMN_MASTERY] ?? NULL,
+				$unitData[\App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY],
 
 			);
 		} catch (\Exception $exception) {

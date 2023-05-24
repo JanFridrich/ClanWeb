@@ -13,13 +13,16 @@ class UserUnit extends \App\CoreModule\Model\Entity
 
 	protected int $level;
 
+	protected int $mastery;
+
 
 	public function __construct(
 		int $id,
 		int $user,
 		int $unit,
 		string $line,
-		int $level
+		int $level,
+		int $mastery
 
 	)
 	{
@@ -28,6 +31,7 @@ class UserUnit extends \App\CoreModule\Model\Entity
 		$this->unit = $unit;
 		$this->line = $line;
 		$this->level = $level;
+		$this->mastery = $mastery;
 	}
 
 
@@ -76,6 +80,18 @@ class UserUnit extends \App\CoreModule\Model\Entity
 	public function setLevel(int $level): void
 	{
 		$this->level = $level;
+	}
+
+
+	public function getMastery(): int
+	{
+		return $this->mastery;
+	}
+
+
+	public function setMastery(int $mastery): void
+	{
+		$this->mastery = $mastery;
 	}
 
 }

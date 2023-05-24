@@ -14,4 +14,22 @@ class UserUnitPresenter extends \App\CoreModule\AdminModule\Presenters\BasePrese
 		$this->dataGridFactory = $dataGridFactory;
 	}
 
+
+	public function createComponentGridLevel(): \Ublaboo\DataGrid\DataGrid
+	{
+		return $this->dataGridFactory->createLevel();
+	}
+
+
+	public function createComponentGridVeterancy(): \Ublaboo\DataGrid\DataGrid
+	{
+		return $this->dataGridFactory->createVeterancy();
+	}
+
+
+	public function createComponentGridMastery(): \Ublaboo\DataGrid\DataGrid
+	{
+		return $this->dataGridFactory->createMastery();
+	}
+
 }

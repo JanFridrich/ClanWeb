@@ -5,28 +5,69 @@ namespace App\UnitModule\Grid;
 class UserUnitDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 {
 
-	private \App\UserModule\Model\UserService $userService;
-
 	private \App\UnitModule\Model\UnitService $unitService;
+
+	private \App\UnitModule\Grid\UserUnitDataGridFactory\DataSourceGetter $dataSourceGetter;
 
 
 	public function __construct(
-		\App\UserModule\Model\UserService $userService,
+		\App\UnitModule\Grid\UserUnitDataGridFactory\DataSourceGetter $dataSourceGetter,
 		\App\UnitModule\Model\UnitService $unitService
 	)
 	{
-		$this->userService = $userService;
 		$this->unitService = $unitService;
+		$this->dataSourceGetter = $dataSourceGetter;
 	}
 
 
-	public function create(string $locale): \Ublaboo\DataGrid\DataGrid
+	public function createLevel(): \Ublaboo\DataGrid\DataGrid
 	{
 		$grid = new \Ublaboo\DataGrid\DataGrid();
 
-		\Tracy\Debugger::barDump($this->userService->prepareDataForGrid());
+		$grid->setDataSource($this->dataSourceGetter->getLevelDataForGrid());
+		$grid->addColumnText('user', 'login')
+			->setSortable()
+			->setFilterText()
+		;
+		/** @var \App\UnitModule\Model\Unit $unit */
+		foreach ($this->unitService->getAll() as $unit) {
+			$grid->addColumnText('unit' . $unit->getId(), $unit->getName())
+				->setSortable()
+				->setFilterText()
+			;
+		}
 
-		$grid->setDataSource($this->userService->prepareDataForGrid());
+		return $grid;
+	}
+
+
+	public function createVeterancy(): \Ublaboo\DataGrid\DataGrid
+	{
+
+		$grid = new \Ublaboo\DataGrid\DataGrid();
+
+		$grid->setDataSource($this->dataSourceGetter->getVeterancyDataForGrid());
+		$grid->addColumnText('user', 'login')
+			->setSortable()
+			->setFilterText()
+		;
+		/** @var \App\UnitModule\Model\Unit $unit */
+		foreach ($this->unitService->getAll() as $unit) {
+			$grid->addColumnText('unit' . $unit->getId(), $unit->getName())
+				->setSortable()
+				->setFilterText()
+			;
+		}
+
+		return $grid;
+	}
+
+
+	public function createMastery(): \Ublaboo\DataGrid\DataGrid
+	{
+		$grid = new \Ublaboo\DataGrid\DataGrid();
+
+		$grid->setDataSource($this->dataSourceGetter->getMasteryDataForGrid());
 		$grid->addColumnText('user', 'login')
 			->setSortable()
 			->setFilterText()

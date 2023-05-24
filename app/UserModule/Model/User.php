@@ -27,7 +27,9 @@ class User extends \App\CoreModule\Model\Entity
 
 	protected ?\Dibi\DateTime $lastUpdatedUnits;
 
-	private array $armors;
+	protected array $armors;
+
+	protected array $armorTypes;
 
 
 	public function __construct(
@@ -41,7 +43,8 @@ class User extends \App\CoreModule\Model\Entity
 		string $note,
 		?\Dibi\DateTime $lastUpdatedUnits,
 		array $units,
-		array $armors
+		array $armors,
+		array $armorTypes
 	)
 	{
 		$this->id = $id;
@@ -55,6 +58,7 @@ class User extends \App\CoreModule\Model\Entity
 		$this->units = $units;
 		$this->lastUpdatedUnits = $lastUpdatedUnits;
 		$this->armors = $armors;
+		$this->armorTypes = $armorTypes;
 	}
 
 
@@ -187,6 +191,24 @@ class User extends \App\CoreModule\Model\Entity
 	public function setArmors(array $armors): void
 	{
 		$this->armors = $armors;
+	}
+
+
+	/**
+	 * @return array<int, \App\ArmorModule\Model\ArmorType\ArmorType>
+	 */
+	public function getArmorTypes(): array
+	{
+		return $this->armorTypes;
+	}
+
+
+	/**
+	 * @param array<int, \App\ArmorModule\Model\ArmorType\ArmorType> $armorTypes
+	 */
+	public function setArmorTypes(array $armorTypes): void
+	{
+		$this->armorTypes = $armorTypes;
 	}
 
 }

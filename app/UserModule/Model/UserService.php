@@ -84,33 +84,7 @@ class UserService extends \App\CoreModule\Model\Service
 	}
 
 
-	public function prepareDataForGrid(): array
-	{
-		$users = $this->getAll();
-		$gridData = [];
-		$units = $this->unitService->getAll();
 
-		/** @var \App\UserModule\Model\User $user */
-		foreach ($users as $user) {
-			$userId = $user->getId();
-			$gridData[$userId]['user'] = $user->getLogin();
-			$gridData[$userId]['id'] = $userId;
-			$userUnits = $user->getUnits();
-			/** @var \App\UnitModule\Model\Unit $unit */
-			foreach ($units as $unitId => $unit) {
-				$level = 'X';
-				if (isset($userUnits[$unitId])) {
-					$level = $userUnits[$unitId]->getLevel();
-					if ($level === $unit->getMaxLevel()) {
-						$level = 'max';
-					}
-				}
-				$gridData[$userId]['unit' . $unitId] = $level;
-			}
-		}
-
-		return $gridData;
-	}
 
 
 	protected function constructEntity(?\Dibi\Row $userData): ?\App\UserModule\Model\User
@@ -131,6 +105,7 @@ class UserService extends \App\CoreModule\Model\Service
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_LAST_UPDATED_UNITS],
 				$this->unitService->getUnitsForUser($userData[\App\UserModule\Model\UserMapping::COLUMN_ID]),
 				$this->armorService->getAllByUser($userData[\App\UserModule\Model\UserMapping::COLUMN_ID]),
+				[],
 			);
 		} catch (\Exception $exception) {
 			\Tracy\Debugger::barDump($exception);
@@ -138,7 +113,6 @@ class UserService extends \App\CoreModule\Model\Service
 			return NULL;
 		}
 
-		\Tracy\Debugger::barDump($user);
 		return $user;
 	}
 
