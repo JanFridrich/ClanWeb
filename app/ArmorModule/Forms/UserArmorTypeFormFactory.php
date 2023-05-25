@@ -36,6 +36,7 @@ class UserArmorTypeFormFactory
 			}
 			$armorTypeForm->addInteger(\App\ArmorModule\Model\UserArmorType\UserArmorTypeMapping::COLUMN_LEADERSHIP, $armorType->getName())
 				->setDefaultValue($leadership)
+				->setDisabled($leadership === 700)
 				->setRequired()
 			;
 

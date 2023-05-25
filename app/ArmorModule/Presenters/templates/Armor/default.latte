@@ -1,19 +1,23 @@
 {block content}
-	<form n:name=armorTypeForm class="form-horizontal">
+	<form n:name=armorTypeForm class="form-horizontal pb-4">
 		<div class="row d-flex align-items-center justify-content-center">
 			<h3 class="d-flex justify-content-center h3">Leadership for armors</h3>
-		{foreach $form->getComponents() as $armorTypeId =>  $container}
-			{if $container instanceof \Nette\Forms\Container}
-				{foreach $container->getComponents() as $component}
-					<div class="col-lg-auto ps-lg-4 pt-2 ">
-						{label $component/}
+			{foreach $form->getComponents() as $armorTypeId =>  $container}
+				{if $container instanceof \Nette\Forms\Container}
+					{foreach $container->getComponents() as $component}
+						<div class="col-lg-auto ps-lg-4 pt-2 ">
+							{if $component->isDisabled()}
+								Select preferences first
+							{else}
+								{label $component/}
+							{/if}
 						{input $component class => form-control}
-					</div>
-				{/foreach}
-			{/if}
-		{/foreach}
+						</div>
+					{/foreach}
+				{/if}
+			{/foreach}
 			<div class="form-group row pt-4 control-label d-flex align-items-center justify-content-center">
-				<div class="col-sm-1">
+				<div class="col-sm-1 d-flex align-items-center justify-content-center">
 					{input save class => "btn btn-primary save-button"}
 				</div>
 			</div>
@@ -21,13 +25,17 @@
 	</form>
 
 
-	<form n:name=armorForm class="form-horizontal pt-5">
+	<h2 class="d-flex justify-content-center pt-4 border-top"> Preferences</h2>
+	<form n:name=armorForm class="form-horizontal">
 		{foreach $form->getComponents() as $armorId =>  $container}
 			{if $container instanceof \Nette\Forms\Container}
 				<div class="row pt-5">
-					<h3 class="d-flex align-items-center justify-content-center"><span class="h3">{$armors[$armorId]->getName()} </span></h3>
+					<h3 class="d-flex align-items-center justify-content-center"><span
+								class="h3">{$armors[$armorId]->getName()} </span></h3>
 					<div class="col-6 pe-2">
-						<img class="unit-image" alt="{$armors[$armorId]->getName()}" title="{$armors[$armorId]->getName()}" src="/data/images/armors/{$armors[$armorId]->getImage()}">
+						<img class="unit-image" alt="{$armors[$armorId]->getName()}"
+							 title="{$armors[$armorId]->getName()}"
+							 src="/data/images/armors/{$armors[$armorId]->getImage()}">
 					</div>
 					<div class="col-6 m-auto">
 						{foreach $container->getComponents() as $component}

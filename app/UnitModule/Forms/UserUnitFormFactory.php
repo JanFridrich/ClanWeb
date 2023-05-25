@@ -31,16 +31,16 @@ class UserUnitFormFactory
 		/** @var \App\UnitModule\Model\Unit $unit */
 		foreach ($this->unitService->getAll() as $unit) {
 			$unitForm = new \Nette\Forms\Container();
-			$unitForm->addSelect(\App\UnitModule\Model\UserUnitMapping::COLUMN_LEVEL, \App\UnitModule\Model\UserUnitMapping::COLUMN_LEVEL, $unit->getLevelsArray())
+			$unitForm->addSelect(\App\UnitModule\Model\UserUnitMapping::COLUMN_LEVEL, 'Level', $unit->getLevelsArray())
 				->setDefaultValue(isset($userUnits[$unit->getId()]) ? $userUnits[$unit->getId()]->getLevel() : 0)
 				->setRequired()
 			;
-			$unitForm->addSelect(\App\UnitModule\Model\UserUnitMapping::COLUMN_LINE, \App\UnitModule\Model\UserUnitMapping::COLUMN_LINE, \App\UnitModule\Model\Unit::VETERANCIES)
+			$unitForm->addSelect(\App\UnitModule\Model\UserUnitMapping::COLUMN_LINE, 'Veterancy line', \App\UnitModule\Model\Unit::VETERANCIES)
 				->setDefaultValue(isset($userUnits[$unit->getId()]) ? $userUnits[$unit->getId()]->getUserVeterancyLine() : \App\UnitModule\Model\Unit::VETERANCY_HYBRID)
 				->setRequired()
 			;
 			if ($unit->getMaxMastery() > 0) {
-				$unitForm->addSelect(\App\UnitModule\Model\UserUnitMapping::COLUMN_MASTERY, \App\UnitModule\Model\UserUnitMapping::COLUMN_MASTERY, $unit->getMasteriesArray())
+				$unitForm->addSelect(\App\UnitModule\Model\UserUnitMapping::COLUMN_MASTERY, 'Mastery', $unit->getMasteriesArray())
 					->setDefaultValue(isset($userUnits[$unit->getId()]) ? $userUnits[$unit->getId()]->getUserMastery() : 0)
 					->setRequired()
 				;

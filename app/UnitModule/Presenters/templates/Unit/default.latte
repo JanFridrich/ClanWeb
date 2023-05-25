@@ -3,13 +3,23 @@
 		{foreach $form->getComponents() as $unitId =>  $container}
 			{if $container instanceof \Nette\Forms\Container}
 				<div class="row">
-					<h3 class="d-flex align-items-center justify-content-center"><span class="h3">{$units[$unitId]->getName()} </span> <span class="h5"> - {$units[$unitId]->getPriority()}</span></h3>
+					<h3 class="d-flex align-items-center justify-content-center">
+						<span class="h3">
+							{$units[$unitId]->getName()}
+						</span>
+						<span class="h5"> - {\App\UnitModule\Model\Unit::PRIORITIES[$units[$unitId]->getPriority()]}
+						{for $i = 0; $i < $units[$unitId]->getPriority(); $i++}
+							<i class="bi bi-star-fill yellow"></i>
+						{/for}
+						</span>
+					</h3>
 					<div class="col-6 pe-2">
 						<img class="unit-image" alt="{$units[$unitId]->getName()}" title="{$units[$unitId]->getName()}" src="/data/images/units/{$units[$unitId]->getImage()}">
 					</div>
 					<div class="col-6 m-auto">
 				{foreach $container->getComponents() as $component}
 					<div class="row pt-2">
+						{label $component class => control-label /}
 						{input $component class => form-select}
 					</div>
 				{/foreach}

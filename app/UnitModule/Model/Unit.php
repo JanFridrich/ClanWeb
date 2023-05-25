@@ -38,11 +38,11 @@ class Unit extends \App\CoreModule\Model\Entity
 		PRIORITY_DONT_CARE = 'dont care';
 
 	public const PRIORITIES = [
-		self::PRIORITY_MOST_WANTED => self::PRIORITY_MOST_WANTED,
-		self::PRIORITY_WANTED => self::PRIORITY_WANTED,
-		self::PRIORITY_GOOD_TO_HAVE => self::PRIORITY_GOOD_TO_HAVE,
-		self::PRIORITY_FILL => self::PRIORITY_FILL,
-		self::PRIORITY_DONT_CARE => self::PRIORITY_DONT_CARE,
+		5 => self::PRIORITY_MOST_WANTED,
+		4 => self::PRIORITY_WANTED,
+		3 => self::PRIORITY_GOOD_TO_HAVE,
+		2 => self::PRIORITY_FILL,
+		1 => self::PRIORITY_DONT_CARE,
 	];
 
 	public const VETERANCY_LINE_UP = 'up',
@@ -79,7 +79,7 @@ class Unit extends \App\CoreModule\Model\Entity
 
 	protected string $veterancyLine;
 
-	protected string $priority;
+	protected int $priority;
 
 	protected ?int $level;
 
@@ -97,7 +97,7 @@ class Unit extends \App\CoreModule\Model\Entity
 		string $name,
 		string $tier,
 		string $veterancyLine,
-		string $priority,
+		int $priority,
 		string $category,
 		int $leadership,
 		int $maxLevel,
@@ -222,13 +222,13 @@ class Unit extends \App\CoreModule\Model\Entity
 	}
 
 
-	public function getPriority(): string
+	public function getPriority(): int
 	{
 		return $this->priority;
 	}
 
 
-	public function setPriority(string $priority): void
+	public function setPriority(int $priority): void
 	{
 		$this->priority = $priority;
 	}
