@@ -21,21 +21,27 @@ class UserUnitService extends \App\CoreModule\Model\Service
 	/**
 	 * @throws \Dibi\Exception
 	 *
-	 * @return \Dibi\Result|null
+	 * @return int
 	 *
 	 * @param array<string|int, mixed> $values
 	 * @param \App\UserModule\Model\User $entity
 	 */
 	public function saveFormData(array $values, \App\CoreModule\Model\Entity $entity)
 	{
+		$maxedLevels = 0;
 		$this->connection->delete($this->mappingClass::TABLE_NAME)
 			->where($this->mappingClass::COLUMN_USER . ' = %i', $entity->getId())
 			->execute()
 		;
+		$units = $values['units'];
+		$values = $values['values'];
 
 		foreach ($values as $unitId => $value) {
 			if ($value[$this->mappingClass::COLUMN_LEVEL] === 0) {
 				continue;
+			}
+			if ($value[$this->mappingClass::COLUMN_LEVEL] === $units[$unitId]->getMaxLevel()) {
+				$maxedLevels++;
 			}
 			$value[$this->mappingClass::COLUMN_USER] = $entity->getId();
 			$value[$this->mappingClass::COLUMN_UNIT] = $unitId;
@@ -45,7 +51,12 @@ class UserUnitService extends \App\CoreModule\Model\Service
 			;
 		}
 
-		return NULL;
+		\Tracy\Debugger::barDump($maxedLevels);
+		\Tracy\Debugger::barDump($maxedLevels/\count($units));
+		\Tracy\Debugger::barDump(\round($maxedLevels/\count($units), 1));
+		$maxedUnits = (\round($maxedLevels/\count($units), 1)) * 100;
+
+		return (int) ($maxedUnits);
 	}
 
 

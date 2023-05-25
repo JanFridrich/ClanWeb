@@ -28,8 +28,9 @@ class UserUnitFormFactory
 	{
 		$form = new \Nette\Application\UI\Form();
 		$userUnits = $user->getUnits();
+		$allUnits = $this->unitService->getAll();
 		/** @var \App\UnitModule\Model\Unit $unit */
-		foreach ($this->unitService->getAll() as $unit) {
+		foreach ($allUnits as $unit) {
 			$unitForm = new \Nette\Forms\Container();
 			$unitForm->addSelect(\App\UnitModule\Model\UserUnitMapping::COLUMN_LEVEL, 'Level', $unit->getLevelsArray())
 				->setDefaultValue(isset($userUnits[$unit->getId()]) ? $userUnits[$unit->getId()]->getLevel() : 0)
@@ -49,9 +50,10 @@ class UserUnitFormFactory
 			$form->addComponent($unitForm, (string) $unit->getId());
 		}
 		$form->addSubmit('save', 'Save');
-		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, array $values) use ($onSuccess, $user): void {
-			$this->userUnitService->saveFormData($values, $user);
+		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, array $values) use ($onSuccess, $user, $allUnits): void {
+			$maxedUnits = $this->userUnitService->saveFormData(['values' => $values, 'units'=>$allUnits], $user);
 			$user->setLastUpdatedUnits(new \Dibi\DateTime());
+			$user->setMaxedUnits($maxedUnits);
 			$this->userService->saveFormData($user->toArray(), $user);
 			$onSuccess();
 		};

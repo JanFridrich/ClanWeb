@@ -103,6 +103,7 @@ class UserService extends \App\CoreModule\Model\Service
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_SKILL_LEVEL],
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_NOTE],
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_LAST_UPDATED_UNITS],
+				$userData[\App\UserModule\Model\UserMapping::COLUMN_MAXED_UNITS],
 				$this->unitService->getUnitsForUser($userData[\App\UserModule\Model\UserMapping::COLUMN_ID]),
 				$this->armorService->getAllByUser($userData[\App\UserModule\Model\UserMapping::COLUMN_ID]),
 				[],

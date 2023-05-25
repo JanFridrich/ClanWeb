@@ -16,5 +16,7 @@ class UserMapping
 	public const COLUMN_SKILL_LEVEL = 'skillLevel';
 	public const COLUMN_NOTE = 'note';
 	public const COLUMN_LAST_UPDATED_UNITS = 'lastUpdatedUnits';
+	public const COLUMN_MAXED_UNITS = 'maxedUnits';
+
 
 }

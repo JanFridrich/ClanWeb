@@ -48,6 +48,8 @@ class User extends \App\CoreModule\Model\Entity
 
 	protected array $armorTypes;
 
+	protected int $maxedUnits;
+
 
 	public function __construct(
 		int $id,
@@ -59,6 +61,7 @@ class User extends \App\CoreModule\Model\Entity
 		?string $skillLevel,
 		string $note,
 		?\Dibi\DateTime $lastUpdatedUnits,
+		int $maxedUnits,
 		array $units,
 		array $armors,
 		array $armorTypes
@@ -76,6 +79,7 @@ class User extends \App\CoreModule\Model\Entity
 		$this->lastUpdatedUnits = $lastUpdatedUnits;
 		$this->armors = $armors;
 		$this->armorTypes = $armorTypes;
+		$this->maxedUnits = $maxedUnits;
 	}
 
 
@@ -226,6 +230,18 @@ class User extends \App\CoreModule\Model\Entity
 	public function setArmorTypes(array $armorTypes): void
 	{
 		$this->armorTypes = $armorTypes;
+	}
+
+
+	public function getMaxedUnits(): int
+	{
+		return $this->maxedUnits === 0 ? 10 : $this->maxedUnits;
+	}
+
+
+	public function setMaxedUnits(int $maxedUnits): void
+	{
+		$this->maxedUnits = $maxedUnits;
 	}
 
 }
