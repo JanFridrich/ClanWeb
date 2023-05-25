@@ -162,10 +162,19 @@
 
 	<script src="{$basePath}/js/main.js"></script>
 	<script src="{$basePath}/bower_components/nette.ajax.js/nette.ajax.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('a[data-id="remove"]').click(function(e) {
+				e.preventDefault();
+
+				if (confirm("Are you sure you want to delete it?")) {
+					window.location.href = $(this).attr('href');
+				} else {
+				}
+			});
+		});
+	</script>
 	<script n:syntax="double">
-
-
-
 		function ajaxNette() {
 			$.ajax({
 				beforeSend: function (request) {

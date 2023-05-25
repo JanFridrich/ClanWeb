@@ -51,6 +51,10 @@ class UserDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 			'id' => 'id',
 		]);
 
+		$grid->addAction('remove', 'X️ ', 'remove!', [
+			'remove' => 'id',
+		])->setDataAttribute('id','remove');
+
 		return $grid;
 	}
 }

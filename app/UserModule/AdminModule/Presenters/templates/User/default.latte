@@ -1,5 +1,5 @@
 {block content}
-	<h2 class="pb-2">User {$userEntity ->getLogin()}</h2>
+	<h2 class="pb-2">User {$userEntityFromId->getLogin()}</h2>
 	{include "../../../../../CoreModule/AdminModule/Presenters/templates/@form.latte", name: userForm}
 
 {/block}

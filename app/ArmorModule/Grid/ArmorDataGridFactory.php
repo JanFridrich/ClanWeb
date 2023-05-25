@@ -45,7 +45,7 @@ class ArmorDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 
 		$grid->addAction('remove', 'X ️', ':Armor:Admin:Armor:remove', [
 			'id' => 'id',
-		]);
+		])->setDataAttribute('id', 'remove');
 
 		return $grid;
 	}

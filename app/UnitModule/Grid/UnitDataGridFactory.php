@@ -55,7 +55,7 @@ class UnitDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 
 		$grid->addAction('remove', 'X ️', ':Unit:Admin:Unit:remove', [
 			'id' => 'id',
-		]);
+		])->setDataAttribute('id', 'remove');
 
 		return $grid;
 	}

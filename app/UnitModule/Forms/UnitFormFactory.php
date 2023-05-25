@@ -106,6 +106,7 @@ class UnitFormFactory
 			$this->unitService->saveFormData($values, $unit);
 			$onSuccess();
 		};
+		\Tracy\Debugger::barDump($form);
 
 		return $form;
 	}

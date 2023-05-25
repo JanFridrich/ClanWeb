@@ -35,13 +35,19 @@ class UserPresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 
 	public function renderDefault(int $id): void
 	{
-		$this->template->userEntity = $this->userService->get($id);
+		$this->template->userEntityFromId = $this->userService->get($id);
 	}
 
 
 	public function handleExportAll(): void
 	{
 		$this->sendResponse($this->XLSXFileResponseGetter->get($this->userService->prepareDataForExport(), new \Nette\Utils\DateTime()));
+	}
+
+
+	public function handleRemove(int $remove): void
+	{
+		$this->userService->delete($remove);
 	}
 
 
@@ -56,7 +62,7 @@ class UserPresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 	}
 
 
-	public function actionDefault(): void
+	public function actionDefault(int $id): void
 	{
 		$this->checkStuffAndRedirectIfTrue(
 			! $this->checkPermission(\App\UserModule\Model\User::ROLE_ADMIN),
@@ -64,7 +70,7 @@ class UserPresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 			'warning',
 			':Core:Admin:Homepage:default'
 		);
-		$user = $this->userService->get((int) $this->getParameters()['id']);
+		$user = $this->userService->get($id);
 		if ( ! $user)
 		{
 			$this->flashMessage('User Not Found', 'warning');
