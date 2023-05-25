@@ -58,20 +58,20 @@
 						</div>
 						<div class="col-lg-4 d-flex justify-content-end">
 							<ul class="navbar-nav">
-								<li n:if=" ! $user->isLoggedIn()" class="nav-item">
+								<li n:if=" ! $user->isLoggedIn()" class="nav-item d-flex align-items-center">
 									<a class="nav-link"
 									   href="/{$locale}/{$logInPage->getAlias()}">{$logInPage->getTitle()}</a>
 								</li>
-								<li n:if="$user->isLoggedIn()" class="nav-item">
+								<li n:if="$user->isLoggedIn()" class="nav-item d-flex align-items-center">
 									<img class="logo" src="data/images/Logo.png">
 									<a class="nav-link"
 									   href="/{$locale}/{$profilePage->getAlias()}">{$userEntity->getLogin()}</a>
 								</li>
-								<li n:if=" ! $user->isLoggedIn()" class="nav-item">
+								<li n:if=" ! $user->isLoggedIn()" class="nav-item d-flex align-items-center">
 									<a class="nav-link"
 									   href="/{$locale}/{$singUpPage->getAlias()}">{$singUpPage->getTitle()}</a>
 								</li>
-								<li n:if="$user->isLoggedIn()" class="nav-item"><a
+								<li n:if="$user->isLoggedIn()" class="nav-item d-flex align-items-center"><a
 											class="nav-link" n:href="logout!">{_'messages.buttons.log_out'}</a>
 								</li>
 							</ul>
