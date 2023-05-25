@@ -5,7 +5,7 @@ namespace App\MailModule\Model\Mail;
 class MailConstants
 {
 
-	public const INFO_EMAIL = 'bloodoath@bloodoath.eu';
+	public const INFO_EMAIL = 'info@bloodoath.site';
 	public const TPL_TOKEN_SEND = 'sendToken.latte';
 
 }

@@ -13,4 +13,4 @@ services:
 			secure: 'ssl'
 
 parameters:
-	domain: http://bloodoath-cb.eu/
+	domain: https://bloodoath.site/

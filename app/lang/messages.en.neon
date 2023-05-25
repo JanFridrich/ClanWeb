@@ -43,13 +43,12 @@ passwords:
 	token_send_check_email: "Token was send to your email copy it and paste it down here"
 
 registration:
-	title: Sign Up for Gamifactory
+	title: Sign Up for Bloodoath
 	already_have_acount: 'Already have an account ? <a href="%link%">Log in</a>.'
-	is_mailing: "I want to receive updates from Gamifactory and Impact Games."
 	privacy_and_policy: 'By creating an account, you agree to our <a href="%link%"> privacy policy.</a>'
 
 login:
-	registration: "Don't have a Gamifactory account yet?  <a href='%link%'>Create it</a>"
+	registration: "Don't have a Bloodoath account yet?  <a href='%link%'>Create it</a>"
 	forget_password: 'Forgot your password?'
 
 restore_password:
@@ -65,12 +64,12 @@ footer:
 	call_us: 'Call us'
 	email_us: 'Email us'
 	neswletter_sign_up: 'Subscribe to the newsletter'
-	rights: Gamifactory. All rights reserved.
+	rights: Bloodoath. All rights reserved.
 
 
 mail:
 	restorePasswordText: '<h1 style="font-family:Arial; font-size:2em; line-height:1em; font-weight:bold; ">Forgot your password? Create a new one.</h1> <p style="font-family:Arial; font-size:1em; line-height:1.5em; font-weight:normal;">We have received a request to change the password for this account. If you do not want to change your password, you can ignore this email.</p>  <p style="font-family:Arial; font-size:1em; line-height:1.5em; font-weight:normal;">If you did not request a password change, we recommend that you check the security settings of your account </p>  <p style="font-family:Arial; font-size:1em; line-height:1.5em; font-weight:normal;">Either copy this token and proceed on the website, or click the button below "Restore password" to reset your password .</p>'
-	restorePasswordSubject: 'Password recovery Gamifactory.eu'
+	restorePasswordSubject: 'Password recovery Bloodoath'
 	restorePasswordLinkTitle: 'Restore password'
 
 paginator:
