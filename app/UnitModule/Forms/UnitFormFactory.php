@@ -39,9 +39,7 @@ class UnitFormFactory
 		$form->addInteger(\App\UnitModule\Model\UnitMapping::COLUMN_MAX_LEVEL, \App\UnitModule\Model\UnitMapping::COLUMN_MAX_LEVEL)
 			->setDefaultValue(\App\UnitModule\Model\Unit::DEFAULT_MAX_LEVELS[\App\UnitModule\Model\Unit::TIER_GREY])
 		;
-		$form->addInteger(\App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY, \App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY)
-			->setRequired()
-		;
+		$form->addInteger(\App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY, \App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY);
 		$form->addInteger(\App\UnitModule\Model\UnitMapping::COLUMN_SORT, \App\UnitModule\Model\UnitMapping::COLUMN_SORT);
 		$form->addUpload(\App\UnitModule\Model\UnitMapping::COLUMN_IMAGE, \App\UnitModule\Model\UnitMapping::COLUMN_IMAGE);
 
@@ -93,7 +91,6 @@ class UnitFormFactory
 		;
 		$form->addInteger(\App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY, \App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY)
 			->setDefaultValue($unit->getMaxMastery())
-			->setRequired()
 		;
 		$form->addInteger(\App\UnitModule\Model\UnitMapping::COLUMN_SORT, \App\UnitModule\Model\UnitMapping::COLUMN_SORT)
 			->setDefaultValue($unit->getSort())

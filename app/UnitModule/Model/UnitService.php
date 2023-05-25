@@ -23,6 +23,7 @@ class UnitService extends \App\CoreModule\Model\Service
 	public function createNew(array $values): int
 	{
 		$values[\App\UnitModule\Model\UnitMapping::COLUMN_SORT] = $values[\App\UnitModule\Model\UnitMapping::COLUMN_SORT] ?? 0;
+		$values[\App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY] = $values[\App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY] ?? 0;
 		$image = $values[\App\UnitModule\Model\UnitMapping::COLUMN_IMAGE];
 		if ($image->isOk()) {
 			$file = \fopen('data/images/units/' . $image->getSanitizedName(), 'wb+');
@@ -62,6 +63,8 @@ class UnitService extends \App\CoreModule\Model\Service
 		} else {
 			unset($values[\App\UnitModule\Model\UnitMapping::COLUMN_IMAGE]);
 		}
+		$values[\App\UnitModule\Model\UnitMapping::COLUMN_SORT] = $values[\App\UnitModule\Model\UnitMapping::COLUMN_SORT] ?? 0;
+		$values[\App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY] = $values[\App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY] ?? 0;
 
 		return parent::saveFormData($values, $unit);
 	}
