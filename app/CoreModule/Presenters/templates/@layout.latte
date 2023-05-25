@@ -46,32 +46,32 @@
 						<div class="col-lg-8 d-flex align-items-center">
 							<ul class="navbar-nav">
 								<li n:if=" $userEntity && $userEntity->getRole() !== App\UserModule\Model\User::ROLE_MEMBER">
-									<a class="nav-link d-flex align-items-center" href="/design" target="_blank">Admin</a>
+									<a class="nav-link d-md-flex align-items-center" href="/design" target="_blank">Admin</a>
 								</li>
 								<li n:if="$userEntity">
-									<a class="nav-link d-flex align-items-center" href="/{$locale}/{$unitsPage->getAlias()}">{$unitsPage->getTitle()}</a>
+									<a class="nav-link d-md-flex align-items-center" href="/{$locale}/{$unitsPage->getAlias()}">{$unitsPage->getTitle()}</a>
 								</li>
 								<li n:if="$userEntity">
-									<a class="nav-link d-flex align-items-center" href="/{$locale}/{$armorPage->getAlias()}">{$armorPage->getTitle()}</a>
+									<a class="nav-link d-md-flex align-items-center" href="/{$locale}/{$armorPage->getAlias()}">{$armorPage->getTitle()}</a>
 								</li>
 							</ul>
 						</div>
-						<div class="col-lg-4 d-flex justify-content-end">
+						<div class="col-lg-4 d-md-flex justify-content-end">
 							<ul class="navbar-nav">
-								<li n:if=" ! $user->isLoggedIn()" class="nav-item d-flex align-items-center">
+								<li n:if=" ! $user->isLoggedIn()" class="nav-item d-md-flex align-items-center">
 									<a class="nav-link"
 									   href="/{$locale}/{$logInPage->getAlias()}">{$logInPage->getTitle()}</a>
 								</li>
-								<li n:if="$user->isLoggedIn()" class="nav-item d-flex align-items-center">
+								<li n:if="$user->isLoggedIn()" class="nav-item d-md-flex align-items-center">
 									<img class="logo" src="data/images/ranks/{$userEntity->getMaxedUnits()}.webp">
 									<a class="nav-link"
 									   href="/{$locale}/{$profilePage->getAlias()}">{$userEntity->getLogin()}</a>
 								</li>
-								<li n:if=" ! $user->isLoggedIn()" class="nav-item d-flex align-items-center">
+								<li n:if=" ! $user->isLoggedIn()" class="nav-item d-md-flex align-items-center">
 									<a class="nav-link"
 									   href="/{$locale}/{$singUpPage->getAlias()}">{$singUpPage->getTitle()}</a>
 								</li>
-								<li n:if="$user->isLoggedIn()" class="nav-item d-flex align-items-center"><a
+								<li n:if="$user->isLoggedIn()" class="nav-item d-md-flex align-items-center"><a
 											class="nav-link" n:href="logout!">{_'messages.buttons.log_out'}</a>
 								</li>
 							</ul>
