@@ -46,13 +46,13 @@
 						<div class="col-lg-8">
 							<ul class="navbar-nav">
 								<li n:if=" $userEntity && $userEntity->getRole() !== App\UserModule\Model\User::ROLE_MEMBER">
-									<a class="nav-link" href="/design" target="_blank">Admin</a>
+									<a class="nav-link d-flex align-items-center" href="/design" target="_blank">Admin</a>
 								</li>
 								<li n:if="$userEntity">
-									<a class="nav-link" href="/{$locale}/{$unitsPage->getAlias()}">{$unitsPage->getTitle()}</a>
+									<a class="nav-link d-flex align-items-center" href="/{$locale}/{$unitsPage->getAlias()}">{$unitsPage->getTitle()}</a>
 								</li>
 								<li n:if="$userEntity">
-									<a class="nav-link" href="/{$locale}/{$armorPage->getAlias()}">{$armorPage->getTitle()}</a>
+									<a class="nav-link d-flex align-items-center" href="/{$locale}/{$armorPage->getAlias()}">{$armorPage->getTitle()}</a>
 								</li>
 							</ul>
 						</div>
@@ -63,7 +63,7 @@
 									   href="/{$locale}/{$logInPage->getAlias()}">{$logInPage->getTitle()}</a>
 								</li>
 								<li n:if="$user->isLoggedIn()" class="nav-item d-flex align-items-center">
-									<img class="logo" src="data/images/Logo.png">
+									<img class="logo" src="data/images/ranks/10.webp">
 									<a class="nav-link"
 									   href="/{$locale}/{$profilePage->getAlias()}">{$userEntity->getLogin()}</a>
 								</li>
