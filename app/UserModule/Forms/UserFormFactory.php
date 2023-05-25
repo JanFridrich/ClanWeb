@@ -41,10 +41,13 @@ class UserFormFactory
 		$form->addCheckbox(\App\UserModule\Model\UserMapping::COLUMN_IS_ACTIVE, $this->translator->translate("messages.forms.is_active"))
 			->setDefaultValue($user->isActive())
 		;
+		$form->addSelect(\App\UserModule\Model\UserMapping::COLUMN_ROLE, \App\UserModule\Model\UserMapping::COLUMN_ROLE)
+			->setDefaultValue($user->getRole())
+		;
 		$form->addSubmit('send', $this->translator->translate("messages.forms.change"));
 		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, \stdClass $values) use ($onSuccess, $user): void {
 			try {
-				$this->userService->saveFormData($user, (array) $values);
+				$this->userService->saveFormData((array) $values, $user);
 			} catch (\App\CoreModule\Model\DuplicateNameException $e) {
 				$form->addError($this->translator->translate("messages.forms.username_already_registered"));
 

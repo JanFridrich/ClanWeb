@@ -45,6 +45,28 @@ class UserPresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 	}
 
 
+	public function actionList(): void
+	{
+		$this->checkStuffAndRedirectIfTrue(
+			! $this->checkPermission(\App\UserModule\Model\User::ROLE_ADMIN),
+			'You dont have permission to view that!',
+			'warning',
+			':Core:Admin:Homepage:default'
+		);
+	}
+
+
+	public function actionDefault(): void
+	{
+		$this->checkStuffAndRedirectIfTrue(
+			! $this->checkPermission(\App\UserModule\Model\User::ROLE_ADMIN),
+			'You dont have permission to view that!',
+			'warning',
+			':Core:Admin:Homepage:default'
+		);
+	}
+
+
 	public function createComponentUserForm(): \Nette\Application\UI\Form
 	{
 		return $this->userFormFactory->create(
@@ -53,6 +75,5 @@ class UserPresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 			}, $this->userService->get((int) $this->getParameters()['id'])
 		);
 	}
-
 
 }

@@ -7,9 +7,9 @@ services:
 	SMTPMailerProvider:
 		factory: \App\MailModule\Model\MailerProvider\SMTPMailerProvider
 		arguments:
-			host: 'smtp.endora.cz'
-			username: 'info@bloodoath-cb.eu'
-			password: 'BloodOath2023'
+			host: 'smtp.m1.websupport.sk'
+			username: 'info@bloodoath.site'
+			password: 'Xu8[C!OFTY'
 			secure: 'ssl'
 
 parameters:

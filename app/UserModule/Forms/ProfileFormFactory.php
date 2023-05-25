@@ -38,7 +38,7 @@ final class ProfileFormFactory
 
 		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, \stdClass $values) use ($onSuccess, $user): void {
 			try {
-				$this->userService->saveFormData($user, (array) $values);
+				$this->userService->saveFormData((array) $values, $user);
 				/** @var \Nette\Security\SimpleIdentity $newIdentity */
 				$newIdentity = $this->user->getIdentity();
 				$newIdentity->__set(\App\CoreModule\Model\UserManager::COLUMN_LOGIN, $values->login);
