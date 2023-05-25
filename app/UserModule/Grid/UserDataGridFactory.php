@@ -42,9 +42,18 @@ class UserDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 			->setFilterText()
 		;
 
+		$grid->addColumnText(\App\UserModule\Model\UserMapping::COLUMN_MAXED_UNITS, 'progress')
+			->setSortable()
+			->setRenderer([$this->renderer, 'renderProgress'])
+			->setFilterText()
+
+
+		;
+
 		$grid->addColumnText(\App\UserModule\Model\UserMapping::COLUMN_IS_ACTIVE, \App\UserModule\Model\UserMapping::COLUMN_IS_ACTIVE)
 			->setSortable()
 			->setRenderer([$this->renderer, 'renderIsActive'])
+			->setFilterText()
 		;
 
 		$grid->addAction('edit', '✏️', ':User:Admin:User:default', [

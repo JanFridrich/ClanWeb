@@ -10,4 +10,10 @@ class Renderer
 		return $user->isActive() ? 'YES' : 'NO';
 	}
 
+
+	public function renderProgress(\App\UserModule\Model\User $user): string
+	{
+		return $user->getMaxedUnits() . '%';
+	}
+
 }
