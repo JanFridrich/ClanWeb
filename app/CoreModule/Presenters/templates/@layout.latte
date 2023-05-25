@@ -63,6 +63,7 @@
 									   href="/{$locale}/{$logInPage->getAlias()}">{$logInPage->getTitle()}</a>
 								</li>
 								<li n:if="$user->isLoggedIn()" class="nav-item">
+									<img class="logo" src="data/images/Logo.png">
 									<a class="nav-link"
 									   href="/{$locale}/{$profilePage->getAlias()}">{$userEntity->getLogin()}</a>
 								</li>
