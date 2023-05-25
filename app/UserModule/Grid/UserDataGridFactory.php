@@ -37,6 +37,11 @@ class UserDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 			->setFilterText()
 		;
 
+		$grid->addColumnText(\App\UserModule\Model\UserMapping::COLUMN_LAST_UPDATED_UNITS, 'updated units')
+			->setSortable()
+			->setFilterText()
+		;
+
 		$grid->addColumnText(\App\UserModule\Model\UserMapping::COLUMN_IS_ACTIVE, \App\UserModule\Model\UserMapping::COLUMN_IS_ACTIVE)
 			->setSortable()
 			->setRenderer([$this->renderer, 'renderIsActive'])

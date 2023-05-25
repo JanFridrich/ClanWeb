@@ -64,6 +64,12 @@ class UserPresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 			'warning',
 			':Core:Admin:Homepage:default'
 		);
+		$user = $this->userService->get((int) $this->getParameters()['id']);
+		if ( ! $user)
+		{
+			$this->flashMessage('User Not Found', 'warning');
+			$this->redirect('list');
+		}
 	}
 
 
@@ -71,7 +77,7 @@ class UserPresenter extends \App\CoreModule\AdminModule\Presenters\BasePresenter
 	{
 		return $this->userFormFactory->create(
 			function (): void {
-				$this->redirect('this');
+				$this->redirect('this', ['id' => $this->getParameters()['id']]);
 			}, $this->userService->get((int) $this->getParameters()['id'])
 		);
 	}

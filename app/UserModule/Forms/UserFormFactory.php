@@ -41,8 +41,14 @@ class UserFormFactory
 		$form->addCheckbox(\App\UserModule\Model\UserMapping::COLUMN_IS_ACTIVE, $this->translator->translate("messages.forms.is_active"))
 			->setDefaultValue($user->isActive())
 		;
-		$form->addSelect(\App\UserModule\Model\UserMapping::COLUMN_ROLE, \App\UserModule\Model\UserMapping::COLUMN_ROLE)
+		$form->addSelect(\App\UserModule\Model\UserMapping::COLUMN_ROLE, \App\UserModule\Model\UserMapping::COLUMN_ROLE, \App\UserModule\Model\User::ROLES)
 			->setDefaultValue($user->getRole())
+		;
+		$form->addText(\App\UserModule\Model\UserMapping::COLUMN_NOTE, \App\UserModule\Model\UserMapping::COLUMN_NOTE)
+			->setDefaultValue($user->getNote())
+		;
+		$form->addSelect(\App\UserModule\Model\UserMapping::COLUMN_SKILL_LEVEL, 'Skill level', \App\UserModule\Model\User::SKILL_LEVELS)
+			->setDefaultValue($user->getSkillLevel())
 		;
 		$form->addSubmit('send', $this->translator->translate("messages.forms.change"));
 		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, \stdClass $values) use ($onSuccess, $user): void {

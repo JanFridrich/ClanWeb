@@ -8,6 +8,23 @@ class User extends \App\CoreModule\Model\Entity
 	public const ROLE_MEMBER = 'member';
 	public const ROLE_ADMIN = 'admin';
 	public const ROLE_WARLORD = 'warlord';
+	public const ROLES = [
+		self::ROLE_MEMBER => self::ROLE_MEMBER,
+		self::ROLE_ADMIN => self::ROLE_ADMIN,
+		self::ROLE_WARLORD => self::ROLE_WARLORD,
+	];
+
+	public const SKILL_LEVEL_BEGINNER = 'beginner';
+	public const SKILL_LEVEL_INTERMEDIATE = 'intermediate';
+	public const SKILL_LEVEL_ADVANCED = 'advanced';
+	public const SKILL_LEVEL_GOD = 'god of war';
+	public const SKILL_LEVELS = [
+		NULL => NULL,
+		self::SKILL_LEVEL_BEGINNER => self::SKILL_LEVEL_BEGINNER,
+		self::SKILL_LEVEL_INTERMEDIATE => self::SKILL_LEVEL_INTERMEDIATE,
+		self::SKILL_LEVEL_ADVANCED => self::SKILL_LEVEL_ADVANCED,
+		self::SKILL_LEVEL_GOD => self::SKILL_LEVEL_GOD,
+	];
 
 	protected string $email;
 
