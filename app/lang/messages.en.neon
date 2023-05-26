@@ -7,7 +7,7 @@ buttons:
 forms:
 	sign_in: 'Log in'
 	password: 'Password'
-	username: 'Username'
+	username: 'Username (ingame)'
 	credentials_incorrect: 'The username, email or password you entered is incorrect.'
 
 	request_password: 'Request password'
