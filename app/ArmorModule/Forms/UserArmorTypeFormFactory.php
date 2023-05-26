@@ -28,15 +28,17 @@ class UserArmorTypeFormFactory
 		foreach ($this->armorTypeService->getAll() as $armorType) {
 			$armorTypeForm = new \Nette\Forms\Container();
 			$leadership = \App\ArmorModule\Model\Armor\Armor::DEFAULT_LEADERSHIP;
+			$disabled = TRUE;
 			foreach ($userArmors as $armor) {
 				if ($armor->getArmorType()->getId() === $armorType->getId()) {
 					$leadership = $armor->getLeadership();
+					$disabled = FALSE;
 					break;
 				}
 			}
 			$armorTypeForm->addInteger(\App\ArmorModule\Model\UserArmorType\UserArmorTypeMapping::COLUMN_LEADERSHIP, $armorType->getName())
 				->setDefaultValue($leadership)
-				->setDisabled($leadership === 700)
+				->setDisabled($disabled)
 				->setRequired()
 			;
 
