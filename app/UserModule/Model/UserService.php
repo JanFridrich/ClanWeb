@@ -40,7 +40,6 @@ class UserService extends \App\CoreModule\Model\Service
 	public function saveFormData(array $values, \App\CoreModule\Model\Entity $user)
 	{
 		unset($values[\App\UserModule\Model\UserMapping::COLUMN_CREATED], $values[\App\UserModule\Model\UserMapping::COLUMN_EMAIL], $values['units'], $values['armors'], $values['armorTypes']);
-		\Tracy\Debugger::barDump($values);
 		try {
 			return parent::saveFormData($values, $user);
 		} catch (\Dibi\UniqueConstraintViolationException $e) {

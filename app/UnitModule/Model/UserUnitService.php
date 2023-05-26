@@ -51,9 +51,6 @@ class UserUnitService extends \App\CoreModule\Model\Service
 			;
 		}
 
-		\Tracy\Debugger::barDump($maxedLevels);
-		\Tracy\Debugger::barDump($maxedLevels/\count($units));
-		\Tracy\Debugger::barDump(\round($maxedLevels/\count($units), 1));
 		$maxedUnits = (\round($maxedLevels/\count($units), 1)) * 100;
 
 		return (int) ($maxedUnits);
