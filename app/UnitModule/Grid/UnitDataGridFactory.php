@@ -33,15 +33,15 @@ class UnitDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 			->setSortable()
 			->setFilterText()
 		;
-		$grid->addColumnText(\App\UnitModule\Model\UnitMapping::COLUMN_CATEGORY, \App\UnitModule\Model\UnitMapping::COLUMN_CATEGORY)
-			->setSortable()
-			->setFilterText()
-		;
 		$grid->addColumnText(\App\UnitModule\Model\UnitMapping::COLUMN_LEADERSHIP, \App\UnitModule\Model\UnitMapping::COLUMN_LEADERSHIP)
 			->setSortable()
 			->setFilterText()
 		;
 		$grid->addColumnText(\App\UnitModule\Model\UnitMapping::COLUMN_MAX_LEVEL, \App\UnitModule\Model\UnitMapping::COLUMN_MAX_LEVEL)
+			->setSortable()
+			->setFilterText()
+		;
+		$grid->addColumnText(\App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY, \App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY)
 			->setSortable()
 			->setFilterText()
 		;
