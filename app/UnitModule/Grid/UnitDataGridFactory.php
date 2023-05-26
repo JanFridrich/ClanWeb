@@ -59,4 +59,5 @@ class UnitDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 
 		return $grid;
 	}
+
 }

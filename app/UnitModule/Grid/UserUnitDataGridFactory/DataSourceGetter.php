@@ -60,6 +60,9 @@ class DataSourceGetter
 			$userUnits = $user->getUnits();
 			/** @var \App\UnitModule\Model\Unit $unit */
 			foreach ($units as $unitId => $unit) {
+				if ($unit->getMaxMastery() === 0) {
+					continue;
+				}
 				$level = '';
 				if (isset($userUnits[$unitId]) && $unit->getMaxMastery() !== 0) {
 					$level = $userUnits[$unitId]->getUserMastery();
@@ -70,6 +73,7 @@ class DataSourceGetter
 				$gridData[$userId]['unit' . $unitId] = $level;
 			}
 		}
+		\Tracy\Debugger::barDump($gridData);
 
 		return $gridData;
 	}

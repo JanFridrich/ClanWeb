@@ -74,6 +74,9 @@ class UserUnitDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactor
 		;
 		/** @var \App\UnitModule\Model\Unit $unit */
 		foreach ($this->unitService->getAll() as $unit) {
+			if ($unit->getMaxMastery() === 0) {
+				continue;
+			}
 			$grid->addColumnText('unit' . $unit->getId(), $unit->getName())
 				->setSortable()
 				->setFilterText()
