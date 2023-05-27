@@ -55,7 +55,7 @@
 								<li n:if="$userEntity">
 									<a class="nav-link d-md-flex align-items-center" href="/{$locale}/{$armorPage->getAlias()}">{$armorPage->getTitle()}</a>
 								</li>
-								<li n:if="$userEntity->getRole() === App\UserModule\Model\User::ROLE_WARLORD || $userEntity->getRole() === App\UserModule\Model\User::ROLE_ADMIN">
+								<li n:if="$userEntity && $userEntity->getRole() === App\UserModule\Model\User::ROLE_WARLORD || $userEntity->getRole() === App\UserModule\Model\User::ROLE_ADMIN">
 									<a class="nav-link d-md-flex align-items-center" href="/{$locale}/{$tablePage->getAlias()}">{$tablePage->getTitle()}</a>
 								</li>
 							</ul>
