@@ -17,6 +17,10 @@ class PageService
 	public const UID_RESTORE_PASSWORD = 'UID_RESTORE_PASSWORD';
 	public const UID_UNITS = 'UID_UNITS';
 	public const UID_ARMOR = 'UID_ARMOR';
+	public const UID_CREATE_TABLE = 'UID_CREATE_TABLE';
+	public const UID_ASSIGN_UNITS = 'UID_ASSIGN_UNITS';
+	public const UID_ROLES_TABLE = 'UID_ROLES_TABLE';
+	public const UID_PREVIEW_TABLE = 'UID_PREVIEW_TABLE';
 
 	private \Dibi\Connection $database;
 

@@ -83,7 +83,7 @@ abstract class Service
 			if ( ! $entity) {
 				continue;
 			}
-			$entities[] = $entity;
+			$entities[$entity->getId()] = $entity;
 		}
 
 		return $entities;

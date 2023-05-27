@@ -320,4 +320,10 @@ class Unit extends \App\CoreModule\Model\Entity
 		$this->maxMastery = $maxMastery;
 	}
 
+
+	public function __toString(): string
+	{
+		return $this->name;
+	}
+
 }

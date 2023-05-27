@@ -120,4 +120,10 @@ class Armor extends \App\CoreModule\Model\Entity
 		$this->leadership = $leadership;
 	}
 
+
+	public function __toString(): string
+	{
+		return $this->name;
+	}
+
 }

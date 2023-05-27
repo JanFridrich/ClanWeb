@@ -1,0 +1,9 @@
+services:
+	tableService:
+		factory: \App\TableModule\Model\Table\TableService
+
+	tableCreateFormFactory:
+		factory: \App\TableModule\Forms\TableCreateFormFactory
+
+	tableUnitFormFactory:
+		factory: \App\TableModule\Forms\TableUnitFormFactory

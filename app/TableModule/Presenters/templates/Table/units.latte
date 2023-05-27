@@ -1,0 +1,167 @@
+{block content}
+	<div class="row">
+		<div class="col">
+			<h1 class="text-danger" n:block=title>Table create</h1>
+		</div>
+	</div>
+
+	{form unitsForm}
+		<ul class='alert alert-danger' n:ifcontent>
+			<li n:foreach="$form->ownErrors as $error">{$error}</li>
+		</ul>
+		<div class="table-responsive">
+			<table class="table table-striped table-dark table-bordered">
+				<thead>
+				<tr>
+					<th>Character</th>
+					<th>Units1</th>
+					<th>Units2</th>
+					<th>Units3</th>
+					<th>Class</th>
+					<th>Squad</th>
+				</tr>
+				</thead>
+				<tbody>
+				{foreach $form->getControls() as $component}
+					{if \App\TableModule\Forms\TableUnitFormFactory::isColumnName($component->name)}
+						<tr>
+							<td>{input $component class => "form-select"}</td>
+							{elseif \App\TableModule\Forms\TableUnitFormFactory::isSquadName($component->name)}
+							<td>{input $component class => "form-select"}</td>
+						</tr>
+					{elseif $component->getOption(type) === select}
+						<td>{input $component class => "form-select"}</td>
+					{/if}
+				{/foreach}
+
+				</tbody>
+			</table>
+		</div>
+		{input send class => 'btn btn-danger'}
+	{/form unitsForm}
+
+	<script n:syntax="double">
+
+		function main() {
+			let pageObject = {{$consts}};
+			let pageObjectClass = {{$constsClasses}};
+			let actualSquad = [];
+			let lastColor = 0;
+			let colors = ['#ffb3b3', '#b3ffb3', '#ffffb3', '#b3ffff',
+				'#ffd9b3','#ff42cc', '#6ef366', '#ffde14',
+				'#4ce0fa', '#dc7841'];
+
+			const rows = Number({{$rows}});
+			for (let i = 1; i < rows; i++) {
+				setSelects(i);
+				const nameSelectBox = document.getElementById('frm-unitsForm-' + i * 10 + 'names');
+				nameSelectBox.addEventListener("change", () => setSelects(i));
+
+				setSquadColors(i);
+				const squadSelectBox = document.getElementById('frm-unitsForm-' + (i * 10 + 5) + 'squad');
+				squadSelectBox.addEventListener("change", () => setSquadColors(i));
+			}
+
+			function setSquadColors(i) {
+				if (typeof actualSquad[document.getElementById('frm-unitsForm-' + (i * 10 + 5) + 'squad').value] === 'undefined') {
+					actualSquad[document.getElementById('frm-unitsForm-' + (i * 10 + 5) + 'squad').value] = colors[lastColor % 10];
+					lastColor++;
+				}
+				let color = actualSquad[document.getElementById('frm-unitsForm-' + (i * 10 + 5) + 'squad').value];
+				setBackgroundColor(document.getElementById('frm-unitsForm-' + i * 10 + 'names'), color);
+				setBackgroundColor(document.getElementById('frm-unitsForm-' + (i * 10 + 1) + 'unit'), color);
+				setBackgroundColor(document.getElementById('frm-unitsForm-' + (i * 10 + 2) + 'unit'), color);
+				setBackgroundColor(document.getElementById('frm-unitsForm-' + (i * 10 + 3) + 'unit'), color);
+				setBackgroundColor(document.getElementById('frm-unitsForm-' + (i * 10 + 4) + 'armor'), color);
+				setBackgroundColor(document.getElementById('frm-unitsForm-' + (i * 10 + 5) + 'squad'), color);
+			}
+
+			function setBackgroundColor(control, color) {
+				control.style.backgroundColor = color;
+			}
+
+			function setSelects(i) {
+				const selectBox = document.getElementById('frm-unitsForm-' + i * 10 + 'names');
+				selectBox.leadershipPoints = 700;
+				const selectedName = selectBox.value;
+				let classForUser = document.getElementById('frm-unitsForm-' + (i * 10 + 4) + 'armor');
+				classForUser.innerHTML = '';
+
+				const arrayOfArmor = Object.keys(pageObjectClass[selectedName]).map(key => ({ key: parseInt(key), value: pageObjectClass[selectedName][key] }));
+				arrayOfArmor.forEach((U, index, arr) => {
+					classForUser.innerHTML += '<option value="' + U.key + '">' + U.value.split('=')[0] + '</option>';
+				});
+				arrayOfArmor.forEach((U, index, arr) => {
+					let lPoints = U.value.split('=')[1];
+					lPoints = (lPoints && lPoints.length > 0) ? lPoints : 0;
+					classForUser.children[index].leadershipPoints = lPoints;
+				})
+
+				classForUser.addEventListener('change', () => {
+					selectBox.leadershipPoints = classForUser.children[classForUser.selectedIndex].leadershipPoints;
+					for (let j = 1; j <= 3; j++){
+						let unitSelect = document.getElementById('frm-unitsForm-' + (i * 10 + j) + 'unit')
+						unitSelect.selectedIndex = 0;
+					}
+				})
+				for (let j = 1; j <= 3; j++) {
+					let unit = document.getElementById('frm-unitsForm-' + (i * 10 + j) + 'unit');
+					unit.innerHTML = '';
+
+					const arrayOfUnit = Object.keys(pageObject[selectedName]).map(key => ({ key: parseInt(key), value: pageObject[selectedName][key] }));
+					arrayOfUnit.forEach((U, index, arr) => {
+						const name = U.value.split('=')[0];
+						let option = '<option value="' + U.key + '">' + name + '</option>';
+						unit.innerHTML += option;
+					})
+					arrayOfUnit.forEach((U, index, arr) => {
+						let lPoints = U.value.split('=')[1];
+						lPoints = (lPoints && lPoints.length > 0) ? lPoints : 0;
+						unit.children[index].leadershipPointsCosts = lPoints;
+					})
+
+					unit.addEventListener('change', () => {
+						let remainingLeadership = selectBox.leadershipPoints - unit.children[unit.selectedIndex].leadershipPointsCosts;
+						unit.selectedOptionLeadershipCosts = unit.children[unit.selectedIndex].leadershipPointsCosts;
+						Array.from(document.querySelectorAll('option')).forEach((Opt, index, arr) => {
+							Opt.removeAttribute('disabled');
+						})
+						for (let y = 1; y <= 3; y++) {
+							let actualRemainingLeadership = remainingLeadership;
+
+							let secondUnit = document.getElementById('frm-unitsForm-' + (i * 10 + y) + 'unit');
+							let lastIndex = 6 - y - j;
+
+							if (y === j) {
+								actualRemainingLeadership = Number(remainingLeadership) + Number(unit.children[unit.selectedIndex].leadershipPointsCosts);
+								lastIndex = y;
+								if (y === 3) {
+									secondUnit = document.getElementById('frm-unitsForm-' + (i * 10 + 1) + 'unit');
+									let tempUnit = document.getElementById('frm-unitsForm-' + (i * 10 + 2) + 'unit');
+									actualRemainingLeadership = actualRemainingLeadership - tempUnit.children[tempUnit.selectedIndex].leadershipPointsCosts;
+								} else {
+									secondUnit = document.getElementById('frm-unitsForm-' + (i * 10 + 3) + 'unit');
+									let tempUnit = document.getElementById('frm-unitsForm-' + (i * 10 + (6 - 3 - y)) + 'unit');
+									actualRemainingLeadership = actualRemainingLeadership - tempUnit.children[tempUnit.selectedIndex].leadershipPointsCosts;
+								}
+							}
+
+							let leadershipOfSelectedSecondUnit = secondUnit.children[secondUnit.value].leadershipPointsCosts;
+							let unitToDisable = document.getElementById('frm-unitsForm-' + (i * 10 + lastIndex) + 'unit');
+							for (let z = 0; z < unitToDisable.length; z++) {
+								if (Number(unitToDisable.children[z].leadershipPointsCosts) > (actualRemainingLeadership - leadershipOfSelectedSecondUnit)) {
+									unitToDisable.children[z].disabled = true;
+								}
+							}
+
+						}
+					})
+				}
+			}
+		}
+
+		$(document).ready(function() {
+			main();
+		});
+	</script>
+{/block}

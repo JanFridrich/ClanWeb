@@ -57,7 +57,7 @@ class Entity implements \ArrayAccess, \IteratorAggregate, \Countable
 	}
 
 
-	public function toArray()
+	public function toArray(): array
 	{
 		$array = [];
 

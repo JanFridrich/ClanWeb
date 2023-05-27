@@ -45,3 +45,4 @@ includes:
 	- ../UserModule/user.neon
 	- ../MailModule/mail.neon
 	- ../UnitModule/unit.neon
+	- ../TableModule/table.neon

@@ -5,14 +5,30 @@ namespace App\PageModule\Model;
 class Page extends \App\CoreModule\Model\Entity
 {
 
+	public const ACTION_SIGN_IN = 'Core:Sign:in';
+	public const ACTION_SIGN_UP = 'Core:Sign:up';
+	public const ACTION_PROFILE = 'User:Profile:default';
+	public const ACTION_FORGOT_PASSWORD = 'Core:Sign:forgotPassword';
+	public const ACTION_RESTORE_PASSWORD = 'Core:Sign:restorePassword';
+	public const ACTION_UNITS = 'Unit:Unit:default';
+	public const ACTION_ARMORS = 'Armor:Armor:default';
+	public const ACTION_CREATE_TABLE = 'Table:Table:create';
+	public const ACTION_TABLE_UNITS = 'Table:Table:units';
+	public const ACTION_TABLE_ROLES = 'Table:Table:roles';
+	public const ACTION_TABLE_PREVIEW = 'Table:Table:preview';
+
 	public const ACTIONS = [
-		'Core:Sign:in' => 'Sign in',
-		'Core:Sign:up' => 'Sign up',
-		'User:Profile:default' => 'Profile',
-		'Core:Sign:forgotPassword' => 'Forgot password',
-		'Core:Sign:restorePassword' => 'Restore password',
-		'Unit:Unit:default' => 'Units list',
-		'Armor:Armor:default' => 'Armors list',
+		self::ACTION_SIGN_IN => 'sign in',
+		self::ACTION_SIGN_UP => 'sign up',
+		self::ACTION_PROFILE => 'profile',
+		self::ACTION_FORGOT_PASSWORD => 'forgot password',
+		self::ACTION_RESTORE_PASSWORD => 'restore password',
+		self::ACTION_UNITS => 'units',
+		self::ACTION_ARMORS => 'armors',
+		self::ACTION_CREATE_TABLE => 'create table',
+		self::ACTION_TABLE_UNITS => 'table units',
+		self::ACTION_TABLE_ROLES => 'table roles',
+		self::ACTION_TABLE_PREVIEW => 'table preview',
 	];
 
 	protected bool $includeHeader;
