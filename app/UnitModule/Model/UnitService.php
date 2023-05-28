@@ -70,17 +70,17 @@ class UnitService extends \App\CoreModule\Model\Service
 	}
 
 
-	public function getUnitsForUser(int $userId): array
+	public function getUnitsForUser(int $userId, array $options = []): array
 	{
-		$unitsIds = $this->userUnitService->getAllUnitIdsForUser($userId);
 		$units = [];
-		$entitiesData = $this->connection->select($this->mappingClass::TABLE_NAME . '.*, ' . \App\UnitModule\Model\UserUnitMapping::COLUMN_LEVEL . ', ' . \App\UnitModule\Model\UserUnitMapping::COLUMN_LINE . ', ' . \App\UnitModule\Model\UserUnitMapping::COLUMN_MASTERY)
+		$select = $this->connection->select($this->mappingClass::TABLE_NAME . '.*, ' . \App\UnitModule\Model\UserUnitMapping::COLUMN_LEVEL . ', ' . \App\UnitModule\Model\UserUnitMapping::COLUMN_LINE . ', ' . \App\UnitModule\Model\UserUnitMapping::COLUMN_MASTERY)
 			->from($this->mappingClass::TABLE_NAME)
 			->leftJoin(\App\UnitModule\Model\UserUnitMapping::TABLE_NAME)->on(\App\UnitModule\Model\UserUnitMapping::TABLE_NAME . '.' . \App\UnitModule\Model\UserUnitMapping::COLUMN_UNIT . ' = ' . $this->mappingClass::TABLE_NAME . '.' . $this->mappingClass::COLUMN_ID . ' AND ' . \App\UnitModule\Model\UserUnitMapping::TABLE_NAME . '.' . \App\UnitModule\Model\UserUnitMapping::COLUMN_USER . ' = %i', $userId)
-			->where($this->mappingClass::TABLE_NAME . '.' . $this->mappingClass::COLUMN_ID . ' IN %in', $unitsIds)
+			->where(\App\UnitModule\Model\UserUnitMapping::TABLE_NAME . '.' . \App\UnitModule\Model\UserUnitMapping::COLUMN_USER . ' = %i', $userId)
 			->orderBy($this->mappingClass::COLUMN_SORT)
-			->fetchAll()
 		;
+		$this->addOptions($select, $options);
+		$entitiesData = $select->fetchAll();
 		foreach ($entitiesData as $entityData) {
 			$unit = $this->constructEntity($entityData);
 			if ( ! $unit) {
@@ -93,27 +93,7 @@ class UnitService extends \App\CoreModule\Model\Service
 	}
 
 
-	public function getAll(): array
-	{
-		$entities = [];
-		$entitiesData = $this->connection->select('*')
-			->from($this->mappingClass::TABLE_NAME)
-			->orderBy($this->mappingClass::COLUMN_SORT)
-			->fetchAll()
-		;
-		foreach ($entitiesData as $entityData) {
-			$entity = $this->constructEntity($entityData);
-			if ( ! $entity) {
-				continue;
-			}
-			$entities[$entity->getId()] = $entity;
-		}
-
-		return $entities;
-	}
-
-
-	protected function constructEntity(?\Dibi\Row $unitData): ?\App\UnitModule\Model\Unit
+	protected function constructEntity(?\Dibi\Row $unitData, array $options = []): ?\App\UnitModule\Model\Unit
 	{
 		if ( ! $unitData) {
 			return NULL;

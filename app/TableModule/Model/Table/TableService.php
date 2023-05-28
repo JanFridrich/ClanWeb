@@ -23,7 +23,7 @@ class TableService extends \App\CoreModule\Model\Service
 	/**
 	 * @return \App\TableModule\Model\Table\Table|null
 	 */
-	protected function constructEntity(?\Dibi\Row $entityData): ?\App\CoreModule\Model\Entity
+	protected function constructEntity(?\Dibi\Row $entityData, array $options = []): ?\App\CoreModule\Model\Entity
 	{
 		if ($entityData === NULL) {
 			return NULL;

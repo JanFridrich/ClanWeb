@@ -83,14 +83,23 @@ class UserService extends \App\CoreModule\Model\Service
 	}
 
 
-
-
-
-	protected function constructEntity(?\Dibi\Row $userData): ?\App\UserModule\Model\User
+	protected function constructEntity(?\Dibi\Row $userData, array $options = []): ?\App\UserModule\Model\User
 	{
 		if ( ! $userData) {
 			return NULL;
 		}
+		if (isset($options['tierLock']) && $options['tierLock']) {
+			$options = [
+				'where' => [
+					\App\UnitModule\Model\UnitMapping::COLUMN_TIER => $options['tierLock'],
+				],
+			];
+			unset($options['tierLock']);
+		}
+		$units = $this->unitService->getUnitsForUser(
+			$userData[\App\UserModule\Model\UserMapping::COLUMN_ID],
+			$options
+		);
 		try {
 			$user = new \App\UserModule\Model\User(
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_ID],
@@ -103,7 +112,7 @@ class UserService extends \App\CoreModule\Model\Service
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_NOTE],
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_LAST_UPDATED_UNITS],
 				$userData[\App\UserModule\Model\UserMapping::COLUMN_MAXED_UNITS],
-				$this->unitService->getUnitsForUser($userData[\App\UserModule\Model\UserMapping::COLUMN_ID]),
+				$units,
 				$this->armorService->getAllByUser($userData[\App\UserModule\Model\UserMapping::COLUMN_ID]),
 				[],
 			);

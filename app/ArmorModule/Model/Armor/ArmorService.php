@@ -65,7 +65,7 @@ class ArmorService extends \App\CoreModule\Model\Service
 	}
 
 
-	public function getAllByUser(int $userId): array
+	public function getAllByUser(int $userId, array $options = []): array
 	{
 		$armors = [];
 		$entitiesData = $this->connection->select($this->mappingClass::TABLE_NAME . '.*, ' . \App\ArmorModule\Model\UserArmor\UserArmorMapping::COLUMN_PREFER . ', ' . \App\ArmorModule\Model\UserArmorType\UserArmorTypeMapping::COLUMN_LEADERSHIP)
@@ -90,7 +90,7 @@ class ArmorService extends \App\CoreModule\Model\Service
 	/**
 	 * @return \App\ArmorModule\Model\Armor\Armor|null
 	 */
-	protected function constructEntity(?\Dibi\Row $entityData): ?\App\CoreModule\Model\Entity
+	protected function constructEntity(?\Dibi\Row $entityData, array $options = []): ?\App\CoreModule\Model\Entity
 	{
 		if ( ! $entityData) {
 			return NULL;

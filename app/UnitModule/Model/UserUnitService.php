@@ -57,7 +57,7 @@ class UserUnitService extends \App\CoreModule\Model\Service
 	}
 
 
-	protected function constructEntity(?\Dibi\Row $entityData): ?\App\UnitModule\Model\UserUnit
+	protected function constructEntity(?\Dibi\Row $entityData, array $options = []): ?\App\UnitModule\Model\UserUnit
 	{
 		if ( ! $entityData) {
 			return NULL;

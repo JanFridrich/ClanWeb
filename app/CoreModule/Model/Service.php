@@ -18,32 +18,20 @@ abstract class Service
 	}
 
 
-	public function get(int $id): ?\App\CoreModule\Model\Entity
+	public function get(int $id, array $options = []): ?\App\CoreModule\Model\Entity
 	{
-		$entityData = $this->connection->select('*')
+		$select = $this->connection->select('*')
 			->from($this->mappingClass::TABLE_NAME)
 			->where($this->mappingClass::COLUMN_ID . ' = %i', $id)
-			->fetch()
 		;
+		$this->addOptions($select, $options);
+		$entityData = $select->fetch();
 
 		return $this->constructEntity($entityData);
 	}
 
 
-	public function getByLang(int $id, string $lang): ?\App\CoreModule\Model\Entity
-	{
-		$entityData = $this->connection->select('*')
-			->from($this->mappingClass::TABLE_NAME)
-			->where($this->mappingClass::COLUMN_ID . ' = %i', $id)
-			->where($this->mappingClass::COLUMN_LANG . ' = %s', $lang)
-			->fetch()
-		;
-
-		return $this->constructEntity($entityData);
-	}
-
-
-	public function getAll(): array
+	public function getAll(array $options = []): array
 	{
 		$entities = [];
 		$select = $this->connection->select('*')
@@ -52,10 +40,12 @@ abstract class Service
 		if (\defined($this->mappingClass . '::COLUMN_SORT')) {
 			$select->orderBy($this->mappingClass::COLUMN_SORT);
 		}
+		$this->addOptions($select, $options);
+
 		$entitiesData = $select->fetchAll();
 
 		foreach ($entitiesData as $entityData) {
-			$entity = $this->constructEntity($entityData);
+			$entity = $this->constructEntity($entityData, $options);
 			if ( ! $entity) {
 				continue;
 			}
@@ -66,31 +56,7 @@ abstract class Service
 	}
 
 
-	public function getAllByWeb(string $lang): array
-	{
-		$entities = [];
-		$select = $this->connection->select('*')
-			->from($this->mappingClass::TABLE_NAME)
-			->where($this->mappingClass::COLUMN_LANG . ' = %s', $lang)
-		;
-		if (\defined($this->mappingClass . '::COLUMN_SORT')) {
-			$select->orderBy($this->mappingClass::COLUMN_SORT);
-		}
-		$entitiesData = $select->fetchAll();
-
-		foreach ($entitiesData as $entityData) {
-			$entity = $this->constructEntity($entityData);
-			if ( ! $entity) {
-				continue;
-			}
-			$entities[$entity->getId()] = $entity;
-		}
-
-		return $entities;
-	}
-
-
-	public function delete(int $id): void
+	public function delete(int $id, array $options = []): void
 	{
 		$this->connection->delete($this->mappingClass::TABLE_NAME)
 			->where($this->mappingClass::COLUMN_ID . ' = %i', $id)
@@ -123,7 +89,7 @@ abstract class Service
 	}
 
 
-	protected function constructEntity(?\Dibi\Row $entityData): ?\App\CoreModule\Model\Entity
+	protected function constructEntity(?\Dibi\Row $entityData, array $options = []): ?\App\CoreModule\Model\Entity
 	{
 		if ( ! $entityData) {
 			return NULL;
@@ -135,5 +101,46 @@ abstract class Service
 		}
 
 		return NULL;
+	}
+
+
+	protected function addOptions(\Dibi\Fluent $select, array $options): void
+	{
+		if (isset($options['where'])) {
+			foreach ($options['where'] as $column => $value) {
+				if ($value === NULL) {
+					$select->where($column . ' IS NULL');
+					continue;
+				}
+				if (\is_string($value)) {
+					$select->where($column . ' = %s', $value);
+					continue;
+				}
+				if (\is_int($value)) {
+					$select->where($column . ' = %i', $value);
+					continue;
+				}
+				if (\is_bool($value)) {
+					$select->where($column . ' = %b', $value);
+					continue;
+				}
+				if (\is_float($value)) {
+					$select->where($column . ' = %f', $value);
+					continue;
+				}
+				if (\is_array($value) && $value !== []) {
+					$select->where($column . ' IN %in', $value);
+					continue;
+				}
+				if ($value instanceof \Dibi\DateTime) {
+					$select->where($column . ' = %d', $value);
+					continue;
+				}
+				if ($value instanceof CustomWhere) {
+					$select->where($value->getSql());
+					continue;
+				}
+			}
+		}
 	}
 }

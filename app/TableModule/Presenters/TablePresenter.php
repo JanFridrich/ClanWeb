@@ -25,6 +25,8 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 
 	private ?\App\TableModule\Model\Table\Table $table;
 
+	private array $options;
+
 
 	public function __construct(
 		\App\PageModule\Model\PageService $pageService,
@@ -45,6 +47,7 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 		$this->tableService = $tableService;
 		$this->unitService = $unitService;
 		$this->userService = $userService;
+		$this->options = [];
 	}
 
 
@@ -61,16 +64,25 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 	}
 
 
-	public function actionUnits(int $tableId): void
+	public function actionUnits(int $tableId, ?string $tierLock = NULL): void
 	{
+		if ($tierLock) {
+			foreach (\App\UnitModule\Model\Unit::TIERS as $tier) {
+				if ($tier === $tierLock) {
+					$this->options['tierLock'][] = $tier;
+					break;
+				}
+				$this->options['tierLock'][] = $tier;
+			}
+		}
 		$this->table = $this->tableService->get($tableId);
 
 		$units[] = ['-'];
-		$armors[]  = ['-'];
+		$armors[] = ['-'];
 		$formatted = [];
 		$armorsFormatted = [];
 
-		foreach ($this->userService->getAll() as $user){
+		foreach ($this->userService->getAll($this->options) as $user) {
 			$formatted[$user->getLogin()][] = '-';
 			/** @var \App\UnitModule\Model\Unit $unit */
 			foreach ($user->getUnits() as $unit) {
@@ -83,7 +95,7 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 			/** @var \App\ArmorModule\Model\Armor\Armor $armor */
 			foreach ($user->getArmors() as $armor) {
 				$login = $user->getLogin();
-				$armorsFormatted[$login][$armor->getId()] = $armor->getName() . '-' . $armor->getPrefer(). '=' . $armor->getLeadership();
+				$armorsFormatted[$login][$armor->getId()] = $armor->getName() . '-' . $armor->getPrefer() . '=' . $armor->getLeadership();
 			}
 			$armors[] = $armorsFormatted[$user->getLogin()];
 			$units[] = $formatted[$user->getLogin()];
@@ -93,17 +105,17 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 		$this->template->consts = $units;
 		$this->template->rows = $this->table->getRows() + 1;
 		$this->template->constsClasses = $armors;
-
 	}
 
 
 	public function createComponentCreateForm(): \Nette\Application\UI\Form
 	{
 		return $this->tableCreateFormFactory->create(
-			function (int $id) {
+			function (int $id, string $tierLock) {
 				$this->redirect(':' . \App\PageModule\Model\Page::ACTION_TABLE_UNITS, [
 					'pageId' => $this->unitsPage->getId(),
 					'tableId' => $id,
+					'tierLock' => $tierLock,
 				]);
 			},
 			$this->getUserEntity()
@@ -119,7 +131,8 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 				$this->redirect('this');
 			},
 			$this->getUserEntity(),
-			$this->table
+			$this->table,
+			$this->options
 		);
 	}
 

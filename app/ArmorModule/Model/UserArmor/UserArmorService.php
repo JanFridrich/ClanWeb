@@ -58,7 +58,7 @@ class UserArmorService extends \App\CoreModule\Model\Service
 	}
 
 
-	protected function constructEntity(?\Dibi\Row $entityData): ?\App\CoreModule\Model\Entity
+	protected function constructEntity(?\Dibi\Row $entityData, array $options = []): ?\App\CoreModule\Model\Entity
 	{
 		$this->container->callInjects($this);
 		if ( ! $entityData) {

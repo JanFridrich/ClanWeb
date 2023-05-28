@@ -73,7 +73,6 @@ class DataSourceGetter
 				$gridData[$userId]['unit' . $unitId] = $level;
 			}
 		}
-		\Tracy\Debugger::barDump($gridData);
 
 		return $gridData;
 	}

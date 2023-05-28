@@ -33,7 +33,7 @@ class TableUnitFormFactory
 	}
 
 
-	public function create(callable $onSuccess, \App\UserModule\Model\User $userEditor, \App\TableModule\Model\Table\Table $table): \Nette\Application\UI\Form
+	public function create(callable $onSuccess, \App\UserModule\Model\User $userEditor, \App\TableModule\Model\Table\Table $table, array $options): \Nette\Application\UI\Form
 	{
 
 		$columns = [
@@ -52,7 +52,7 @@ class TableUnitFormFactory
 		$formatted = [];
 
 		/** @var \App\UserModule\Model\User $user */
-		foreach ($this->userService->getAll() as $user){
+		foreach ($this->userService->getAll($options) as $user){
 			$users[] = $user->getLogin();
 			$formatted[$user->getLogin()][] = '-';
 			foreach ($user->getUnits() as $unit) {
