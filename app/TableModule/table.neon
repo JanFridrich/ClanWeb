@@ -7,3 +7,9 @@ services:
 
 	tableUnitFormFactory:
 		factory: \App\TableModule\Forms\TableUnitFormFactory
+
+	tableItemService:
+		factory: \App\TableModule\Model\TableItem\TableItemService
+
+	tableRoleFormFactory:
+		factory: \App\TableModule\Forms\TableRoleFormFactory

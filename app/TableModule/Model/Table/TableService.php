@@ -9,14 +9,18 @@ class TableService extends \App\CoreModule\Model\Service
 
 	private \App\UserModule\Model\UserService $userService;
 
+	private \App\TableModule\Model\TableItem\TableItemService $tableItemService;
+
 
 	public function __construct(
 		\Dibi\Connection $connection,
-		\App\UserModule\Model\UserService $userService
+		\App\UserModule\Model\UserService $userService,
+		\App\TableModule\Model\TableItem\TableItemService $tableItemService
 	)
 	{
 		parent::__construct($connection);
 		$this->userService = $userService;
+		$this->tableItemService = $tableItemService;
 	}
 
 
@@ -40,9 +44,18 @@ class TableService extends \App\CoreModule\Model\Service
 				$entityData[\App\TableModule\Model\Table\TableMapping::COLUMN_STATUS],
 				$entityData[\App\TableModule\Model\Table\TableMapping::COLUMN_ROWS],
 				$entityData[\App\TableModule\Model\Table\TableMapping::COLUMN_CREATED],
-				$user
+				$user,
+				[],
+			);
+			$table->setTableItems(
+				$this->tableItemService->getAll([
+					'where' => [\App\TableModule\Model\TableItem\TableItemMapping::COLUMN_TABLE => $table->getId(),],
+					'table' => $table,
+				])
 			);
 		} catch (\Exception $e) {
+			\Tracy\Debugger::barDump($e);
+
 			return NULL;
 		}
 

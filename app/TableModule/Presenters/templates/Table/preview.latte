@@ -1,0 +1,99 @@
+{block content}
+
+	<div id="FinalTable" class="row content w-100 bg-white">
+		<div class="row">
+			<div class="col">
+				<h1 class="h1" n:block=title>{$table->getName()}</h1>
+			</div>
+		</div>
+
+		<div class="table-responsive ">
+			<table class="table table-bordered">
+				<thead>
+				<tr>
+					<th>Character</th>
+					<th>Units</th>
+					<th>Class</th>
+					<th>Squad</th>
+					<th>Role</th>
+					<th>Note</th>
+				</tr>
+				</thead>
+				<tbody>
+					{var $color = \App\TableModule\Model\Table\Colors::getNextColor('')}
+					{var $secondaryColor = \App\TableModule\Model\Table\Colors::getSecondaryColor($color)}
+					{var $previousSquad = NULL}
+					{foreach $table->getTableItems() as $item}
+						{if $previousSquad && $previousSquad !== $item->getSquad()}
+							{var $color = \App\TableModule\Model\Table\Colors::getNextColor($color)}
+							{var $secondaryColor = \App\TableModule\Model\Table\Colors::getSecondaryColor($color)}
+						{/if}
+						<tr>
+							<td style="background-color:{$color|noescape};">
+								<b>
+									{$item->getUser()->getLogin()}
+								</b>
+							</td>
+
+							<td style="background-color:{$secondaryColor|noescape};">
+								{foreach $item->getUnits() as $unit}
+									{$unit}<br>
+								{/foreach}
+							</td>
+
+
+							<td style="background-color:{$secondaryColor|noescape};">
+								{$item->getArmor()}
+							</td>
+
+							<td style="background-color:{$color};">
+								{$item->getSquad()}
+							</td>
+							{if $item->isGroupLeader()}
+								<td style="background-color:{$secondaryColor|noescape};"><b>GROUP LEADER</b></td>
+							{else}
+								<td style="background-color:{$secondaryColor|noescape};"></td>
+							{/if}
+							<td style="background-color:{$secondaryColor|noescape};">
+								{$item->getNote()}
+							</td>
+							{var $previousSquad = $item->getSquad()}
+						</tr>
+
+					{/foreach}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row content">
+		<div class="col-2 pe-4">
+			<button id="convert" class="btn btn-primary save-button">
+				Download as Image
+			</button>
+		</div>
+		<div class="col-2">
+			<div id="result">
+				<!-- Result will appear be here -->
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript"
+			src="https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.js"></script>
+	<script>
+		//convert table to image
+		function convertToImage() {
+			let resultDiv = document.getElementById("result");
+			html2canvas(document.getElementById("FinalTable"), {
+				onrendered: function (canvas) {
+					let img = canvas.toDataURL("image/png");
+					result.innerHTML = '<a download={$title . ".jpg"} href="' + img + '" class="btn btn-danger">Save</a>';
+				}
+			});
+		}
+
+		//click event
+		let convertBtn = document.getElementById("convert");
+		convertBtn.addEventListener('click', convertToImage);
+	</script>
+
+{/block}

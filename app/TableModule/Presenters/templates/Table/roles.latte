@@ -1,0 +1,39 @@
+{block content}
+
+	<div class="row content">
+		<h1>Notes and group leaders</h1>
+		{form roleForm}
+			<table class="w-100 table">
+				<thead>
+				<tr>
+					<th>Player</th>
+					<th>Units</th>
+					<th>Squad</th>
+					<th class=" d-flex justify-content-center">Group leaders</th>
+					<th>Notes</th>
+				</tr>
+				</thead>
+				<tbody>
+				{foreach $table->getTableItems() as $item}
+					<tr>
+						<td>{$item->getUser()->getLogin()}</td>
+						<td>
+							{foreach $item->getUnits() as $unit}
+							{$unit}<br>
+							{/foreach}
+						</td>
+						<td>{$item->getSquad()}</td>
+						{var $controlName = $item->getId() . 'GL'}
+						<td><div class="radio d-flex justify-content-center">{input $controlName class => "form-check-input"}</div></td>
+						{var $controlName = $item->getId() . 'note'}
+						<td>{input $controlName class => form-control}</td>
+					</tr>
+				{/foreach}
+				</tbody>
+			</table>
+			{input submit class => "btn btn-primary save-button"}
+		{/form}
+
+	</div>
+
+{/block}

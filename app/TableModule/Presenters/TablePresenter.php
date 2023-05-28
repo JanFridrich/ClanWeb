@@ -27,6 +27,8 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 
 	private array $options;
 
+	private \App\TableModule\Forms\TableRoleFormFactory $tableRoleFormFactory;
+
 
 	public function __construct(
 		\App\PageModule\Model\PageService $pageService,
@@ -34,7 +36,8 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 		\App\TableModule\Forms\TableCreateFormFactory $tableCreateFormFactory,
 		\App\TableModule\Forms\TableUnitFormFactory $tableUnitFormFactory,
 		\App\TableModule\Model\Table\TableService $tableService,
-		\App\UnitModule\Model\UnitService $unitService
+		\App\UnitModule\Model\UnitService $unitService,
+		\App\TableModule\Forms\TableRoleFormFactory $tableRoleFormFactory
 	)
 	{
 		parent::__construct($pageService, $userService);
@@ -48,13 +51,13 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 		$this->unitService = $unitService;
 		$this->userService = $userService;
 		$this->options = [];
+		$this->tableRoleFormFactory = $tableRoleFormFactory;
 	}
 
 
 	public function beforeRender(): void
 	{
 		parent::beforeRender();
-		$this->previewPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_PREVIEW_TABLE);
 	}
 
 
@@ -68,11 +71,10 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 	{
 		if ($tierLock) {
 			foreach (\App\UnitModule\Model\Unit::TIERS as $tier) {
+				$this->options['tierLock'][] = $tier;
 				if ($tier === $tierLock) {
-					$this->options['tierLock'][] = $tier;
 					break;
 				}
-				$this->options['tierLock'][] = $tier;
 			}
 		}
 		$this->table = $this->tableService->get($tableId);
@@ -108,6 +110,31 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 	}
 
 
+	public function actionRoles(int $tableId): void
+	{
+		$this->table = $this->tableService->get($tableId);
+		$this->previewPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_PREVIEW_TABLE);
+	}
+
+
+	public function renderRoles(int $tableId): void
+	{
+		$this->template->table = $this->table;
+	}
+
+
+	public function actionPreview(int $tableId): void
+	{
+		$this->table = $this->tableService->get($tableId);
+	}
+
+
+	public function renderPreview(int $tableId): void
+	{
+		$this->template->table = $this->table;
+	}
+
+
 	public function createComponentCreateForm(): \Nette\Application\UI\Form
 	{
 		return $this->tableCreateFormFactory->create(
@@ -125,14 +152,29 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 
 	public function createComponentUnitsForm(): \Nette\Application\UI\Form
 	{
-
 		return $this->tableUnitFormFactory->create(
-			function () {
-				$this->redirect('this');
+			function (int $id) {
+				$this->redirect(':' . \App\PageModule\Model\Page::ACTION_TABLE_ROLES, [
+					'pageId' => $this->rolesPage->getId(),
+					'tableId' => $id,
+				]);
 			},
-			$this->getUserEntity(),
 			$this->table,
 			$this->options
+		);
+	}
+
+
+	public function createComponentRoleForm(): \Nette\Application\UI\Form
+	{
+		return $this->tableRoleFormFactory->create(
+			function (int $id) {
+				$this->redirect(':' . \App\PageModule\Model\Page::ACTION_TABLE_PREVIEW, [
+					'pageId' => $this->previewPage->getId(),
+					'tableId' => $id,
+				]);
+			},
+			$this->table
 		);
 	}
 

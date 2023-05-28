@@ -22,6 +22,8 @@ class Table extends \App\CoreModule\Model\Entity
 
 	protected int $rows;
 
+	protected array $tableItems;
+
 
 	public function __construct(
 		int $id,
@@ -29,7 +31,8 @@ class Table extends \App\CoreModule\Model\Entity
 		int $status,
 		int $rows,
 		\Dibi\DateTime $created,
-		\App\UserModule\Model\User $createdBy
+		\App\UserModule\Model\User $createdBy,
+		array $tableItems
 	)
 	{
 		$this->id = $id;
@@ -38,6 +41,7 @@ class Table extends \App\CoreModule\Model\Entity
 		$this->created = $created;
 		$this->createdBy = $createdBy;
 		$this->rows = $rows;
+		$this->tableItems = $tableItems;
 	}
 
 
@@ -98,6 +102,18 @@ class Table extends \App\CoreModule\Model\Entity
 	public function setRows(int $rows): void
 	{
 		$this->rows = $rows;
+	}
+
+
+	public function getTableItems(): array
+	{
+		return $this->tableItems;
+	}
+
+
+	public function setTableItems(array $tableItems): void
+	{
+		$this->tableItems = $tableItems;
 	}
 
 }
