@@ -99,10 +99,10 @@
 
 				classForUser.addEventListener('change', () => {
 					selectBox.leadershipPoints = classForUser.children[classForUser.selectedIndex].leadershipPoints;
-					for (let j = 1; j <= 3; j++){
-						let unitSelect = document.getElementById('frm-unitsForm-' + (i * 10 + j) + 'unit')
-						unitSelect.selectedIndex = 0;
-					}
+					let unitSelect = document.getElementById('frm-unitsForm-' + (i * 10 + 3) + 'unit')
+					unitSelect.selectedIndex = 0;
+					const event = new Event('change');
+					unitSelect.dispatchEvent(event);
 				})
 				for (let j = 1; j <= 3; j++) {
 					let unit = document.getElementById('frm-unitsForm-' + (i * 10 + j) + 'unit');

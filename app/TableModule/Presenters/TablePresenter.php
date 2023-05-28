@@ -91,7 +91,7 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 
 		$this->rolesPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_ROLES_TABLE);
 		$this->template->consts = $units;
-		$this->template->rows = $this->table->getRows();
+		$this->template->rows = $this->table->getRows() + 1;
 		$this->template->constsClasses = $armors;
 
 	}

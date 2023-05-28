@@ -75,7 +75,7 @@ class TableUnitFormFactory
 
 		$form = new \Nette\Application\UI\Form();
 
-		for ($i = 1; $i < $table->getRows(); $i++) {
+		for ($i = 1; $i < $table->getRows() + 1; $i++) {
 			foreach ($columns as $colNumber => $column) {
 				$form->addSelect($i . $colNumber . $column, '', $data[$column])->setDefaultValue(0);
 			}
