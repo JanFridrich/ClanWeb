@@ -47,3 +47,4 @@ includes:
 	- ../UnitModule/unit.neon
 	- ../TableModule/table.neon
 	- ../RankingModule/ranking.neon
+	- ../SettingModule/setting.neon

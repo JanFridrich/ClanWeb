@@ -1,0 +1,6 @@
+services:
+	settingService:
+		factory: \App\SettingModule\Model\SettingService
+
+	settingFormFactory:
+		factory: \App\SettingModule\Forms\SettingFormFactory
