@@ -66,7 +66,7 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 	}
 
 
-	public function actionUnits(int $tableId, ?string $tierLock = NULL, ?int $addedLeadership = 0 ): void
+	public function actionUnits(int $tableId, ?string $tierLock = NULL, ?int $addedLeadership = 0): void
 	{
 		if ($tierLock) {
 			foreach (\App\UnitModule\Model\Unit::TIERS as $tier) {
