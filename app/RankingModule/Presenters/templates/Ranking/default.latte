@@ -14,16 +14,16 @@
 		function drawChart() {
 			var data = google.visualization.arrayToDataTable([
 				['Rank', 'Number of people'],
-				['Wood', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_WOOD]}}],
-				['Iron', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_IRON]}}],
-				['Bronze', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_BRONZE]}}],
-				['Silver', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_SILVER]}}],
-				['Gold', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_GOLD]}}],
-				['Platinum', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_PLATINUM]}}],
-				['Diamond', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_DIAMOND]}}],
-				['Master', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_MASTER]}}],
-				['GrandMaster', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_GRANDMASTER]}}],
-				['Challenger', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_CHALLENGER]}}]
+				['Wood 0-15%', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_WOOD]}}],
+				['Iron 15-25%', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_IRON]}}],
+				['Bronze 25%-35%', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_BRONZE]}}],
+				['Silver 35%-45%', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_SILVER]}}],
+				['Gold 45%-55%', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_GOLD]}}],
+				['Platinum 55%-65%', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_PLATINUM]}}],
+				['Diamond 65%-75%', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_DIAMOND]}}],
+				['Master 75%-85%', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_MASTER]}}],
+				['GrandMaster 85%-95', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_GRANDMASTER]}}],
+				['Challenger 95%-100%', {{$rankDistributions[App\RankingModule\Model\RankingService::RANK_CHALLENGER]}}]
 
 			]);
 
@@ -64,7 +64,7 @@
 
 			// Optional; add a title and set the width and height of the chart
 			var options = {
-				title:'Rank distribution',
+				title:'Rank distribution for how much players have maxed out a units',
 				height: 700,
 				pieHole: 0.2,
 				slices: offset,
