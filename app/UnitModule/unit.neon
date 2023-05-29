@@ -19,3 +19,6 @@ services:
 
 	dataSourceGetter:
 		factory: \App\UnitModule\Grid\UserUnitDataGridFactory\DataSourceGetter
+
+	unitSelectFormFactory:
+		factory: \App\UnitModule\Forms\UnitSelectFormFactory

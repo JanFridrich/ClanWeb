@@ -24,11 +24,11 @@ class UserUnitFormFactory
 	}
 
 
-	public function create(callable $onSuccess, \App\UserModule\Model\User $user): \Nette\Application\UI\Form
+	public function create(callable $onSuccess, \App\UserModule\Model\User $user, array $options): \Nette\Application\UI\Form
 	{
 		$form = new \Nette\Application\UI\Form();
 		$userUnits = $user->getUnits();
-		$allUnits = $this->unitService->getAll();
+		$allUnits = $this->unitService->getAll($options);
 		/** @var \App\UnitModule\Model\Unit $unit */
 		foreach ($allUnits as $unit) {
 			$unitForm = new \Nette\Forms\Container();
