@@ -7,12 +7,16 @@ class UnitDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 
 	private \App\UnitModule\Model\UnitService $unitService;
 
+	private \App\UnitModule\Grid\UnitRenderer $unitRenderer;
+
 
 	public function __construct(
-		\App\UnitModule\Model\UnitService $unitService
+		\App\UnitModule\Model\UnitService $unitService,
+		\App\UnitModule\Grid\UnitRenderer $unitRenderer
 	)
 	{
 		$this->unitService = $unitService;
+		$this->unitRenderer = $unitRenderer;
 	}
 
 
@@ -47,6 +51,11 @@ class UnitDataGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 		;
 		$grid->addColumnText(\App\UnitModule\Model\UnitMapping::COLUMN_SORT, \App\UnitModule\Model\UnitMapping::COLUMN_SORT)
 			->setSortable()
+			->setFilterText()
+		;
+		$grid->addColumnText(\App\UnitModule\Model\UnitMapping::COLUMN_SHOW, \App\UnitModule\Model\UnitMapping::COLUMN_SHOW)
+			->setSortable()
+			->setRenderer([$this->unitRenderer, 'renderShow'])
 			->setFilterText()
 		;
 		$grid->addAction('edit', '✏️', ':Unit:Admin:Unit:default', [

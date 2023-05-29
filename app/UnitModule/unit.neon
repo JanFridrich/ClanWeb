@@ -22,3 +22,6 @@ services:
 
 	unitSelectFormFactory:
 		factory: \App\UnitModule\Forms\UnitSelectFormFactory
+
+	unitRenderer:
+		factory: \App\UnitModule\Grid\UnitRenderer
