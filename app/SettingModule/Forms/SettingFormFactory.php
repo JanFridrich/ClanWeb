@@ -19,7 +19,7 @@ class SettingFormFactory
 	public function create(callable $onSuccess, \App\UserModule\Model\User $user): \Nette\Application\UI\Form
 	{
 		$form = new \Nette\Application\UI\Form();
-		$form->addTextArea('Homepage Text', \App\SettingModule\Model\Setting::KEY_HOMEPAGE_CONTENT)
+		$form->addTextArea(\App\SettingModule\Model\Setting::KEY_HOMEPAGE_CONTENT, 'Homepage Text' )
 		->setDefaultValue($this->settingService->getByKey(\App\SettingModule\Model\Setting::KEY_HOMEPAGE_CONTENT)->getValue());
 		$form->addSubmit('submit', 'save');
 		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, array $values) use ($onSuccess, $user): void {

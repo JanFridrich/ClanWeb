@@ -72,10 +72,11 @@ class SettingService extends \App\CoreModule\Model\Service
 	{
 		try {
 			return $this->connection->update($this->mappingClass::TABLE_NAME, $values)
-				->where(SettingMapping::COLUMN_KEY . ' = %s', $values[SettingMapping::COLUMN_KEY])
+				->where($this->mappingClass::TABLE_NAME . '.' . SettingMapping::COLUMN_KEY . ' = %s', $values[SettingMapping::COLUMN_KEY])
 				->execute()
 			;
 		} catch (\Exception $exception) {
+			\Tracy\Debugger::barDump($exception);
 			return $this->connection->insert($this->mappingClass::TABLE_NAME, $values)
 				->execute()
 			;
