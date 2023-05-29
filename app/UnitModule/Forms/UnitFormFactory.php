@@ -42,7 +42,9 @@ class UnitFormFactory
 		$form->addInteger(\App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY, \App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY);
 		$form->addInteger(\App\UnitModule\Model\UnitMapping::COLUMN_SORT, \App\UnitModule\Model\UnitMapping::COLUMN_SORT);
 		$form->addUpload(\App\UnitModule\Model\UnitMapping::COLUMN_IMAGE, \App\UnitModule\Model\UnitMapping::COLUMN_IMAGE);
-
+		$form->addCheckbox(\App\UnitModule\Model\UnitMapping::COLUMN_SHOW, \App\UnitModule\Model\UnitMapping::COLUMN_SHOW)
+			->setDefaultValue(TRUE)
+		;
 		$form->addSubmit('send', 'Create');
 		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, array $values) use ($onSuccess): void {
 
@@ -96,7 +98,9 @@ class UnitFormFactory
 			->setDefaultValue($unit->getSort())
 		;
 		$form->addUpload(\App\UnitModule\Model\UnitMapping::COLUMN_IMAGE, \App\UnitModule\Model\UnitMapping::COLUMN_IMAGE);
-
+		$form->addCheckbox(\App\UnitModule\Model\UnitMapping::COLUMN_SHOW, \App\UnitModule\Model\UnitMapping::COLUMN_SHOW)
+			->setDefaultValue($unit->isShow())
+		;
 		$form->addSubmit('send', 'Save');
 		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, array $values) use ($onSuccess, $unit): void {
 
