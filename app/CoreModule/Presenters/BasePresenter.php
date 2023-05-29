@@ -71,7 +71,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 		$this->template->unitsPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_UNITS);
 		$this->template->armorPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_ARMOR);
 		$this->template->tablePage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_CREATE_TABLE);
-
+		$this->template->rankingPage = $this->pageService->getPageByUid($this->locale, \App\PageModule\Model\PageService::UID_RANKING);
 		$this->template->user = $this->getUser();
 
 		$this->template->userEntity = $this->getUserEntity();
@@ -109,7 +109,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 	public function handleLogout(): void
 	{
 		$this->getUser()->logout(TRUE);
-		$this->redirect('this');
+		$this->redirect('Homepage:default');
 	}
 
 

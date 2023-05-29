@@ -1,0 +1,3 @@
+services:
+	rankingService:
+		factory: \App\RankingModule\Model\RankingService

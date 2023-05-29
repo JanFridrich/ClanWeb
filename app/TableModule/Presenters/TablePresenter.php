@@ -19,8 +19,6 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 
 	private \App\TableModule\Model\Table\TableService $tableService;
 
-	private \App\UnitModule\Model\UnitService $unitService;
-
 	private \App\UserModule\Model\UserService $userService;
 
 	private ?\App\TableModule\Model\Table\Table $table;
@@ -36,7 +34,6 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 		\App\TableModule\Forms\TableCreateFormFactory $tableCreateFormFactory,
 		\App\TableModule\Forms\TableUnitFormFactory $tableUnitFormFactory,
 		\App\TableModule\Model\Table\TableService $tableService,
-		\App\UnitModule\Model\UnitService $unitService,
 		\App\TableModule\Forms\TableRoleFormFactory $tableRoleFormFactory
 	)
 	{
@@ -48,7 +45,6 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 		$this->previewPage = NULL;
 		$this->tableUnitFormFactory = $tableUnitFormFactory;
 		$this->tableService = $tableService;
-		$this->unitService = $unitService;
 		$this->userService = $userService;
 		$this->options = [];
 		$this->tableRoleFormFactory = $tableRoleFormFactory;
@@ -58,6 +54,9 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 	public function beforeRender(): void
 	{
 		parent::beforeRender();
+		if ( ! $this->getUserEntity() || $this->getUserEntity()->getRole() === \App\UserModule\Model\User::ROLE_MEMBER) {
+			$this->redirect(':Core:Homepage:default', ['locale' => $this->locale, 'pageId' => 0]);
+		}
 	}
 
 
@@ -67,7 +66,7 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 	}
 
 
-	public function actionUnits(int $tableId, ?string $tierLock = NULL): void
+	public function actionUnits(int $tableId, ?string $tierLock = NULL, ?int $addedLeadership = 0 ): void
 	{
 		if ($tierLock) {
 			foreach (\App\UnitModule\Model\Unit::TIERS as $tier) {
@@ -107,6 +106,8 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 		$this->template->consts = $units;
 		$this->template->rows = $this->table->getRows() + 1;
 		$this->template->constsClasses = $armors;
+		$this->template->addedLeadership = $addedLeadership;
+		$this->template->tierLock = $tierLock;
 	}
 
 
@@ -138,11 +139,12 @@ class TablePresenter extends \App\CoreModule\Presenters\BasePresenter
 	public function createComponentCreateForm(): \Nette\Application\UI\Form
 	{
 		return $this->tableCreateFormFactory->create(
-			function (int $id, string $tierLock) {
+			function (int $id, string $tierLock, int $addedLeadership) {
 				$this->redirect(':' . \App\PageModule\Model\Page::ACTION_TABLE_UNITS, [
 					'pageId' => $this->unitsPage->getId(),
 					'tableId' => $id,
 					'tierLock' => $tierLock,
+					'addedLeadership' => $addedLeadership,
 				]);
 			},
 			$this->getUserEntity()

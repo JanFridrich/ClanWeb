@@ -68,7 +68,7 @@
 	<div class="row content">
 		<div class="col-2 pe-4">
 			<button id="convert" class="btn btn-primary save-button">
-				Download as Image
+				Generate as Image
 			</button>
 		</div>
 		<div class="col-2">
@@ -86,7 +86,7 @@
 			html2canvas(document.getElementById("FinalTable"), {
 				onrendered: function (canvas) {
 					let img = canvas.toDataURL("image/png");
-					result.innerHTML = '<a download={$title . ".jpg"} href="' + img + '" class="btn btn-danger">Save</a>';
+					result.innerHTML = '<a download={$table->getName() . ".jpg"} href="' + img + '" class="btn btn-danger">Download</a>';
 				}
 			});
 		}

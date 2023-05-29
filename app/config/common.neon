@@ -46,3 +46,4 @@ includes:
 	- ../MailModule/mail.neon
 	- ../UnitModule/unit.neon
 	- ../TableModule/table.neon
+	- ../RankingModule/ranking.neon

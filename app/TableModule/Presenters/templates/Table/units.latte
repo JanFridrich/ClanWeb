@@ -1,8 +1,11 @@
 {block content}
 	<div class="row">
-		<div class="col">
+		<div class="col-lg-6">
 			<h1 class="text-danger" n:block=title>Table create</h1>
 		</div>
+		<div class="col-lg-3">Tier lock = {$tierLock}</div>
+		<div class="col-lg-3">Added Leadership = {$addedLeadership}</div>
+
 	</div>
 
 	{form unitsForm}
@@ -82,7 +85,7 @@
 
 			function setSelects(i) {
 				const selectBox = document.getElementById('frm-unitsForm-' + i * 10 + 'names');
-				selectBox.leadershipPoints = 700;
+				selectBox.leadershipPoints = 700 + Number({{$addedLeadership}});
 				const selectedName = selectBox.value;
 				let classForUser = document.getElementById('frm-unitsForm-' + (i * 10 + 4) + 'armor');
 				classForUser.innerHTML = '';
@@ -94,7 +97,7 @@
 				arrayOfArmor.forEach((U, index, arr) => {
 					let lPoints = U.value.split('=')[1];
 					lPoints = (lPoints && lPoints.length > 0) ? lPoints : 0;
-					classForUser.children[index].leadershipPoints = lPoints;
+					classForUser.children[index].leadershipPoints = lPoints + Number({{$addedLeadership}});
 				})
 
 				classForUser.addEventListener('change', () => {

@@ -18,7 +18,6 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 	 */
 	protected $userEntity;
 
-
 	protected \App\CoreModule\GridFactory\DataGridFactory $dataGridFactory;
 
 
@@ -70,7 +69,13 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 
 	protected function checkUserForRoles(): bool
 	{
-		return $this->getUserEntity() && $this->userEntity->getRole();
+		if ($this->getUserEntity() === NULL) {
+			return FALSE;
+		}
+		if ($this->getUserEntity()->getRole() === \App\UserModule\Model\User::ROLE_MEMBER) {
+			return FALSE;
+		}
+		return TRUE;
 	}
 
 
@@ -91,6 +96,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 
 		return FALSE;
 	}
+
 
 	public function createComponentGrid(): \Ublaboo\DataGrid\DataGrid
 	{

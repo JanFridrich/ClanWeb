@@ -21,6 +21,7 @@ class PageService
 	public const UID_ASSIGN_UNITS = 'UID_ASSIGN_UNITS';
 	public const UID_ROLES_TABLE = 'UID_ROLES_TABLE';
 	public const UID_PREVIEW_TABLE = 'UID_PREVIEW_TABLE';
+	public const UID_RANKING = 'UID_RANKING';
 
 	private \Dibi\Connection $database;
 

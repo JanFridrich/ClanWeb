@@ -29,6 +29,10 @@ class TableCreateFormFactory
 		$form->addSelect('tierLock', 'tierLock', \App\UnitModule\Model\Unit::TIERS)
 			->setDefaultValue(\App\UnitModule\Model\Unit::TIER_ORANGE)
 		;
+		$form->addInteger('addedLeadership', 'added leadership')
+			->setDefaultValue(0)
+			->setRequired()
+		;
 
 		$form->addSubmit('submit', 'Create');
 		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, array $values) use ($onSuccess, $user) {
@@ -37,8 +41,10 @@ class TableCreateFormFactory
 			$values[\App\TableModule\Model\Table\TableMapping::COLUMN_STATUS] = 0;
 			$tier = $values['tierLock'];
 			unset($values['tierLock']);
+			$addedLeadership = $values['addedLeadership'];
+			unset($values['addedLeadership']);
 			$id = $this->tableService->createNew($values);
-			$onSuccess($id, $tier);
+			$onSuccess($id, $tier, $addedLeadership);
 		};
 
 		return $form;

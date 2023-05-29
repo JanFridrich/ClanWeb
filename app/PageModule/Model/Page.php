@@ -16,6 +16,7 @@ class Page extends \App\CoreModule\Model\Entity
 	public const ACTION_TABLE_UNITS = 'Table:Table:units';
 	public const ACTION_TABLE_ROLES = 'Table:Table:roles';
 	public const ACTION_TABLE_PREVIEW = 'Table:Table:preview';
+	public const ACTION_RANKING = 'Ranking:Ranking:default';
 
 	public const ACTIONS = [
 		self::ACTION_SIGN_IN => 'sign in',
@@ -29,6 +30,7 @@ class Page extends \App\CoreModule\Model\Entity
 		self::ACTION_TABLE_UNITS => 'table units',
 		self::ACTION_TABLE_ROLES => 'table roles',
 		self::ACTION_TABLE_PREVIEW => 'table preview',
+		self::ACTION_RANKING => 'ranking',
 	];
 
 	protected bool $includeHeader;
