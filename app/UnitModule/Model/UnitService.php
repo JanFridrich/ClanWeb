@@ -5,18 +5,25 @@ namespace App\UnitModule\Model;
 class UnitService extends \App\CoreModule\Model\Service
 {
 
-	protected string $mappingClass = \App\UnitModule\Model\UnitMapping::class;
+	public const SHOW_ALL = 'showAll';
 
-	private \App\UnitModule\Model\UserUnitService $userUnitService;
+	protected string $mappingClass = \App\UnitModule\Model\UnitMapping::class;
 
 
 	public function __construct(
-		\Dibi\Connection $connection,
-		\App\UnitModule\Model\UserUnitService $userUnitService
+		\Dibi\Connection $connection
 	)
 	{
 		parent::__construct($connection);
-		$this->userUnitService = $userUnitService;
+	}
+
+
+	protected function addOptions(\Dibi\Fluent $select, array $options): void
+	{
+		if (isset($options[self::SHOW_ALL]) && $options[self::SHOW_ALL] === FALSE) {
+			$options['where'][\App\UnitModule\Model\UnitMapping::TABLE_NAME.'.'.\App\UnitModule\Model\UnitMapping::COLUMN_SHOW] = TRUE;
+		}
+		parent::addOptions($select, $options);
 	}
 
 
@@ -115,7 +122,7 @@ class UnitService extends \App\CoreModule\Model\Service
 				$unitData[\App\UnitModule\Model\UserUnitMapping::COLUMN_LINE] ?? NULL,
 				$unitData[\App\UnitModule\Model\UserUnitMapping::COLUMN_MASTERY] ?? NULL,
 				$unitData[\App\UnitModule\Model\UnitMapping::COLUMN_MAX_MASTERY],
-
+				(bool) $unitData[\App\UnitModule\Model\UnitMapping::COLUMN_SHOW],
 			);
 		} catch (\Exception $exception) {
 			\Tracy\Debugger::barDump($exception);

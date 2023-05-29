@@ -91,6 +91,8 @@ class Unit extends \App\CoreModule\Model\Entity
 
 	protected int $maxMastery;
 
+	protected bool $show;
+
 
 	public function __construct(
 		int $id,
@@ -106,7 +108,8 @@ class Unit extends \App\CoreModule\Model\Entity
 		?int $level,
 		?string $userLine,
 		?int $userMastery,
-		int $maxMastery
+		int $maxMastery,
+		bool $show
 	)
 	{
 		$this->id = $id;
@@ -123,6 +126,7 @@ class Unit extends \App\CoreModule\Model\Entity
 		$this->sort = $sort;
 		$this->userMastery = $userMastery;
 		$this->maxMastery = $maxMastery;
+		$this->show = $show;
 	}
 
 
@@ -324,6 +328,18 @@ class Unit extends \App\CoreModule\Model\Entity
 	public function __toString(): string
 	{
 		return $this->name;
+	}
+
+
+	public function isShow(): bool
+	{
+		return $this->show;
+	}
+
+
+	public function setShow(bool $show): void
+	{
+		$this->show = $show;
 	}
 
 }

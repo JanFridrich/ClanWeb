@@ -38,7 +38,7 @@ class UnitPresenter extends \App\CoreModule\Presenters\BasePresenter
 
 	public function renderDefault(?string $tier = NULL, ?string $type = NULL): void
 	{
-		$options = [];
+		$options = [\App\UnitModule\Model\UnitService::SHOW_ALL => FALSE];
 		if ($tier !== NULL) {
 			$options['where'][\App\UnitModule\Model\UnitMapping::COLUMN_TIER] = $tier;
 		}
@@ -51,7 +51,7 @@ class UnitPresenter extends \App\CoreModule\Presenters\BasePresenter
 
 	public function createComponentUnitsForm(): \Nette\Application\UI\Form
 	{
-		$options = [];
+		$options = [\App\UnitModule\Model\UnitService::SHOW_ALL => FALSE];
 		if ($this->getParameter('tier')) {
 			$options['where'][\App\UnitModule\Model\UnitMapping::COLUMN_TIER] = $this->getParameter('tier');
 		}
