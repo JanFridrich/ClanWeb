@@ -21,7 +21,7 @@ class UnitService extends \App\CoreModule\Model\Service
 	protected function addOptions(\Dibi\Fluent $select, array $options): void
 	{
 		if (isset($options[self::SHOW_ALL]) && $options[self::SHOW_ALL] === FALSE) {
-			$options['where'][\App\UnitModule\Model\UnitMapping::TABLE_NAME.'.'.\App\UnitModule\Model\UnitMapping::COLUMN_SHOW] = TRUE;
+			$options['where'][\App\UnitModule\Model\UnitMapping::TABLE_NAME . '.' . \App\UnitModule\Model\UnitMapping::COLUMN_SHOW] = TRUE;
 		}
 		parent::addOptions($select, $options);
 	}
@@ -97,6 +97,12 @@ class UnitService extends \App\CoreModule\Model\Service
 		}
 
 		return $units;
+	}
+
+
+	public function getCountOfUnits(): int
+	{
+		return $this->connection->select('COUNT(*)')->from($this->mappingClass::TABLE_NAME)->fetchSingle();
 	}
 
 

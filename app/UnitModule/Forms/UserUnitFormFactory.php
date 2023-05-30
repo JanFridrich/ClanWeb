@@ -51,7 +51,7 @@ class UserUnitFormFactory
 		}
 		$form->addSubmit('save', 'Save');
 		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, array $values) use ($onSuccess, $user, $allUnits): void {
-			$maxedUnits = $this->userUnitService->saveFormData(['values' => $values, 'units'=>$allUnits], $user);
+			$maxedUnits = $this->userUnitService->saveFormData(['values' => $values, 'units' => $allUnits], $user);
 			$user->setLastUpdatedUnits(new \Dibi\DateTime());
 			$user->setMaxedUnits($maxedUnits);
 			$this->userService->saveFormData($user->toArray(), $user);
