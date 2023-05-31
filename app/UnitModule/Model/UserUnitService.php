@@ -67,7 +67,7 @@ class UserUnitService extends \App\CoreModule\Model\Service
 			;
 		}
 
-		$maxedUnits = (\round($this->getMaxedUnits($entity->getId()) / $this->unitService->getCountOfUnits(), 1)) * 100;
+		$maxedUnits = (\round($this->getMaxedUnits($entity->getId()) / $this->unitService->getCountOfUnits([\App\UnitModule\Model\UnitService::SHOW_ALL => FALSE]), 1)) * 100;
 
 		return (int) ($maxedUnits);
 	}

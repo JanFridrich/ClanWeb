@@ -100,9 +100,12 @@ class UnitService extends \App\CoreModule\Model\Service
 	}
 
 
-	public function getCountOfUnits(): int
+	public function getCountOfUnits($options): int
 	{
-		return $this->connection->select('COUNT(*)')->from($this->mappingClass::TABLE_NAME)->fetchSingle();
+		$select = $this->connection->select('COUNT(*)')->from($this->mappingClass::TABLE_NAME);
+		$this->addOptions($select, $options);
+
+		return $select->fetchSingle();
 	}
 
 
