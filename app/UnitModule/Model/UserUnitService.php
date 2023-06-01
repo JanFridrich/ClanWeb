@@ -38,7 +38,6 @@ class UserUnitService extends \App\CoreModule\Model\Service
 	 */
 	public function saveFormData(array $values, \App\CoreModule\Model\Entity $entity)
 	{
-		$maxedLevels = 0;
 		try {
 			$this->connection->delete($this->mappingClass::TABLE_NAME)
 				->where($this->mappingClass::COLUMN_USER . ' = %i', $entity->getId())
@@ -49,15 +48,11 @@ class UserUnitService extends \App\CoreModule\Model\Service
 			\Tracy\Debugger::barDump($e);
 		}
 
-		$units = $values['units'];
 		$values = $values['values'];
 
 		foreach ($values as $unitId => $value) {
 			if ($value[$this->mappingClass::COLUMN_LEVEL] === 0) {
 				continue;
-			}
-			if ($value[$this->mappingClass::COLUMN_LEVEL] === $units[$unitId]->getMaxLevel()) {
-				$maxedLevels++;
 			}
 			$value[$this->mappingClass::COLUMN_USER] = $entity->getId();
 			$value[$this->mappingClass::COLUMN_UNIT] = $unitId;
@@ -67,21 +62,25 @@ class UserUnitService extends \App\CoreModule\Model\Service
 			;
 		}
 
-		$maxedUnits = (\round($this->getMaxedUnits($entity->getId()) / $this->unitService->getCountOfUnits([\App\UnitModule\Model\UnitService::SHOW_ALL => FALSE]), 1)) * 100;
+		$maxedUnits = (\round($this->getMaxedUnits($entity->getId(), [\App\UnitModule\Model\UnitService::SHOW_ALL => FALSE]) / $this->unitService->getCountOfUnits([\App\UnitModule\Model\UnitService::SHOW_ALL => FALSE]), 1)) * 100;
 
 		return (int) ($maxedUnits);
 	}
 
 
-	private function getMaxedUnits(int $userId): int
+	public function getMaxedUnits(int $userId, array $options = []): int
 	{
-		return $this->connection->select('COUNT(*)')
+		$select = $this->connection->select('COUNT(*)')
 			->from($this->mappingClass::TABLE_NAME)
 			->leftJoin(\App\UnitModule\Model\UnitMapping::TABLE_NAME)->on($this->mappingClass::TABLE_NAME . '.' . $this->mappingClass::COLUMN_UNIT . ' = ' . \App\UnitModule\Model\UnitMapping::TABLE_NAME . '.' . \App\UnitModule\Model\UnitMapping::COLUMN_ID)
 			->where($this->mappingClass::COLUMN_USER . ' = %i', $userId)
-			->where($this->mappingClass::COLUMN_LEVEL . ' = ' . UnitMapping::COLUMN_MAX_LEVEL)
-			->fetchSingle()
+			->where($this->mappingClass::COLUMN_LEVEL . ' = ' . \App\UnitModule\Model\UnitMapping::COLUMN_MAX_LEVEL)
 		;
+		if (isset($options[\App\UnitModule\Model\UnitService::SHOW_ALL]) && $options[\App\UnitModule\Model\UnitService::SHOW_ALL] === FALSE) {
+			$select->where(\App\UnitModule\Model\UnitMapping::TABLE_NAME . '.' . \App\UnitModule\Model\UnitMapping::COLUMN_SHOW . ' = %i', TRUE);
+		}
+
+		return $select->fetchSingle();
 	}
 
 

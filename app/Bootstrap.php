@@ -4,17 +4,15 @@ namespace App;
 
 define('ROOT_DIR', realpath(__DIR__ . "/.."));
 
-use Nette\Configurator;
-
 class Bootstrap
 {
 
-	public static function boot(): Configurator
+	public static function boot(): \Nette\Configurator
 	{
 		if ('https' === getenv('HTTP_X_FORWARDED_PROTO')) {
 			\Nette\Http\Url::$defaultPorts['https'] = (int) getenv('SERVER_PORT');
 		}
-		$configurator = new Configurator;
+		$configurator = new \Nette\Configurator();
 
 		$configurator->setDebugMode(isset($_COOKIE['DLEMBOR_DEBUG']) && $_COOKIE['DLEMBOR_DEBUG']); // enable for your remote IP
 		$configurator->enableTracy(__DIR__ . '/../log');
@@ -36,7 +34,7 @@ class Bootstrap
 	}
 
 
-	public static function bootForTests(): Configurator
+	public static function bootForTests(): \Nette\Configurator
 	{
 		$configurator = self::boot();
 		\Tester\Environment::setup();
