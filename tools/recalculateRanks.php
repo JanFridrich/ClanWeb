@@ -19,8 +19,8 @@ $userService = $container->getByType(\App\UserModule\Model\UserService::class);
  */
 foreach ($userService->getAll() as $userId => $user) {
 
-	$maxedUnits = (int) (\round($userUnitService->getMaxedUnits($userId, [\App\UnitModule\Model\UnitService::SHOW_ALL => FALSE]) / $unitService->getCountOfUnits([\App\UnitModule\Model\UnitService::SHOW_ALL => FALSE]), 1)) * 100;
-	$user->setMaxedUnits($maxedUnits);
+	$maxedUnits = (\round($userUnitService->getMaxedUnits($user->getId(), [\App\UnitModule\Model\UnitService::SHOW_ALL => FALSE]) / $unitService->getCountOfUnits([\App\UnitModule\Model\UnitService::SHOW_ALL => FALSE]), 1)) * 100;
+	$user->setMaxedUnits((int)$maxedUnits);
 	$userService->saveFormData($user->toArray(), $user);
 }
 
