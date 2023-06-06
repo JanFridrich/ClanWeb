@@ -109,7 +109,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
 	public function handleLogout(): void
 	{
 		$this->getUser()->logout(TRUE);
-		$this->redirect('Homepage:default');
+		$this->redirect(':Core:Homepage:default');
 	}
 
 
