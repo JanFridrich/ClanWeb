@@ -26,14 +26,18 @@ class TableUnitFormFactory
 
 	private \App\TableModule\Model\TableItem\TableItemService $tableItemService;
 
+	private \App\TableModule\Model\Table\TableService $tableService;
+
 
 	public function __construct(
 		\App\UserModule\Model\UserService $userService,
-		\App\TableModule\Model\TableItem\TableItemService $tableItemService
+		\App\TableModule\Model\TableItem\TableItemService $tableItemService,
+		\App\TableModule\Model\Table\TableService $tableService
 	)
 	{
 		$this->userService = $userService;
 		$this->tableItemService = $tableItemService;
+		$this->tableService = $tableService;
 	}
 
 
@@ -86,8 +90,9 @@ class TableUnitFormFactory
 
 		$form->addSubmit('send', 'Create');
 
-		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, \stdClass $values) use ($onSuccess, $data, $tableId, $userIds): void {
+		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, \stdClass $values) use ($onSuccess, $data, $table, $userIds): void {
 
+			$tableId = $table->getId();
 			$this->tableItemService->clearTableItems($tableId, \App\TableModule\Model\TableItem\TableItem::ITEM_TYPES);
 			$itemId = 0;
 			$items = [];
@@ -139,6 +144,8 @@ class TableUnitFormFactory
 				$item[\App\TableModule\Model\TableItem\TableItemMapping::COLUMN_VALUE] = $armor;
 				$this->tableItemService->createNew($item);
 			}
+			$table->setStatus(\App\TableModule\Model\Table\Table::STATUS_UNITS_ASSIGNED);
+			$this->tableService->saveFormData((array) $table, $table);
 			$onSuccess($tableId);
 		};
 

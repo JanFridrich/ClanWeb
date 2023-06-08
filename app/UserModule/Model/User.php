@@ -244,4 +244,9 @@ class User extends \App\CoreModule\Model\Entity
 		$this->maxedUnits = $maxedUnits;
 	}
 
+	public function __toString(): string
+	{
+		return $this->getLogin();
+	}
+
 }

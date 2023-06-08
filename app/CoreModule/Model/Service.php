@@ -31,9 +31,8 @@ abstract class Service
 	}
 
 
-	public function getAll(array $options = []): array
+	public function prepareSelectForGridAndAll(array $options = []): \Dibi\Fluent
 	{
-		$entities = [];
 		$select = $this->connection->select('*')
 			->from($this->mappingClass::TABLE_NAME)
 		;
@@ -42,7 +41,14 @@ abstract class Service
 		}
 		$this->addOptions($select, $options);
 
-		$entitiesData = $select->fetchAll();
+		return $select;
+	}
+
+
+	public function getAll(array $options = []): array
+	{
+		$entities = [];
+		$entitiesData = $this->prepareSelectForGridAndAll($options)->fetchAll();
 
 		foreach ($entitiesData as $entityData) {
 			$entity = $this->constructEntity($entityData, $options);
@@ -84,6 +90,15 @@ abstract class Service
 	{
 		return $this->connection->update($this->mappingClass::TABLE_NAME, $values)
 			->where($this->mappingClass::COLUMN_ID . ' = %i', $entity->getId())
+			->execute()
+		;
+	}
+
+
+	public function saveGridData(\Nette\Utils\ArrayHash $arrayHash, int $id): void
+	{
+		$this->connection->update($this->mappingClass::TABLE_NAME, $arrayHash)
+			->where($this->mappingClass::COLUMN_ID . ' = %i', $id)
 			->execute()
 		;
 	}

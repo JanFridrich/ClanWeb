@@ -12,5 +12,7 @@ class TableMapping
 	public const COLUMN_CREATED = 'created';
 	public const COLUMN_CREATED_BY = 'createdBy';
 	public const COLUMN_ROWS = 'rows';
+	public const COLUMN_IS_ACTIVE = 'isActive';
+
 
 }

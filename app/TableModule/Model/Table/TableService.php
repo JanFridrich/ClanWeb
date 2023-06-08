@@ -45,6 +45,7 @@ class TableService extends \App\CoreModule\Model\Service
 				$entityData[\App\TableModule\Model\Table\TableMapping::COLUMN_ROWS],
 				$entityData[\App\TableModule\Model\Table\TableMapping::COLUMN_CREATED],
 				$user,
+				(bool) $entityData[\App\TableModule\Model\Table\TableMapping::COLUMN_IS_ACTIVE],
 				[],
 			);
 			$table->setTableItems(

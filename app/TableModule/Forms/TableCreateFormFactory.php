@@ -38,7 +38,7 @@ class TableCreateFormFactory
 		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, array $values) use ($onSuccess, $user) {
 			$values[\App\TableModule\Model\Table\TableMapping::COLUMN_CREATED_BY] = $user->getId();
 			$values[\App\TableModule\Model\Table\TableMapping::COLUMN_CREATED] = new \Dibi\DateTime();
-			$values[\App\TableModule\Model\Table\TableMapping::COLUMN_STATUS] = 0;
+			$values[\App\TableModule\Model\Table\TableMapping::COLUMN_STATUS] = \App\TableModule\Model\Table\Table::STATUS_STARTED;
 			$tier = $values['tierLock'];
 			unset($values['tierLock']);
 			$addedLeadership = $values['addedLeadership'];

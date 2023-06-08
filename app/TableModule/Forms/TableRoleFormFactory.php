@@ -7,10 +7,16 @@ class TableRoleFormFactory
 
 	private \App\TableModule\Model\TableItem\TableItemService $tableItemService;
 
+	private \App\TableModule\Model\Table\TableService $tableService;
 
-	public function __construct(\App\TableModule\Model\TableItem\TableItemService $tableItemService)
+
+	public function __construct(
+		\App\TableModule\Model\TableItem\TableItemService $tableItemService,
+		\App\TableModule\Model\Table\TableService $tableService
+	)
 	{
 		$this->tableItemService = $tableItemService;
+		$this->tableService = $tableService;
 	}
 
 
@@ -26,7 +32,8 @@ class TableRoleFormFactory
 			$userIds[$tableItem->getId()] = $tableItem->getUser()->getId();
 		}
 		$form->addSubmit('submit', 'Next');
-		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, \stdClass $values) use ($onSuccess, $tableId, $userIds): void {
+		$form->onSuccess[] = function (\Nette\Application\UI\Form $form, \stdClass $values) use ($onSuccess, $table, $userIds): void {
+			$tableId = $table->getId();
 			$this->tableItemService->clearTableItems($tableId, [
 				\App\TableModule\Model\TableItem\TableItem::ITEM_TYPE_NOTE,
 				\App\TableModule\Model\TableItem\TableItem::ITEM_TYPE_GROUP_LEADER,
@@ -53,6 +60,8 @@ class TableRoleFormFactory
 					$this->tableItemService->createNew($item);
 				}
 			}
+			$table->setStatus(\App\TableModule\Model\Table\Table::STATUS_FINISHED);
+			$this->tableService->saveFormData((array) $table, $table);
 			$onSuccess($tableId);
 		};
 

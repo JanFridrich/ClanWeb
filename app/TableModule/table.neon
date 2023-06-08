@@ -13,3 +13,12 @@ services:
 
 	tableRoleFormFactory:
 		factory: \App\TableModule\Forms\TableRoleFormFactory
+
+	tableRenderer:
+		factory: \App\TableModule\Grid\TableRenderer
+
+	tableGridFactory:
+		factory: \App\TableModule\Grid\TableGridFactory
+
+	tableInlineEdit:
+		factory: \App\TableModule\Grid\TableInlineEdit

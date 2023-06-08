@@ -7,9 +7,7 @@ abstract class DataGridFactory
 
 	public function create(string $locale): \Ublaboo\DataGrid\DataGrid
 	{
-		$grid = new \Ublaboo\DataGrid\DataGrid();
-
-		return $grid;
+		return new \Ublaboo\DataGrid\DataGrid();
 	}
 
 }

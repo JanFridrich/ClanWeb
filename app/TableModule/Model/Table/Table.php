@@ -5,11 +5,13 @@ namespace App\TableModule\Model\Table;
 class Table extends \App\CoreModule\Model\Entity
 {
 
+	public const STATUS_STARTED = 0;
+	public const STATUS_UNITS_ASSIGNED = 1;
+	public const STATUS_FINISHED = 2;
 	public const STATUSES = [
-		0 => 'started',
-		1 => 'units assigned',
-		2 => 'roles assigned',
-		3 => 'finished',
+		self::STATUS_STARTED => 'started',
+		self::STATUS_UNITS_ASSIGNED => 'units assigned',
+		self::STATUS_FINISHED => 'finished',
 	];
 
 	protected string $name;
@@ -24,6 +26,8 @@ class Table extends \App\CoreModule\Model\Entity
 
 	protected array $tableItems;
 
+	protected bool $isActive;
+
 
 	public function __construct(
 		int $id,
@@ -32,6 +36,7 @@ class Table extends \App\CoreModule\Model\Entity
 		int $rows,
 		\Dibi\DateTime $created,
 		\App\UserModule\Model\User $createdBy,
+		bool $isActive,
 		array $tableItems
 	)
 	{
@@ -42,6 +47,7 @@ class Table extends \App\CoreModule\Model\Entity
 		$this->createdBy = $createdBy;
 		$this->rows = $rows;
 		$this->tableItems = $tableItems;
+		$this->isActive = $isActive;
 	}
 
 
@@ -114,6 +120,18 @@ class Table extends \App\CoreModule\Model\Entity
 	public function setTableItems(array $tableItems): void
 	{
 		$this->tableItems = $tableItems;
+	}
+
+
+	public function isActive(): bool
+	{
+		return $this->isActive;
+	}
+
+
+	public function setIsActive(bool $isActive): void
+	{
+		$this->isActive = $isActive;
 	}
 
 }
