@@ -9,18 +9,15 @@ class TableGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 
 	private \App\TableModule\Grid\TableRenderer $tableRenderer;
 
-	private \App\TableModule\Grid\TableInlineEdit $inlineEdit;
 
 
 	public function __construct(
 		\App\TableModule\Model\Table\TableService $tableService,
-		\App\TableModule\Grid\TableRenderer $tableRenderer,
-		\App\TableModule\Grid\TableInlineEdit $inlineEdit
+		\App\TableModule\Grid\TableRenderer $tableRenderer
 	)
 	{
 		$this->tableService = $tableService;
 		$this->tableRenderer = $tableRenderer;
-		$this->inlineEdit = $inlineEdit;
 	}
 
 
@@ -28,7 +25,7 @@ class TableGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 	{
 		$dataGrid = parent::create($locale);
 		$dataGrid->setDataSource(
-			$this->tableService->prepareSelectForGridAndAll(
+			$this->tableService->getAll(
 				[
 					'where' =>
 						[
@@ -53,7 +50,6 @@ class TableGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 
 		$dataGrid->addColumnText(\App\TableModule\Model\Table\TableMapping::COLUMN_CREATED_BY, \App\TableModule\Model\Table\TableMapping::COLUMN_CREATED_BY)
 			->setSortable()
-			->setRenderer([$this->tableRenderer, 'renderCreatedBy'])
 			->setFilterText()
 		;
 
@@ -62,12 +58,10 @@ class TableGridFactory extends \App\CoreModule\GridFactory\DataGridFactory
 			->setRenderer([$this->tableRenderer, 'renderIsActive'])
 			->setFilterText()
 		;
-
-		$inlineEdit = $dataGrid->addInlineEdit();
-		$inlineEdit->onControlAdd[] = [$this->inlineEdit, 'onControlAdd'];
-		$inlineEdit->onSetDefaults[] = [$this->inlineEdit, 'onSetDefaults'];
-		$inlineEdit->onSubmit[] = [$this->inlineEdit, 'onSubmit'];
-		$inlineEdit->setShowNonEditingColumns();
+		$dataGrid->addAction('edit', 'Edit')
+			->setIcon('pencil')
+			->setTitle('Edit')
+			;
 
 		return $dataGrid;
 	}

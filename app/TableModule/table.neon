@@ -20,5 +20,3 @@ services:
 	tableGridFactory:
 		factory: \App\TableModule\Grid\TableGridFactory
 
-	tableInlineEdit:
-		factory: \App\TableModule\Grid\TableInlineEdit
