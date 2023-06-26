@@ -97,7 +97,7 @@
 				arrayOfArmor.forEach((U, index, arr) => {
 					let lPoints = U.value.split('=')[1];
 					lPoints = (lPoints && lPoints.length > 0) ? lPoints : 0;
-					classForUser.children[index].leadershipPoints = lPoints + Number({{$addedLeadership}});
+					classForUser.children[index].leadershipPoints = Number(lPoints) + Number({{$addedLeadership}});
 				})
 
 				classForUser.addEventListener('change', () => {
