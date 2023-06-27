@@ -61,7 +61,7 @@ class TableRoleFormFactory
 				}
 			}
 			$table->setStatus(\App\TableModule\Model\Table\Table::STATUS_FINISHED);
-			$this->tableService->saveFormData((array) $table, $table);
+			$this->tableService->saveFormData($table->toArray(), $table);
 			$onSuccess($tableId);
 		};
 

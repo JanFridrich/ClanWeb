@@ -24,6 +24,19 @@ class TableService extends \App\CoreModule\Model\Service
 	}
 
 
+	public function saveFormData(array $values, \App\CoreModule\Model\Entity $entity)
+	{
+		if (isset($values['tableItems'])) {
+			unset($values['tableItems']);
+		}
+		if (isset($values[\App\TableModule\Model\Table\TableMapping::COLUMN_CREATED_BY])) {
+			unset($values[\App\TableModule\Model\Table\TableMapping::COLUMN_CREATED_BY]);
+		}
+
+		return parent::saveFormData($values, $entity);
+	}
+
+
 	/**
 	 * @return \App\TableModule\Model\Table\Table|null
 	 */

@@ -145,7 +145,7 @@ class TableUnitFormFactory
 				$this->tableItemService->createNew($item);
 			}
 			$table->setStatus(\App\TableModule\Model\Table\Table::STATUS_UNITS_ASSIGNED);
-			$this->tableService->saveFormData((array) $table, $table);
+			$this->tableService->saveFormData($table->toArray(), $table);
 			$onSuccess($tableId);
 		};
 
