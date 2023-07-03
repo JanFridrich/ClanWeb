@@ -160,8 +160,8 @@
 								}
 							}
 							let leadershipOfSelectedSecondUnit = 0;
-							if (secondUnit.children[secondUnit.value] !== undefined && secondUnit.children[secondUnit.value].hasOwnProperty('leadershipPointsCosts')) {
-								leadershipOfSelectedSecondUnit =  Number(secondUnit.children[secondUnit.value].leadershipPointsCosts);
+							if (secondUnit.children[secondUnit.selectedIndex] !== undefined && secondUnit.children[secondUnit.selectedIndex].hasOwnProperty('leadershipPointsCosts')) {
+								leadershipOfSelectedSecondUnit =  Number(secondUnit.children[secondUnit.selectedIndex].leadershipPointsCosts);
 							}
 							let unitToDisable = document.getElementById('frm-unitsForm-' + (i * 10 + lastIndex) + 'unit');
 							for (let z = 0; z < unitToDisable.length; z++) {
