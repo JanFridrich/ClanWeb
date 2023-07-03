@@ -101,7 +101,10 @@
 				})
 
 				classForUser.addEventListener('change', () => {
-					selectBox.leadershipPoints = classForUser.children[classForUser.selectedIndex].leadershipPoints;
+					selectBox.leadershipPoints = 700 + Number({{$addedLeadership}});
+					if (classForUser.children[classForUser.selectedIndex] !== undefined && classForUser.children[classForUser.selectedIndex].hasOwnProperty('leadershipPoints') && Number(classForUser.children[classForUser.selectedIndex].leadershipPoints !== 0)) {
+						selectBox.leadershipPoints = Number(classForUser.children[classForUser.selectedIndex].leadershipPoints);
+					}
 					let unitSelect = document.getElementById('frm-unitsForm-' + (i * 10 + 3) + 'unit')
 					unitSelect.selectedIndex = 0;
 					const event = new Event('change');
@@ -124,8 +127,12 @@
 					})
 
 					unit.addEventListener('change', () => {
-						let remainingLeadership = selectBox.leadershipPoints - unit.children[unit.selectedIndex].leadershipPointsCosts;
-						unit.selectedOptionLeadershipCosts = unit.children[unit.selectedIndex].leadershipPointsCosts;
+						let remainingLeadership = selectBox.leadershipPoints;
+						unit.selectedOptionLeadershipCosts = 0;
+						if(unit.children[unit.selectedIndex].hasOwnProperty('leadershipPointsCosts')){
+							remainingLeadership = remainingLeadership - Number(unit.children[unit.selectedIndex].leadershipPointsCosts);
+							unit.selectedOptionLeadershipCosts = Number(unit.children[unit.selectedIndex].leadershipPointsCosts);
+						}
 						Array.from(document.querySelectorAll('option')).forEach((Opt, index, arr) => {
 							Opt.removeAttribute('disabled');
 						})
@@ -136,23 +143,29 @@
 							let lastIndex = 6 - y - j;
 
 							if (y === j) {
-								actualRemainingLeadership = Number(remainingLeadership) + Number(unit.children[unit.selectedIndex].leadershipPointsCosts);
+								actualRemainingLeadership = Number(remainingLeadership) + Number(unit.selectedOptionLeadershipCosts);
 								lastIndex = y;
 								if (y === 3) {
 									secondUnit = document.getElementById('frm-unitsForm-' + (i * 10 + 1) + 'unit');
 									let tempUnit = document.getElementById('frm-unitsForm-' + (i * 10 + 2) + 'unit');
-									actualRemainingLeadership = actualRemainingLeadership - tempUnit.children[tempUnit.selectedIndex].leadershipPointsCosts;
+									if(tempUnit.children[tempUnit.selectedIndex] !== undefined && tempUnit.children[tempUnit.selectedIndex].hasOwnProperty('leadershipPointsCosts')){
+										actualRemainingLeadership = actualRemainingLeadership -  Number(tempUnit.children[tempUnit.selectedIndex].leadershipPointsCosts);
+									}
 								} else {
 									secondUnit = document.getElementById('frm-unitsForm-' + (i * 10 + 3) + 'unit');
 									let tempUnit = document.getElementById('frm-unitsForm-' + (i * 10 + (6 - 3 - y)) + 'unit');
-									actualRemainingLeadership = actualRemainingLeadership - tempUnit.children[tempUnit.selectedIndex].leadershipPointsCosts;
+									if(tempUnit.children[tempUnit.selectedIndex] !== undefined && tempUnit.children[tempUnit.selectedIndex].hasOwnProperty('leadershipPointsCosts')){
+										actualRemainingLeadership = actualRemainingLeadership -  Number(tempUnit.children[tempUnit.selectedIndex].leadershipPointsCosts);
+									}
 								}
 							}
-
-							let leadershipOfSelectedSecondUnit = secondUnit.children[secondUnit.value].leadershipPointsCosts;
+							let leadershipOfSelectedSecondUnit = 0;
+							if (secondUnit.children[secondUnit.value] !== undefined && secondUnit.children[secondUnit.value].hasOwnProperty('leadershipPointsCosts')) {
+								leadershipOfSelectedSecondUnit =  Number(secondUnit.children[secondUnit.value].leadershipPointsCosts);
+							}
 							let unitToDisable = document.getElementById('frm-unitsForm-' + (i * 10 + lastIndex) + 'unit');
 							for (let z = 0; z < unitToDisable.length; z++) {
-								if (Number(unitToDisable.children[z].leadershipPointsCosts) > (actualRemainingLeadership - leadershipOfSelectedSecondUnit)) {
+								if (unitToDisable.children[z] !== undefined && unitToDisable.children[z].hasOwnProperty('leadershipPointsCosts') && Number(unitToDisable.children[z].leadershipPointsCosts) > (actualRemainingLeadership - leadershipOfSelectedSecondUnit)) {
 									unitToDisable.children[z].disabled = true;
 								}
 							}
